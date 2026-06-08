@@ -1,0 +1,37 @@
+/**
+ * このファイルの内容を変更してはいけません。
+ */
+ {
+    "include": ["./src/**/*.ts", "./index.html", "./node_modules/@tscratch3/typescracher/src"],
+    "exclude": ["./node_modules/*", "./build/**/*"],
+    "compilerOptions": {
+      "target": "esnext",
+      "useDefineForClassFields": true,
+      "module": "esnext",
+      "lib": ["esnext", "DOM", "DOM.Iterable"],
+      "skipLibCheck": true,
+      "ignoreDeprecations": "6.0",
+      "baseUrl": "./",
+      "paths": {
+        "@Type/*": ["./node_modules/@tscratch3/typescratcher/Type/*"],
+        "@Assets/*": ["./assets/*"]
+      },
+      /* Bundler mode */
+      "moduleResolution": "node",
+      "allowImportingTsExtensions": true,
+      "verbatimModuleSyntax": true,
+      "moduleDetection": "force",
+      "noEmit": true,
+  
+      /* Linting */
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      //"erasableSyntaxOnly": true,  // <---- 有効にすると enum がエラーになる
+      "noFallthroughCasesInSwitch": true,
+      "noUncheckedSideEffectImports": true,
+      
+      /* import package.json のために許可する */
+      "resolveJsonModule": true
+    }
+  }
