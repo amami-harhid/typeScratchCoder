@@ -5,11 +5,11 @@
   "scripts": {
     "dev": "vite --open"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "amami-harhid",
+  "license": "AGPL-3.0-only",
   "description": "",
   "dependencies": {
-    "@tscratch3/typescratcher": "^0.0.26"
+    "@tscratch3/typescratcher": "^0.0.30"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
