@@ -3,10 +3,9 @@
  */
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import svgr from 'vite-plugin-svgr';
-import glob from 'glob';
+//import svgr from 'vite-plugin-svgr';
+import { glob } from 'glob'; // version 10.5.0
 import topLevelAwait from 'vite-plugin-top-level-await';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // ルートとするディレクトリー
 const root = resolve(__dirname, './src/')
@@ -37,26 +36,17 @@ export default defineConfig({
         supported: {
             'top-level-await': true
         },
-        target: "esnext",
-
+        target: "esnext"
     },
     optimizeDeps:{
         esbuildOptions: {
             target: "esnext",
         }
     },
-    root: resolve(__dirname, './'),
+    root: resolve(__dirname, './src'),
     plugins: [
-        svgr(),
-        topLevelAwait(),
-        viteStaticCopy({
-            targets: [
-                {
-                    src: "./CNAME",
-                    dest: "./", // <--- outDir の下
-                },
-            ],
-        }),
+        //svgr(),
+        topLevelAwait()
     ],
     resolve: {
         alias: {
