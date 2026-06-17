@@ -1,50 +1,26 @@
 /**
  * サンプル 01
- * 背景がBasketBallになったら、
- * メッセージを送信する
- * メッセージを受信したスプライトは、ニャーと鳴く
+ * スプライト、ステージを表示する
+ * ・画像を読み込む
+ * ・コスチューム、背景へ画像を設定する
  */
 import { Typescratcher as Ts } from '@tscratch3/typescratcher';
-import type { Sprite, Stage } from '@tscratch3/typescratcher';
 
-// 【Apple画像】
-import AppleSvg from '@Assets/Apple.svg'; // OK：Vite流の書き方
-//import AppleSvg2 from 'https://amami-harhid.github.io/tscratch3assets/assets/Apple.svg'; // この書き方はブラウザ制約により動作しない
-const Ballerina_a = 'https://amami-harhid.github.io/tscratch3assets/assets/Ballerina-a.svg';
-const Ballerina_b = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/4ccb1752a43f48aafe490c9c08e58c27.svg/get';
-/**
- * https://github.com/scratchfoundation/scratch-gui/blob/develop/src/lib/libraries/costumes.json
- * ここにある md5ext を使って、URLを組み立てる
- * https://cdn.assets.scratch.mit.edu/internalapi/asset/[md5ext]/get
- */
-// 画像定義
-const appleImage = new Ts.Image({AppleSvg});
-const ballerina_a = new Ts.Image({Ballerina_a});
-const ballerina_b = new Ts.Image({Ballerina_b});
-// 【apple】スプライト作成
+// 【画像 import 】
+import AppleSvg from '@Assets/Apple.svg';
+import BluesskySvg from '@Assets/Blue Sky.svg';
+
+// イメージ作成
+const AppleImage = new Ts.Image({AppleSvg});
+const BlueskyImage = new Ts.Image({BluesskySvg});
+
+// スプライト作成
 const apple = new Ts.Sprite('apple');
-// 【apple】イメージ追加
-apple.Costume.add( [appleImage, ballerina_a, ballerina_b] );
-apple.Looks.size.scale = [500, 500];
+apple.Costume.add( [AppleImage] ); // イメージを１個追加
 
-// 【stage】作成
+// ステージ作成
 const stage = new Ts.Stage();
-
-// 【apple】旗押されたときのイベント定義
-apple.Event.flagPresser().func = async function*(this: Sprite) {
-    this.Motion.direction.degree = 90;
-    // ずっと繰り返す
-    for(;;) {
-        this.Motion.direction.degree += 5;
-        this.Costume.next();
-        await this.Control.wait(0.1);
-        yield;
-    }
-}
-// 【stage】キー(SPACE)押されたときのイベント定義
-stage.Event.keyPresser(Ts.Keyboard.SPACE).func = async function*(this: Stage) {
-    this.Control.stopAll();
-}
+stage.Backdrop.add( [BlueskyImage] ); // 背景を１個追加
 
 // 開始
 Ts.engine.start();
