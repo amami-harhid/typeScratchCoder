@@ -10,7 +10,7 @@
       "module": "esnext",
       "lib": ["esnext", "DOM", "DOM.Iterable"],
       "skipLibCheck": true,
-      "ignoreDeprecations": "6.0",
+      //"ignoreDeprecations": "6.0",
       "baseUrl": "./",
       "paths": {
         "@Type/*": ["./node_modules/@tscratch3/typescratcher/Type/*"],
@@ -27,10 +27,7 @@
       "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
-      //"erasableSyntaxOnly": true,  // <---- 有効にすると enum がエラーになる
       "noFallthroughCasesInSwitch": true,
-      "noUncheckedSideEffectImports": true,
-      
       /* import package.json のために許可する */
       "resolveJsonModule": true
     }
