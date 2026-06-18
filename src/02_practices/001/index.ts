@@ -4,7 +4,7 @@
  * 左右矢印キーで左右に歩く
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import type { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite, Stage } from "@tscratch3/typescratcher";
 
 // 【画像 import 】
 import CatSvg from "@Assets/cat.svg";
@@ -73,5 +73,14 @@ cat.Event.flagPresser().func = async function* (this: Sprite) {
     }
 };
 
-// 開始
-Ts.engine.start();
+stage.Event.flagPresser().func = async function* (this: Stage) {
+    throw "STAGE ERROR";
+};
+
+try {
+    // 開始
+    Ts.engine.start();
+} catch (e) {
+    console.log("start でキャッチしたよ");
+    throw e;
+}
