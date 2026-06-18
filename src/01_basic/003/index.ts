@@ -1,10 +1,9 @@
 /**
- * サンプル 01
- * スプライト、ステージを表示する
- * ・画像を読み込む
- * ・コスチューム、背景へ画像を設定する
+ * 基本-003
+ * スプライトをずっと横に動し続ける
  */
 import { Typescratcher as Ts } from '@tscratch3/typescratcher';
+import type { Sprite } from '@tscratch3/typescratcher';
 
 // 【画像 import 】
 import AppleSvg from '@Assets/Apple.svg';
@@ -21,6 +20,17 @@ apple.Costume.add( [AppleImage] ); // イメージを１個追加
 // ステージ作成
 const stage = new Ts.Stage();
 stage.Backdrop.add( [BlueskyImage] ); // 背景を１個追加
+
+// 旗を押したときのイベント定義
+apple.Event.flagPresser().func = async function*(this:Sprite){
+    // 位置を中央にする
+    this.Motion.position.xy = [0, 0]; 
+    // ずっと 10 進み続ける。
+    for(;;){
+        this.Motion.move.steps(10);
+        yield;
+    }
+}
 
 // 開始
 Ts.engine.start();

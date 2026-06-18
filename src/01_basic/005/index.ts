@@ -1,5 +1,5 @@
 /**
- * サンプル 05
+ * 基本-005
  * 音を読み込んでサウンド設定、端に触れたら音を鳴らす。
  */
 import { Typescratcher as Ts } from '@tscratch3/typescratcher';

@@ -1,6 +1,7 @@
 /**
- * サンプル 03
- * スプライトをずっと横に動し続ける
+ * 基本-004
+ * スプライトをずっと動し続ける
+ * 端に触れたら跳ね返る
  */
 import { Typescratcher as Ts } from '@tscratch3/typescratcher';
 import type { Sprite } from '@tscratch3/typescratcher';
@@ -23,11 +24,22 @@ stage.Backdrop.add( [BlueskyImage] ); // 背景を１個追加
 
 // 旗を押したときのイベント定義
 apple.Event.flagPresser().func = async function*(this:Sprite){
+    // 回転を左右のみにする
+    this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT;
+    // 角度を設定する
+    this.Motion.direction.degree = 90;
+}
+
+// 旗を押したときのイベント定義
+apple.Event.flagPresser().func = async function*(this:Sprite){
     // 位置を中央にする
     this.Motion.position.xy = [0, 0]; 
-    // ずっと 10 進み続ける。
+    // ずっと 繰り返す
     for(;;){
+        // １０進む
         this.Motion.move.steps(10);
+        // 端に触れたら跳ね返る
+        this.Motion.move.ifOnEdgeBounce();
         yield;
     }
 }

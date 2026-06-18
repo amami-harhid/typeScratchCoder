@@ -1,5 +1,5 @@
 /**
- * サンプル 09
+ * 基本-009
  * スプライトに触ったら「ニャー」と鳴く
  */
 import { Typescratcher as Ts } from '@tscratch3/typescratcher';
@@ -46,7 +46,6 @@ cat.Event.flagPresser().func = async function*(this:Sprite){
     for(;;){
         // マウスが触れたとき
         if(this.Sensing.mouse.isTouching) {
-            console.log('isTouch')
             await this.Sound.playUntilDone(CatSound);
         }
         yield;
