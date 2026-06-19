@@ -1,7 +1,4 @@
-import { CostumesJson } from ".";
-import { getLibrariesURL } from './host';
-
-export const costumeNames = {
+export const CostumeBank = {
     Abbya: 'Abby-a',
     Abbyb: 'Abby-b',
     Abbyc: 'Abby-c',
@@ -889,19 +886,5 @@ export const costumeNames = {
     storyZ2: 'story-Z-2',
     storyZ3: 'story-Z-3',
 } as const;
-
-export type TypeCostumeNameKeys = keyof typeof costumeNames;
-export type TypeCostumeNameVals = typeof costumeNames[TypeCostumeNameKeys];
-
-export const getImagePath = ( name: TypeCostumeNameVals) : string => {
-
-    // eslint-disable-next-line loopCheck/s3-loop-plugin
-    for(const element of CostumesJson) {
-        if(element.name == name) {
-            const fileName = element.md5ext;
-
-            return getLibrariesURL(fileName);
-        }
-    }
-    return '';
-}
+export type TypeCostumeBankKey = keyof typeof CostumeBank;
+export type TypeCostumeBankVal = typeof CostumeBank[TypeCostumeBankKey];
