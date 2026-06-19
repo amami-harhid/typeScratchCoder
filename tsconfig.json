@@ -6,19 +6,22 @@
     "exclude": ["./node_modules/*", "./build/**/*"],
     "compilerOptions": {
       "target": "esnext",
-      "useDefineForClassFields": true,
-      "module": "nodenext",
-      "moduleResolution": "nodenext",
+      //"useDefineForClassFields": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "ignoreDeprecations": "6.0",
+      "types": ["node"],
       "lib": ["esnext", "DOM", "DOM.Iterable"],
       "skipLibCheck": true,
       "paths": {
         "@Type/*": ["./node_modules/@tscratch3/typescratcher/Type/*"],
         "@Assets/*": ["./assets/*"]
       },
+      "importHelpers": true,
       /* Bundler mode */
       "allowImportingTsExtensions": true,
-      "verbatimModuleSyntax": true,
-      "moduleDetection": "force",
+      //"verbatimModuleSyntax": true,
+      //"moduleDetection": "force",
       "noEmit": true,
   
       /* Linting */

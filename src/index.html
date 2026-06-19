@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:,">
+    <script>
+        const TypeScratcher = "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI0NTguOTE5ODQiIGhlaWdodD0iNDAyLjQ0MzYzIiB2aWV3Qm94PSIwLDAsNDU4LjkxOTg0LDQwMi40NDM2MyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IHgxPSIxMS41MTU2MSIgeTE9IjE4Mi43NzcwNiIgeDI9IjQ0MS4zMjkzNCIgeTI9IjE4Mi43NzcwNiIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtNi44NTY3NSwtMzYuOTcxOTUpIHNjYWxlKDAuNTk1NDIsMC4xMzkxNSkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0iY29sb3ItMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmYwMDAwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNjkwMGZmIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgeDE9IjExLjUxNTYxIiB5MT0iMTgyLjc3NzA2IiB4Mj0iNDQxLjMyOTM0IiB5Mj0iMTgyLjc3NzA2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgaWQ9ImNvbG9yLTIiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmMDAwMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzY5MDBmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMC42NzYwOCw0Ni45MTM4KSI+PGcgZmlsbD0idXJsKCNjb2xvci0yKSIgc3Ryb2tlPSJub25lIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGZvbnQtZmFtaWx5PSJTYW5zIFNlcmlmIiBmb250LXNpemU9IjQwIj48dGV4dCB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMS41MTU4MywyNjUuNjk4NjYpIHNjYWxlKDEuNjc5NDksNy4xODY0OSkiIGZvbnQtc2l6ZT0iNDAiIHhtbDpzcGFjZT0icHJlc2VydmUiIGZpbGw9InVybCgjY29sb3ItMSkiPjx0c3BhbiB4PSIwIiBkeT0iMCI+VHlwZVNjcmF0Y2hlcjwvdHNwYW4+PC90ZXh0PjwvZz48L2c+PC9zdmc+PCEtLXJvdGF0aW9uQ2VudGVyOjIyOS4zMjM5MTcwMjg4MTQ1OjIyNi45MTM4MDQ5OTk5OTk5Ny0tPg==";
+    </script>
+    <style>
+        .container {
+            width:80%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            opacity: 0.9;
+        }
+        div.element {
+            background-color: #fafafa;
+            border: 2px solid black;
+        }
+        div.element p {
+            margin: 5px;
+        }
+        div.element button {
+            font-size:large;
+            background-color: #fafafa;
+            border: none;
+            color: #0000ff;
+        }
+        div.element button:hover {
+            background-color: #fa0000;
+            color: #ffffff;
+        }
+        div.element p p {
+            font-size: small;
+        }
+    </style>
+    <script>
+        const getGuidance = async (path) => {
+            return new Promise((resolve,reject)=>{
+                fetch(`${path}guidance.json`).then(response=>{
+                    if(!response.ok) 
+                        reject('{<>}');
+                    return response.json();
+                }).then((data)=>{
+                    resolve(data);
+                }).catch((reason)=>{
+                    reject();
+                })
+            });
+        }
+        const setup = async () => {
+            const divGroups = document.querySelectorAll('div.group')
+            for(const group of divGroups){
+                const groupId = group.id;
+                const testTargets = group.getAttribute('testTargets');
+                if(testTargets){
+                    const targets = testTargets.split(',');
+                    const container = group.querySelector('.container');
+                    for(const target of targets) {
+                        const testName = target.padStart(3, '0');
+                        // DIV作成
+                        const div = document.createElement('div');
+                        div.classList.add('element');
+                        container.appendChild(div);
+                        // Pタグ作成
+                        const p = document.createElement('p');
+                        p.id = `${testName}`;
+                        div.appendChild(p);
+                        const button = document.createElement('button');
+                        const testPage = `/${groupId}/${testName}/`;
+                        button.addEventListener('click', ()=>{
+                            window.location.href = testPage;
+                        });
+                        try{
+                            const json = await getGuidance(`${testPage}`);
+                            if(json.title){
+                                button.innerText = `${testName}:${json.title}`;
+                                p.appendChild(button);
+                                if(json.detail){
+                                    const pDetail = document.createElement('p');
+                                    pDetail.innerHTML = json.detail;
+                                    p.appendChild(pDetail);
+                                }
+                            }else{
+                                button.innerText = `${testName}`;
+                                p.appendChild(button);
+                            }
+                        }catch(e){
+                            // JSONファイルがない、中身が壊れている場合
+                            button.innerText = `${testName}`;
+                            p.appendChild(button);
+
+                        }
+                    }
+
+                }
+
+            }
+        }
+        const cssLog = () => {
+            const style = document.createElement('style');
+            const bgStyle = 
+                `.transparent-bg {
+                    position: relative;
+                    z-index: 0; 
+                 }
+                 .transparent-bg::before {
+                    content: "";
+                    position: absolute;
+                    top:0; bottom:0;
+                    left:0; right:0;
+                    background-image: url('${TypeScratcher}');
+                    z-index: -1;
+                    opacity:0.2;
+                }`;
+            style.innerHTML = bgStyle;
+            const head = document.getElementsByTagName('head');
+            head[0].appendChild(style);
+        }
+        window.onload = ()=>{
+            setup();
+        }
+    </script>
+  </head>
+  <body class="transparent-bg">
+    <h1>Typescratcher Code</h1>
+    <div id="01_basic" class="group" testTargets="1,2,3,4,5,6,7,8,9,10,11">
+        <h2>Basic</h2>
+        <div class="container">
+        </div>
+    </div>
+    <div id="02_practices" class="group" testTargets="1,2">
+        <h2>Practices</h2>
+        <div class="container">
+        </div>
+    </div>
+    <div id="03_specials" class="group" testTargets="1">
+        <h2>Specials</h2>
+        <div class="container">
+        </div>
+    </div>
+    <script>
+        cssLog();
+    </script>
+  </body>
+</html>

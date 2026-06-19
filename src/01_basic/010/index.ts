@@ -24,7 +24,7 @@ const BasketballImage = new Ts.Image({ BasketballPng });
 const CatSound = new Ts.Sound({ CatWav });
 
 // スプライト作成
-const cat = new Ts.Sprite("apple");
+const cat = new Ts.Sprite("cat");
 cat.Costume.add([CatImage, Cat2Image]); // イメージを１個追加
 cat.Sound.add([CatSound]); // サウンドを１個追加
 cat.Sound.setVolume(CatSound, 15);
@@ -60,7 +60,7 @@ cat.Event.flagPresser().func = async function* (this: Sprite) {
         yield;
     }
 };
-// クローンされたとき
+// クローンされたときのイベント定義
 cat.Event.cloned().func = async function* (this: Sprite) {
     const mouse = { x: this.Sensing.mouse.x, y: this.Sensing.mouse.y };
     this.Motion.position.xy = [mouse.x, mouse.y];

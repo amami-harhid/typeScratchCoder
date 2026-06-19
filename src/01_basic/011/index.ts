@@ -1,6 +1,6 @@
 /**
- * 基本-009
- * スプライトに触ったら「ニャー」と鳴く
+ * 基本-011
+ * スプライトが色に触ったら「ニャー」と鳴く
  */
 import { Typescratcher as Ts } from '@tscratch3/typescratcher';
 import type { Sprite } from '@tscratch3/typescratcher';

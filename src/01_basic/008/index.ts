@@ -18,7 +18,7 @@ const BlueskyImage = new Ts.Image({BluesskySvg});
 
 
 // スプライト作成
-const cat = new Ts.Sprite('apple');
+const cat = new Ts.Sprite('cat');
 cat.Costume.add( [CatImage, Cat2Image] ); // イメージを２個追加
 
 // ステージ作成

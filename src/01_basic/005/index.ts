@@ -18,7 +18,7 @@ const BlueskyImage = new Ts.Image({BluesskySvg});
 const CatSound = new Ts.Sound({CatWav});
 
 // スプライト作成
-const apple = new Ts.Sprite('apple');
+const apple = new Ts.Sprite('cat');
 apple.Costume.add( [AppleImage] ); // イメージを１個追加
 apple.Sound.add( [CatSound] ); // サウンドを１個追加
 
@@ -52,6 +52,7 @@ apple.Event.flagPresser().func = async function*(this:Sprite){
 apple.Event.flagPresser().func = async function*(this:Sprite){
     // ずっと 繰り返す
     for(;;){
+        // 端に触れたとき
         if(this.Sensing.edge.isTouching) {
             // 端に触れたら音を鳴らす
             this.Sound.play(CatSound)
