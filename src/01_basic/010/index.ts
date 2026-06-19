@@ -2,6 +2,7 @@
  * 基本-010
  * スプライトをクリックしたらクローンを作る
  * クローンされたとき、ランダムな方向へ動き出す
+ * クローンは 本体のイメージ・サウンドを引き継ぐ
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite } from "@tscratch3/typescratcher";
@@ -53,7 +54,7 @@ cat.Event.flagPresser().func = async function* (this: Sprite) {
     for (;;) {
         // クリックしたとき
         if (this.Sensing.mouse.isDown) {
-            this.Sound.play(CatSound)
+            this.Sound.play(CatSound);
             this.Control.clone();
         }
         yield;
@@ -61,7 +62,7 @@ cat.Event.flagPresser().func = async function* (this: Sprite) {
 };
 // クローンされたとき
 cat.Event.cloned().func = async function* (this: Sprite) {
-    const mouse = {x:this.Sensing.mouse.x, y:this.Sensing.mouse.y};
+    const mouse = { x: this.Sensing.mouse.x, y: this.Sensing.mouse.y };
     this.Motion.position.xy = [mouse.x, mouse.y];
     this.Looks.effect.set(Ts.ImageEffective.GHOST, 0);
     this.Looks.size.scale = [10, 10];
@@ -71,7 +72,7 @@ cat.Event.cloned().func = async function* (this: Sprite) {
     for (;;) {
         this.Motion.move.steps(20);
         this.Motion.direction.degree += Ts.RandomValue(-5, 5);
-        if(this.Sensing.edge.isTouching) {
+        if (this.Sensing.edge.isTouching) {
             //this.Sound.play(CatSound);
             const _random = Ts.RandomValue(-30, 30);
             this.Motion.direction.degree = _random;
