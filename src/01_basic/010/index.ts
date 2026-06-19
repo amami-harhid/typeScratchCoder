@@ -26,6 +26,8 @@ const CatSound = new Ts.Sound({ CatWav });
 const cat = new Ts.Sprite("apple");
 cat.Costume.add([CatImage, Cat2Image]); // イメージを１個追加
 cat.Sound.add([CatSound]); // サウンドを１個追加
+cat.Sound.setVolume(CatSound, 15);
+cat.Sound.setPitch(CatSound, -50);
 
 // ステージ作成
 const stage = new Ts.Stage();
@@ -41,6 +43,8 @@ cat.Event.flagPresser().func = async function* (this: Sprite) {
     this.Motion.position.xy = [0, 0];
     // 大きさを大きくする( 横、縦のパーセンテージ )
     this.Looks.size.scale = [200, 200];
+    // 透明度を50%にする
+    this.Looks.effect.set(Ts.ImageEffective.GHOST, 50);
 };
 
 // 旗を押したときのイベント定義
@@ -48,23 +52,33 @@ cat.Event.flagPresser().func = async function* (this: Sprite) {
     // ずっと繰り返す
     for (;;) {
         // クリックしたとき
-        if (this.Sensing.mouse.isTouching && this.Sensing.mouse.isDown) {
+        if (this.Sensing.mouse.isDown) {
+            this.Sound.play(CatSound)
             this.Control.clone();
-            await this.Sound.playUntilDone(CatSound);
         }
         yield;
     }
 };
 // クローンされたとき
 cat.Event.cloned().func = async function* (this: Sprite) {
-    this.Looks.size.scale = [90, 90];
+    const mouse = {x:this.Sensing.mouse.x, y:this.Sensing.mouse.y};
+    this.Motion.position.xy = [mouse.x, mouse.y];
+    this.Looks.effect.set(Ts.ImageEffective.GHOST, 0);
+    this.Looks.size.scale = [10, 10];
     this.Motion.rotation.style = Ts.Rotation.ALL_AROUND;
     const random = Ts.RandomValue(0, 360);
     this.Motion.direction.degree = random;
     for (;;) {
-        this.Motion.move.steps(2);
+        this.Motion.move.steps(20);
+        this.Motion.direction.degree += Ts.RandomValue(-5, 5);
+        if(this.Sensing.edge.isTouching) {
+            //this.Sound.play(CatSound);
+            const _random = Ts.RandomValue(-30, 30);
+            this.Motion.direction.degree = _random;
+        }
+        this.Motion.move.ifOnEdgeBounce();
         this.Looks.costume.next();
-        if (this.Sensing.edge.isTouching) {
+        if (this.Sensing.sprite.isTouching([cat])) {
             this.Looks.hide();
             break;
         }

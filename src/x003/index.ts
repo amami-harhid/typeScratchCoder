@@ -57,7 +57,7 @@ apple.Event.flagPresser().func = async function*(this: Sprite) {
 apple.Event.flagPresser().func = async function*(this: Sprite) {
     // ずっと繰り返す
     for(;;) {
-        this.Costume.next();
+        this.Looks.costume.next();
         await this.Control.wait(0.5);
         yield;
     }
@@ -66,10 +66,10 @@ apple.Event.flagPresser().func = async function*(this: Sprite) {
 // 【stage】旗押されたときのイベント定義
 // １秒間隔で背景を切り替える
 stage.Event.flagPresser().func = async function*(this: Stage) {
-    this.Backdrop.name = blueskyImage.name;
+    this.Looks.backdrop.name = blueskyImage.name;
     for(;;) {
         await this.Control.wait(1);
-        this.Backdrop.next();
+        this.Looks.backdrop.next();
         yield;
     }
 }
