@@ -31,7 +31,7 @@ apple.Event.flagPresser().func = async function*(this:Sprite){
     // 回転を左右のみにする
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT;
     // 角度を設定する
-    this.Motion.direction.degree = 90 - 5; // 少しだけ斜めにする
+    this.Motion.direction.degree = 45; // 少しだけ斜めにする
 }
 
 // 旗を押したときのイベント定義
