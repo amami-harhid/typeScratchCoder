@@ -1,4 +1,5 @@
 {
     "eslint.runtime": "node",
     "eslint.useFlatConfig": true,
+    "json.schemaDownload.enable": true
 }
