@@ -5,7 +5,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 //import svgr from 'vite-plugin-svgr';
 import { glob } from 'glob'; // version 10.5.0
-import topLevelAwait from 'vite-plugin-top-level-await';
+//import topLevelAwait from 'vite-plugin-top-level-await';
 
 // ルートとするディレクトリー
 const root = resolve(__dirname, './src/')
@@ -46,7 +46,7 @@ export default defineConfig({
     root: resolve(__dirname, './src'),
     plugins: [
         //svgr(),
-        topLevelAwait()
+        //topLevelAwait()
     ],
     resolve: {
         alias: {
