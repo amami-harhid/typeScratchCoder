@@ -7,7 +7,7 @@ import { Typescratcher as Ts } from '@tscratch3/typescratcher';
 import type { Sprite } from '@tscratch3/typescratcher';
 
 // 【画像 import 】
-import AppleSvg from '@Assets/Apple.svg';
+import AppleSvg from '@Assets/front_01.svg';
 import BluesskySvg from '@Assets/Blue Sky.svg';
 
 // イメージ作成

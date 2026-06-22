@@ -3,7 +3,7 @@
  */
  {
     "include": ["./src/**/*.ts", "./index.html", "./node_modules/@tscratch3/typescracher/src"],
-    "exclude": ["./node_modules/*", "./build/**/*"],
+    "exclude": ["./node_modules/*", "./build/**/*", "./node_modules/@tscratch3/typescracher/src/type"],
     "compilerOptions": {
       "target": "esnext",
       //"useDefineForClassFields": true,
@@ -27,7 +27,7 @@
       /* Linting */
       "strict": true,
       "noUnusedLocals": true,
-      "noUnusedParameters": true,
+      //"noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true,
       /* import package.json のために許可する */
       "resolveJsonModule": true
