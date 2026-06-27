@@ -10,6 +10,10 @@ import AppleSvg from '@Assets/Apple.svg';
 import BluesskySvg from '@Assets/Blue Sky.svg';
 import CatWav from '@Assets/Cat.wav';
 
+// モニター変数作成
+const catEdgeTouch = Ts.Variable.number(0);
+Ts.Variable.monitoring({catEdgeTouch});
+
 // イメージ作成
 const AppleImage = new Ts.Image({AppleSvg});
 const BlueskyImage = new Ts.Image({BluesskySvg});
@@ -18,7 +22,7 @@ const BlueskyImage = new Ts.Image({BluesskySvg});
 const CatSound = new Ts.Sound({CatWav});
 
 // スプライト作成
-const apple = new Ts.Sprite('cat');
+const apple = new Ts.Sprite('apple');
 apple.Costume.add( [AppleImage] ); // イメージを１個追加
 apple.Sound.add( [CatSound] ); // サウンドを１個追加
 
@@ -56,6 +60,7 @@ apple.Event.flagPresser().func = async function*(this:Sprite){
         if(this.Sensing.edge.isTouching) {
             // 端に触れたら音を鳴らす
             this.Sound.play(CatSound)
+            catEdgeTouch.value += 1;
         }
         yield;
     }
