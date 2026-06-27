@@ -1,5 +1,5 @@
 /**
- * サンプル-004
+ * サンプル-005
  * コスチュームと背景を切り替えよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
