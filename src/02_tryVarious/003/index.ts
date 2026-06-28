@@ -1,5 +1,5 @@
 /**
- * いろいろ試そう-002
+ * いろいろ試そう-003
  * 画像効果を変化させてみよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
@@ -43,6 +43,7 @@ shark.Event.flagPresser().func = async function*(this: Sprite) {
         // 20回繰り返す
         this.Looks.bubble.say('ペンをひく');
         this.Pen.HSVColor.hue = 0; // 色相 [0 - 360]
+        //this.Pen.HSVColor.saturation = 0;
         this.Pen.HSVColor.transparency = 0; // 透明度
         this.Pen.penDown();
         for(const _ of Ts.Loop.Iterator(20)) {
@@ -55,9 +56,9 @@ shark.Event.flagPresser().func = async function*(this: Sprite) {
             this.Pen.Size.thickness += 1;
 
             // ペンの色を変える
-            this.Pen.HSVColor.hue += 10; // 色相 [0 - 360]
-            // this.Pen.HSVColor.saturation += 1; // 彩度
-            // this.Pen.HSVColor.brightness -= 1; // 明度
+            this.Pen.HSVColor.hue += 15; // 色相 [0 - 360]
+            //this.Pen.HSVColor.saturation += 5; // 彩度
+            //this.Pen.HSVColor.brightness += 5; // 明度
             this.Pen.HSVColor.transparency += 10; // 透明度
             console.log(`hue=${this.Pen.HSVColor.hue}, saturation=${this.Pen.HSVColor.saturation}, brightness=${this.Pen.HSVColor.brightness}, transparency=${this.Pen.HSVColor.transparency}`);
             // すこし待つ
