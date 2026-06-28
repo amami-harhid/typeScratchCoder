@@ -1,9 +1,13 @@
 /**
- * サンプル-008
- * クローンを作ってみよう
+ * サンプル-009
+ * 変数を表示してみよう( ネコとマウスポインターの距離を表示する)
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import { Sprite } from "@tscratch3/typescratcher";
+
+// 【変数モニターを定義】
+const distance = Ts.Variable.number(0); // 初期値ゼロ
+Ts.Variable.monitoring( { distance } ); // モニター表示登録
 
 // 【画像 import 】
 import CatASvg from '@Assets/cat.svg';
@@ -25,23 +29,11 @@ stage.Backdrop.add( [ BlueskyImage ] ); // 背景を追加
 cat.Event.flagPresser().func = async function*(this: Sprite) {
 
     // ずっと繰り返す
-    for(;;){
-        await this.Control.wait(1);
-        this.Control.clone();
+    for( ;; ) {
+        const _distance  = this.Sensing.mouse.distance;
+        distance.value = Math.floor(_distance);
         yield;
     }
-}
-cat.Event.cloned().func = async function*(this:Sprite) {
-    this.Looks.size.scale = [20, 20]; // 横・縦 20% にする
-    this.Motion.direction.degree = Ts.Utils.randomValue(0, 360);
-    for(;;) {
-        this.Motion.move.steps(10);
-        if(this.Sensing.edge.isTouching){
-            break; // 繰り返しを抜ける
-        }
-        yield;
-    }
-    this.Control.removeClone();
 }
 
 // 開始

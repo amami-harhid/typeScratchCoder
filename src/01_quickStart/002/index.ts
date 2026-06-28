@@ -1,9 +1,8 @@
 /**
  * サンプル-002
- * スプライトを移動させてみよう
+ * スプライトとステージを表示してみよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像 URL 】
 // ここではScratch財団が公開してる画像URLを使います
@@ -22,15 +21,6 @@ cat.Costume.add( [CatAImage] ); // イメージを追加
 // ステージ作成
 const stage = new Ts.Stage();
 stage.Backdrop.add([BlueskyImage]); // 背景を追加
-
-// 【旗クリックされたとき】
-cat.Event.flagPresser().func = async function*(this: Sprite) {
-    // Motion: 「動き」系
-    // move: 「動かす」系
-    // steps: 指定した数だけ動かす
-    this.Motion.move.steps(5);
-}
-
 
 // 開始
 Ts.engine.start();

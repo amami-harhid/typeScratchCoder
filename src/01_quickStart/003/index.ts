@@ -1,6 +1,6 @@
 /**
  * サンプル-003
- * ずっと繰り返す、に挑戦しよう
+ * スプライトを移動させてみよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import { Sprite } from "@tscratch3/typescratcher";
@@ -28,12 +28,7 @@ cat.Event.flagPresser().func = async function*(this: Sprite) {
     // Motion: 「動き」系
     // move: 「動かす」系
     // steps: 指定した数だけ動かす
-    // ifOnEdgeBounce: もし端についていたら跳ね返る
-    for(;;) {
-        this.Motion.move.steps(5);
-        this.Motion.move.ifOnEdgeBounce();
-        yield;
-    }
+    this.Motion.move.steps(5);
 }
 
 
