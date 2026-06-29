@@ -47,6 +47,7 @@ dog.Event.flagPresser().func = async function*(this:Sprite){
 
 block.Event.flagPresser().func = async function*(this:Sprite){
     this.Motion.position.xy = [0,0];
+    this.Looks.size.w = 100;
     const bounds = block.Looks.size.drawingSize;
     const scaleWidth = StageWidth/(bounds.right-bounds.left);
     const boundsHeight = bounds.top - bounds.bottom;
@@ -64,10 +65,29 @@ block.Event.cloned().func = async function*(this: Sprite) {
 }
 
 const INIT_JUMP = 50;
-const GRAVITY = 2;
+const GRAVITY = 9.8;
 let speed = 0;
 let onFloor = false;
+/**
+ * moveSpeed の速さで移動したとき targetに衝突するかを判定する
+ */
+const isTouching = function(this:Sprite, target:Sprite, moveSpeed: number):boolean {
 
+    // 自分自身の高さ
+    const ownHeight = this.Looks.size.drawingSize.height;
+    // ターゲットの上辺の座標位置
+    const targetUpperY = target.Looks.size.drawingSize.height - StageWidth / 2;
+
+    // 次に予想される自分自身の位置
+    const nextY = this.Motion.position.y + moveSpeed;
+    // 次に予想される自分自身の底辺の座標位置
+    const ownBottomY = nextY - ownHeight / 2 - 10;
+    if( ownBottomY > targetUpperY ) {
+        return false;
+    }
+    return true;
+
+}
 // 旗が押されたとき
 dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBoundsHeight: number) {
     console.log(`blockBoundsHeight=${blockBoundsHeight}`)
@@ -76,18 +96,25 @@ dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBounds
     console.log(`scaleH=${scaleH}`)
     const DogHeigth = (Bounds.top-Bounds.bottom);
     console.log(`DogHeight=${DogHeigth}`);
+    const _IsTouching = isTouching.bind(this);
 
 
     // ずっと繰り返す
     for(;;){
-        console.log('this.Looks.size.drawingSize=', this.Looks.size.drawingSize)
+        //console.log('this.Looks.size.drawingSize=', this.Looks.size.drawingSize)
         // 自由落下
         if(onFloor === false ) {
             this.Motion.position.y += speed;
         }
+        if(_IsTouching(block, speed - GRAVITY)){
+            // 次に衝突が予想される
+            this.Motion.position.y = blockBoundsHeight - StageHeight/2 + (DogHeigth/2);
+            onFloor = true;
+            speed = 0;
+        }
         if(this.Sensing.sprite.isTouching([block])){
             this.Motion.position.y = blockBoundsHeight - StageHeight/2 + (DogHeigth/2);
-            console.log(`this.Motion.position.y`, this.Motion.position.y);
+            //console.log(`this.Motion.position.y`, this.Motion.position.y);
             onFloor = true;
             speed = 0;
             //break;
@@ -106,9 +133,9 @@ dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
     for(;;){
         if( onFloor === true){
             // 進める
-            //this.Motion.move.steps(10);
+            this.Motion.move.steps(10);
             // 端についたら跳ね返る
-            //this.Motion.move.ifOnEdgeBounce();
+            this.Motion.move.ifOnEdgeBounce();
         }
         yield;
     }
