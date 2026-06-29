@@ -21,11 +21,15 @@ dog.Costume.add( [DogImage] );
 dog.Looks.size.scale = [20, 20];
 dog.Motion.position.xy = [ 0, 180 ];
 
+// ステージの幅
+const StageWidth = Ts.StageBounds.w;
+const StageHeight = Ts.StageBounds.h;
+
 // 【スプライト】(ブロック)
 const block = new Ts.Sprite('block');
 block.Costume.add( [ BlockImage ] );
 block.Looks.hide(); // 非表示にする
-
+block.Looks.effect.set(Ts.ImageEffective.GHOST, 50);
 // 【ステージ】(water)
 const stage = new Ts.Stage();
 stage.Backdrop.add( [WaterImage] );
@@ -35,67 +39,63 @@ const method = Ts.Variable.string('');
 Ts.Variable.monitoring({'ジャンプ': method});
 method.hide(); // 隠す
 
+dog.Event.flagPresser().func = async function*(this:Sprite){
+    this.Motion.position.xy = [ 0, 180 ];
+    this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
+
+};
+
 block.Event.flagPresser().func = async function*(this:Sprite){
-    const bounds = block.Looks.size.drawingSize
-    console.log(bounds.bottom, bounds.top, bounds.left, bounds.right);
-    const W = bounds.right - bounds.left + 5;
-    console.log(W);
-    const H = 20;
+    this.Motion.position.xy = [0,0];
+    const bounds = block.Looks.size.drawingSize;
+    const scaleWidth = StageWidth/(bounds.right-bounds.left);
+    const boundsHeight = bounds.top - bounds.bottom;
+    this.Looks.size.w = scaleWidth*100;
+    const blockY = boundsHeight/2 -StageHeight/2
+    this.Motion.position.y = blockY;
 
-    const X = -200;
-    const Y = -180;
+    this.Looks.show();
 
-    for(const _xIdx of Ts.Loop.Iterator(7)) {
-        this.Motion.position.x = W * _xIdx + X; 
-        for(const _yIdx of Ts.Loop.Iterator(3)) {
-            this.Motion.position.y = H * _yIdx + Y;
-            this.Control.clone();
-            yield;
-        }
-        yield;
-    }
-
-    this.Broadcast.send('START');
+    this.Broadcast.send('START', boundsHeight);
 };
 
 block.Event.cloned().func = async function*(this: Sprite) {
     this.Looks.show();
 }
 
-const INIT_JUMP = 100;
+const INIT_JUMP = 50;
 const GRAVITY = 2;
 let speed = 0;
 let onFloor = false;
 
 // 旗が押されたとき
-dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
-
-    this.Motion.position.xy = [ 0, 180 ];
-    this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
+dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBoundsHeight: number) {
+    console.log(`blockBoundsHeight=${blockBoundsHeight}`)
+    const Bounds = this.Looks.size.drawingSize;
+    const scaleH = this.Looks.size.h;
+    console.log(`scaleH=${scaleH}`)
+    const DogHeigth = (Bounds.top-Bounds.bottom);
+    console.log(`DogHeight=${DogHeigth}`);
 
 
     // ずっと繰り返す
-    for(;;){        
+    for(;;){
+        console.log('this.Looks.size.drawingSize=', this.Looks.size.drawingSize)
         // 自由落下
-        this.Motion.position.y += speed;
-        speed -= GRAVITY;
-        this.Motion.position.y -= 5;
-        if( this.Sensing.sprite.isTouching([block])){
-            console.log('ON FLOOR');
-            onFloor = true;
-            for(;;) {
-                if( this.Sensing.sprite.isTouching([block])){
-                    this.Motion.position.y -= speed;
-                }else{
-                    break;
-                }
-                yield;
-            }
-            speed = 0;
+        if(onFloor === false ) {
+            this.Motion.position.y += speed;
         }
-        this.Motion.position.y += 5;
+        if(this.Sensing.sprite.isTouching([block])){
+            this.Motion.position.y = blockBoundsHeight - StageHeight/2 + (DogHeigth/2);
+            console.log(`this.Motion.position.y`, this.Motion.position.y);
+            onFloor = true;
+            speed = 0;
+            //break;
+        }
+        speed -= GRAVITY;
         yield;
     }
+    console.log('Dog down owari')
 }
 
 // 旗が押されたとき
@@ -106,10 +106,10 @@ dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
     for(;;){
         if( onFloor === true){
             // 進める
-            this.Motion.move.steps(10);
-        }   
-        // 端についたら跳ね返る
-        this.Motion.move.ifOnEdgeBounce();
+            //this.Motion.move.steps(10);
+            // 端についたら跳ね返る
+            //this.Motion.move.ifOnEdgeBounce();
+        }
         yield;
     }
 }
@@ -121,7 +121,7 @@ dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
     method.show();
     for(;;) {
         if(onFloor === true && this.Sensing.keyboard.isDown(Ts.Keyboard.SPACE)){
-            speed = -INIT_JUMP;
+            speed = INIT_JUMP;
             onFloor = false;
             await this.Control.waitWhile(()=>this.Sensing.keyboard.isDown(Ts.Keyboard.SPACE));
         }
