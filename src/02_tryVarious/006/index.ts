@@ -18,13 +18,13 @@ const WaterImage = new Ts.Image({WaterSvg});
 const dog = new Ts.Sprite('shark');
 // 画像をスプライトへ追加
 dog.Costume.add( [DogImage] );
-dog.Looks.size.scale = [30, 30];
-dog.Motion.position.xy = [ 0, -130 ];
+dog.Looks.size.scale = [20, 20];
+dog.Motion.position.xy = [ 0, 180 ];
 
 // 【スプライト】(ブロック)
 const block = new Ts.Sprite('block');
 block.Costume.add( [ BlockImage ] );
-//block.Looks.hide();
+block.Looks.hide(); // 非表示にする
 
 // 【ステージ】(water)
 const stage = new Ts.Stage();
@@ -36,14 +36,16 @@ Ts.Variable.monitoring({'ジャンプ': method});
 method.hide(); // 隠す
 
 block.Event.flagPresser().func = async function*(this:Sprite){
-    
-    const W = 30;
+    const bounds = block.Looks.size.drawingSize
+    console.log(bounds.bottom, bounds.top, bounds.left, bounds.right);
+    const W = bounds.right - bounds.left + 5;
+    console.log(W);
     const H = 20;
 
     const X = -200;
     const Y = -180;
 
-    for(const _xIdx of Ts.Loop.Iterator(10)) {
+    for(const _xIdx of Ts.Loop.Iterator(7)) {
         this.Motion.position.x = W * _xIdx + X; 
         for(const _yIdx of Ts.Loop.Iterator(3)) {
             this.Motion.position.y = H * _yIdx + Y;
@@ -52,62 +54,79 @@ block.Event.flagPresser().func = async function*(this:Sprite){
         }
         yield;
     }
+
+    this.Broadcast.send('START');
 };
 
 block.Event.cloned().func = async function*(this: Sprite) {
     this.Looks.show();
 }
 
-// 旗が押されたとき
-dog.Event.flagPresser().func = async function*(this: Sprite) {
+const INIT_JUMP = 100;
+const GRAVITY = 2;
+let speed = 0;
+let onFloor = false;
 
-    this.Motion.position.xy = [ 0, -130 ];
+// 旗が押されたとき
+dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
+
+    this.Motion.position.xy = [ 0, 180 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
+
 
     // ずっと繰り返す
     for(;;){        
-        // 進める
-        this.Motion.move.steps(10);
+        // 自由落下
+        this.Motion.position.y += speed;
+        speed -= GRAVITY;
+        this.Motion.position.y -= 5;
+        if( this.Sensing.sprite.isTouching([block])){
+            console.log('ON FLOOR');
+            onFloor = true;
+            for(;;) {
+                if( this.Sensing.sprite.isTouching([block])){
+                    this.Motion.position.y -= speed;
+                }else{
+                    break;
+                }
+                yield;
+            }
+            speed = 0;
+        }
+        this.Motion.position.y += 5;
+        yield;
+    }
+}
+
+// 旗が押されたとき
+dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
+
+    this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
+    // ずっと繰り返す
+    for(;;){
+        if( onFloor === true){
+            // 進める
+            this.Motion.move.steps(10);
+        }   
         // 端についたら跳ね返る
         this.Motion.move.ifOnEdgeBounce();
         yield;
     }
 }
-// A キーが押されたとき(等速ジャンプ)
-dog.Event.keyPresser('a').func = async function*(this:Sprite) {
-    method.text = '等速';
-    method.show();
-    const JUMP = 10;
-    for(const _ of Ts.Loop.Iterator(10)) {
-        this.Motion.position.y += JUMP;
-        yield;
-    }
-    for(const _ of Ts.Loop.Iterator(10)) {
-        this.Motion.position.y -= JUMP;
-        yield;
-    }
-    method.hide();
-    method.text = '';
-}
-// B キーが押されたとき(放物風ジャンプ)
-dog.Event.keyPresser('b').func = async function*(this:Sprite) {
+
+// 旗が押されたとき
+dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
+
     method.text = '放物風';
     method.show();
-    const INIT_JUMP = 30;
-    const GRAVITY = 4;
-    let speed = INIT_JUMP;
-
     for(;;) {
-        this.Motion.position.y += speed;
-        speed -= GRAVITY;
-        if(this.Motion.position.y < -130) {
-            break;
+        if(onFloor === true && this.Sensing.keyboard.isDown(Ts.Keyboard.SPACE)){
+            speed = -INIT_JUMP;
+            onFloor = false;
+            await this.Control.waitWhile(()=>this.Sensing.keyboard.isDown(Ts.Keyboard.SPACE));
         }
         yield;
     }
-    this.Motion.position.y = -130;
-    method.hide();
-    method.text = '';
 
 }
 
