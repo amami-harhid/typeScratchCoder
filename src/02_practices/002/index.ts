@@ -63,8 +63,7 @@ cat.Event.cloned().func = async function*(this:Sprite) {
     this.Looks.size.scale = [20, 20];
     const mouse = { x: this.Sensing.mouse.x, y: this.Sensing.mouse.y };
     this.Motion.position.xy = [mouse.x, mouse.y];
-    const degree = Ts.RandomValue(0,360); // ランダムな向き
-    this.Motion.direction.degree = degree;
+    this.Motion.point.toRandom(); // ランダムな向き
     for(;;) {
         this.Motion.move.steps(10);
         this.Motion.move.ifOnEdgeBounce();
