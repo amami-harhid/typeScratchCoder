@@ -4,8 +4,7 @@
  * 自由落下
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
-import { TBoundsEx } from "@tscratch3/typescratcher/src/type/common/typeCommon";
+import type { Sprite, Bounds } from "@tscratch3/typescratcher";
 //Ts.Env.debugMode = true;
 //Ts.Env.fps = 5;
 
@@ -91,7 +90,7 @@ const isTouching = function(this:Sprite, target:Sprite, moveSpeed: number):boole
 }
 let walkSpeed = 0;
 // 旗が押されたとき
-dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBound: TBoundsEx) {
+dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBound: Bounds) {
     speed = 0;
     onFloor = false;
     const Bounds = this.Looks.size.drawingSize;
