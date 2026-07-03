@@ -88,18 +88,21 @@ const isTouching = function(this:Sprite, target:Sprite, moveSpeed: number):boole
     return true;
 
 }
+let firstTouch = true;
 let walkSpeed = 0;
 // 旗が押されたとき
 dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBound: Bounds) {
+    firstTouch = true;
     speed = 0;
     onFloor = false;
     const Bounds = this.Looks.size.drawingSize;
     const DogHeigth = Bounds.height;
     const _IsTouching = isTouching.bind(this);
+    this.Pen.penDown(); // 自由落下中ペン描画をする
     // ずっと繰り返す
-    this.Pen.penDown();
     for(;;){
         if(_IsTouching(block, speed)){
+            firstTouch = false;
             // 次に衝突が予想されるとき
             this.Motion.position.y = blockBound.height - StageHeight/2 + (DogHeigth/2);;
             onFloor = true;
@@ -110,6 +113,8 @@ dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBound:
             this.Motion.position.y += speed;
             this.Motion.move.steps(walkSpeed);
             speed -= GRAVITY;
+            if(firstTouch === false){
+            }
         }
         yield;
     }
