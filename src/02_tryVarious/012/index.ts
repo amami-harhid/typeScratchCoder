@@ -4,7 +4,7 @@
  * 文字を表示する
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import { Sprite, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 Ts.Env.debugMode = true;
 
@@ -12,7 +12,6 @@ Ts.Env.debugMode = true;
 import catSvg from '@Assets/cat.svg';
 const CatImage = new Ts.Image( {catSvg} );
 import WaterSvg from '@Assets/water.svg';
-import type { createSvgImageAttributes } from "@tscratch3/typescratcher/src/type/image";
 const WaterImage = new Ts.Image({WaterSvg});
 
 // 【スプライト】(Spriteネコ)
@@ -31,7 +30,7 @@ stage.Backdrop.add( [WaterImage] );
 
 // 文字列イメージ化
 const HELLO = 'Hello world';
-const attribute:createSvgImageAttributes = {
+const attribute : SvgImageAttributes = {
     fill: '#f0f0f0', // 文字色
     font_weight: 'bold',
     scratch_font_family: Ts.ScratchFontFamily.Scratch
