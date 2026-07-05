@@ -32,14 +32,15 @@ stage.Backdrop.add( [WaterImage] );
 const HELLO = 'Hello world';
 const attribute : SvgImageAttributes = {
     fill: '#f0f0f0', // 文字色
-    font_weight: 'bold',
-    scratch_font_family: Ts.ScratchFontFamily.Scratch
+    font_family: Ts.ScratchFontFamily.Scratch
 };
-const helloImage = await Ts.Image.createSvgImage({HELLO}, attribute); // ESLint で await をつける
+const helloImage = new Ts.FontImage(attribute);
+await helloImage.textToSvg(HELLO);
 
 const moji = new Ts.Sprite('moji');
-moji.Costume.add( [helloImage] ); // <--- 文字中央にならない！！改良必要。
+moji.Costume.add( [helloImage] );
 moji.Looks.layer.gotoBack();
+
 
 // 変数
 const touch = Ts.Variable.string( '' ); // タッチ

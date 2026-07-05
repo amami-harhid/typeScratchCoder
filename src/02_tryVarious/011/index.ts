@@ -34,8 +34,8 @@ Ts.Variable.monitoring( { text: speechText } );
 
 cat.Event.flagPresser().func = async function*(this:Sprite){
     this.Looks.size.scale = [250, 250];
-    this.Speech.locale(Ts.SpeechLocale.JAPANESE).type(Ts.SpeechGender.FEMALE).pitch(50);
-    this.Speech.locale(Ts.SpeechLocale.JAPANESE).type(Ts.SpeechGender.MALE).pitch(-50);
+    this.Speech.locale(Ts.SpeechLocale.JAPANESE).type(Ts.VoiceType.ALTO).typeCopyTo("FEMAIL").pitch(150);
+    this.Speech.locale(Ts.SpeechLocale.JAPANESE).type(Ts.VoiceType.TENOR).typeCopyTo("MAIL").pitch(50);
     const _touch = () => {
         return this.Sensing.mouse.isTouching;
     }
@@ -46,12 +46,12 @@ cat.Event.flagPresser().func = async function*(this:Sprite){
             if(speechFlag){
                 // ピッチ加工したFEMAILの声
                 console.log('FEMAIL')
-                await this.Speech.type(Ts.SpeechGender.FEMALE).speech(speechText.text);
+                await this.Speech.type("FEMAIL").speech(speechText.text);
 
             }else{
                 // ピッチ加工したMAILの声
                 console.log('MAIL')
-                await this.Speech.type(Ts.SpeechGender.MALE).speech(speechText.text);
+                await this.Speech.type("MAIL").speech(speechText.text);
 
             }
             speechFlag = !speechFlag;
