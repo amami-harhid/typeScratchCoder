@@ -6,13 +6,49 @@
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import { Sprite, SvgImageAttributes } from "@tscratch3/typescratcher";
 
-Ts.Env.debugMode = true;
+// 【MAP読み込み】
+import { Map01 } from "./sub/map";
 
 // 【画像読み込み】
+import wallPng  from '../assets/wall.png';
+const WallImage = new Ts.Image({wallPng});
+
 import SlimeSvg from '../assets/slime_a.svg';
 const SlimeImage = new Ts.Image({SlimeSvg});
 import WaterSvg from '@Assets/water.svg';
 const WaterImage = new Ts.Image({WaterSvg});
+
+// 【スプライト】壁
+const wall = new Ts.Sprite('wall');
+wall.Costume.add( [WallImage] );
+wall.Looks.hide();
+
+wall.Event.flagPresser().func = async function*(this:Sprite){
+    const w = 30;
+    const h = 30;
+    let x = 0;
+    // eslint-disable-next-line loopCheck/s3-loop-plugin
+    for(const _row of Map01) {
+        let y = 0; 
+        //console.log(_row);
+        // eslint-disable-next-line loopCheck/s3-loop-plugin
+        for(const _elem of _row) {
+            console.log(x,y)
+            if(_elem == 1) {
+                //const pos: number[] = [ w*x,  h*y ];
+                //console.log( pos);
+                this.Motion.position.xy =  [ w*x,  h*y ];
+                this.Control.clone();
+            }
+            y+=1;
+        }
+        x+=1;
+    }
+
+}
+wall.Event.cloned().func = async function*(this:Sprite) {
+    this.Looks.show();
+}
 
 // 【スプライト】(Spriteスライム)
 const slime = new Ts.Sprite('slime');
