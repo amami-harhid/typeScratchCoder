@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite --open"
+    "dev": "vite --open",
+    "build": "vite build --config ./vite.config-build.js --emptyOutDir"
   },
   "author": "amami-harhid",
   "license": "AGPL-3.0-only",
