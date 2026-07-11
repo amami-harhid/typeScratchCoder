@@ -5,17 +5,22 @@
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import { Sprite } from "@tscratch3/typescratcher";
 
+// イメージ作成
+import { CatAImage, BlueskyImage } from './sub/images';
+
 // スプライト作成
-import { cat } from "./sub/cat";
+export const cat = new Ts.Sprite( "cat" );
+cat.Costume.add( [CatAImage] ); // イメージを追加
 
 // ステージ作成
-import "./sub/stage";
+export const stage = new Ts.Stage();
+stage.Backdrop.add([BlueskyImage]); // 背景を追加
 
-// 【旗クリックされたとき】
+// スプライト【旗クリックされたとき】のイベント定義
 cat.Event.flagPresser().func = async function*(this: Sprite) {
     // Motion: 「動き」系
     // move: 「動かす」系
-    // steps: 指定した数だけ動かす
+    // Motion.move.steps: 指定した数だけ動かす
     this.Motion.move.steps(5);
 }
 
