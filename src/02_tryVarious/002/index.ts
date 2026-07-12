@@ -14,7 +14,7 @@ const WaterImage = new Ts.Image({WaterSvg});
 
 // 【スプライト】(さめ)
 const shark = new Ts.Sprite('shark');
-// おばけ画像をスプライトへ追加
+// さめイメージをスプライトへ追加
 shark.Costume.add( [SharkImage] ); 
 
 // 【ステージ】(water)

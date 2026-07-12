@@ -8,21 +8,19 @@ import { Sprite } from "@tscratch3/typescratcher";
 // 【画像読み込み】
 import sharkPng from '@Assets/shark.png';
 const SharkImage = new Ts.Image( {sharkPng} );
-import WaterSvg from '@Assets/water.svg';
-const WaterImage = new Ts.Image({WaterSvg});
 const ColorfulCityPng = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/04d18ddd1b85f0ea30beb14b8da49f60.png/get';
 const ColorfulCityImage = new Ts.Image({ColorfulCityPng});
 
 // 【スプライト】(さめ)
 const shark = new Ts.Sprite('shark');
-// おばけ画像をスプライトへ追加
+// さめイメージをスプライトへ追加
 shark.Costume.add( [SharkImage] );
 shark.Looks.size.scale = [10, 10];
-shark.Looks.size.w *= -1;
+shark.Looks.size.scale.w *= -1;
 
 // 【ステージ】(water)
 const stage = new Ts.Stage();
-stage.Backdrop.add( [ColorfulCityImage, WaterImage] );
+stage.Backdrop.add( [ColorfulCityImage] );
 
 // 変数
 const Touching = Ts.Variable.string(''); 

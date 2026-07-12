@@ -1,6 +1,6 @@
 /**
  * いろいろ試そう-003
- * 画像効果を変化させてみよう
+ * ペンで線を引いてみよう。
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import { Sprite } from "@tscratch3/typescratcher";
@@ -14,7 +14,7 @@ const WaterImage = new Ts.Image({WaterSvg});
 
 // 【スプライト】(さめ)
 const shark = new Ts.Sprite('shark');
-// おばけ画像をスプライトへ追加
+// さめイメージをスプライトへ追加
 shark.Costume.add( [SharkImage] );
 shark.Looks.size.scale = [30, 30];
 
