@@ -61,10 +61,6 @@ block.Event.flagPresser().func = async function*(this:Sprite){
     this.Broadcast.send('START', bounds);
 };
 
-block.Event.cloned().func = async function*(this: Sprite) {
-    this.Looks.show();
-}
-
 const INIT_JUMP = 70;
 const GRAVITY = 10;
 let speed = 0;
@@ -90,7 +86,7 @@ const isTouching = function(this:Sprite, target:Sprite, moveSpeed: number):boole
 }
 let firstTouch = true;
 let walkSpeed = 0;
-// 旗が押されたとき
+// 犬がメッセージ(START)を受信したとき
 dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBound: Bounds) {
     firstTouch = true;
     speed = 0;
@@ -120,7 +116,7 @@ dog.Broadcast.receiver("START").func = async function*(this: Sprite, blockBound:
     }
 }
 
-// 旗が押されたとき
+// 犬がメッセージ(START)を受信したとき
 dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
 
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
@@ -147,7 +143,7 @@ dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
     }
 }
 
-// 旗が押されたとき
+// 犬がメッセージ(START)を受信したとき
 dog.Broadcast.receiver("START").func = async function*(this: Sprite) {
 
     method.text = '放物風';
