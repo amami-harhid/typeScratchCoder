@@ -32,7 +32,7 @@ for(const target of targetDir){
 }
 console.log(rollupOpsionsInput);
 // ビルド結果を出力する先
-const outDir = resolve(__dirname, 'build');
+const outDir = resolve(__dirname, 'docs');
 
 export default defineConfig({
     build: {
