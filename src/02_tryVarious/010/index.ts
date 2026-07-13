@@ -30,13 +30,13 @@ stage.Backdrop.add( [WaterImage] );
 const touch = Ts.Variable.string( '' ); // タッチ
 Ts.Variable.monitoring( { touch } );
 
+// 旗が押されたときの「ねこ」のスレッド
 cat.Event.flagPresser().func = async function*(this:Sprite){
     this.Looks.size.scale = [250, 250];
-    touch.text = '' // 初期化
-
+    touch.text = ''; // 変数の値を初期化
 };
 
-// 【旗】が押されたとき
+// 旗が押されたときの「ねこ」のスレッド
 cat.Event.flagPresser().func = async function*(this:Sprite){
     /** 色の変化量 */
     const changeColor = 15;

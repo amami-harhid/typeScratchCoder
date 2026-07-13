@@ -11,9 +11,6 @@ import catSvg from '@Assets/cat.svg';
 const CatImage = new Ts.Image( {catSvg} );
 import WaterSvg from '@Assets/water.svg';
 const WaterImage = new Ts.Image({WaterSvg});
-// 【音読み込み】
-import ChillWav from '@Assets/Chill.wav';
-const ChillSound = new Ts.Sound({ChillWav});
 
 // 【スプライト】(Spriteネコ)
 const cat = new Ts.Sprite('cat');
@@ -21,9 +18,6 @@ const cat = new Ts.Sprite('cat');
 // 画像をスプライトへ追加
 cat.Costume.add( [CatImage] );
 cat.Motion.position.xy = [ 0, 0 ];
-
-// サウンドをスプライトへ追加
-cat.Sound.add([ ChillSound ]);
 
 // 大きさの設定
 cat.Looks.size.scale = [250, 250];
@@ -44,7 +38,9 @@ Ts.Variable.monitoring( { pixelate } )
 
 cat.Event.flagPresser().func = async function*(this:Sprite){
     this.Looks.size.scale = [250, 250];
+    // スプライトを囲む矩形の情報を取り出す
     const bounds = this.Looks.size.drawingSize;
+    // スプライトを囲む円の半径を計算しておく（参考値として）
     radius.value = Math.floor(Math.max( bounds.width / 2, bounds.height / 2 )); // 半径
 
 };
