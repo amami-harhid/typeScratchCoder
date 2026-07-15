@@ -30,6 +30,7 @@ const StageHeight = Ts.StageBounds.h;
 // 【スプライト】(ブロック)
 const block = new Ts.Sprite('block');
 block.Costume.add( [ BlockImage ] );
+console.log(block.Looks.visible)
 block.Looks.visible.hide(); // 非表示にする
 block.Looks.effect.set(Ts.ImageEffective.GHOST, 50);
 // 【ステージ】(water)
