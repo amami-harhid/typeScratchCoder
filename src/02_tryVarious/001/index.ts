@@ -32,25 +32,25 @@ obake.Event.flagPresser().func = async function*(this: Sprite) {
     for(;;){
         // 10回繰り返す(横に大きくする)
         for(const _ of Ts.Loop.Iterator(10)) {
-            this.Looks.size.w += 5;
+            this.Looks.size.scale.w += 5;
             //console.log('w + 5 ', this.Looks.size.scale)
             yield;
         }
         // 10回繰り返す(縦に大きくする)
         for(const _ of Ts.Loop.Iterator(10)) {
-            this.Looks.size.h += 5;
+            this.Looks.size.scale.h += 5;
             //console.log('h + 5 ', this.Looks.size.scale)
             yield;
         }
         // 10回繰り返す(横に小さくする)
         for(const _ of Ts.Loop.Iterator(10)) {
-            this.Looks.size.w -= 5;
+            this.Looks.size.scale.w -= 5;
             //console.log('w - 5 ', this.Looks.size.scale)
             yield;
         }
         // 10回繰り返す(縦に小さくする)
         for(const _ of Ts.Loop.Iterator(10)) {
-            this.Looks.size.h -= 5;
+            this.Looks.size.scale.h -= 5;
             //console.log('h - 5 ', this.Looks.size.scale)
             yield;
         }

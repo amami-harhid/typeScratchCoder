@@ -21,29 +21,26 @@ const wall = new Wall('wall');
 wall.Costume.add( [WallImage] );
 const w = WallWidth;
 const h = WallHeight;
-wall.Looks.size.w = w;
-wall.Looks.size.h = h;
-wall.Looks.hide();
+wall.Looks.size.drawingSize = {w:w, h:h};
+wall.Looks.visible.hide();
 
 // 【スプライト】Cage
 const cage = new Wall('cage');
 cage.Costume.add( [DoorImage, CageImage] );
-cage.Looks.size.w = w;
-cage.Looks.size.h = h;
-cage.Looks.hide();
+cage.Looks.size.drawingSize = {w:w, h:h};
+cage.Looks.visible.hide();
 
 const CageBank : {[key : string]: IWall} = {};
 
 // 【スプライト】(Spriteスライム)
 const slime = new Ts.Sprite('slime');
-slime.Looks.hide();
+slime.Looks.visible.hide();
 
 // 画像をスプライトへ追加
 slime.Costume.add( [SlimeImage] );
 slime.Sound.add([ChirpSound, CollectSound, CrashBeatboxSound]);
 slime.Motion.position.xy = [ 0, 0 ];
-slime.Looks.size.w = w*0.8;
-slime.Looks.size.h = h*0.8;
+slime.Looks.size.drawingSize = {w: w*0.8, h:h*0.8};
 
 
 //【変数】
@@ -53,12 +50,10 @@ Count.hide();
 
 
 wall.Event.flagPresser().func = async function*(this:IWall){
-    this.Looks.size.w = w;
-    this.Looks.size.h = h;
+    this.Looks.size.drawingSize = {w:w, h:h };
 }
 cage.Event.flagPresser().func = async function*(this:IWall){
-    this.Looks.size.w = w;
-    this.Looks.size.h = h;
+    this.Looks.size.drawingSize = {w:w, h:h };
 }
 
 wall.Event.flagPresser().func = async function*(this:IWall){
@@ -110,23 +105,23 @@ cage.Event.flagPresser().func = async function*(this:IWall){
 }
 
 wall.Event.cloned().func = async function*(this:IWall) {
-    this.Looks.show();
+    this.Looks.visible.show();
 }
 cage.Event.cloned().func = async function*(this:IWall) {
     const me = this;
     if(this.type == 2) {
         this.Looks.costume.name = DoorImage.name;
-        this.Looks.show();
+        this.Looks.visible.show();
     }else if(this.type == 3){
         this.Looks.costume.name = CageImage.name;
-        this.Looks.show();
+        this.Looks.visible.show();
     }
     // ケージを保存
     CageBank[this.name] = me;
 
     for(;;){
         if( ! this.Sensing.sprite.isTouching([slime])){
-            this.Looks.show();
+            this.Looks.visible.show();
             await this.Control.wait(Ts.Utils.randomValue(3.5, 5.5));
             if(this.type == 2) {
                 this.Looks.costume.name = CageImage.name;
@@ -143,8 +138,6 @@ cage.Event.cloned().func = async function*(this:IWall) {
 
 slime.Event.flagPresser().func = async function*(this:IWall){
     // 大きさの設定
-    // this.Looks.size.w = w*0.8;
-    // this.Looks.size.h = h*0.8;
     Count.scale.w = 50;
     Count.scale.h = 50;
     Count.value = 0;
@@ -177,9 +170,9 @@ moji.Event.flagPresser().func = async function*(this:Sprite) {
     this.Looks.layer.gotoFront();
     slime.Looks.layer.gotoFront();
     for(;;) {
-        this.Looks.hide();
+        this.Looks.visible.hide();
         await this.Control.wait(1);
-        this.Looks.show();
+        this.Looks.visible.show();
         await this.Control.wait(1);
         yield;
     }
@@ -207,14 +200,13 @@ const teleportToRandomCage = async function(this:Sprite) {
     this.Motion.position.xy = [_randomCage.Motion.position.x, _randomCage.Motion.position.y];
     Count.value += 1;
     // ケージを非表示 ==> 離れたら表示される(Cageのclonedイベントの中で制御している)
-    _randomCage.Looks.hide();
+    _randomCage.Looks.visible.hide();
 
 }
 slime.Event.cloned().func = async function*(this:Sprite) {
     // 大きさの設定
-    this.Looks.size.w = w*0.7;
-    this.Looks.size.h = h*0.8;
-    this.Looks.show();
+    this.Looks.size.drawingSize = {w:w*0.7, h: h*0.8 };
+    this.Looks.visible.show();
 
     const _teleport = teleportToRandomCage.bind(this);
     for(;;) {

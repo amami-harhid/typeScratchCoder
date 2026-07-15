@@ -17,7 +17,7 @@ catA.Motion.position.xy = [-100, -100]; // 座標の位置[X座標、Y座標]
 const catB = new Ts.Sprite( "catB" );
 catB.Costume.add( [ CatBImage ] ); // イメージを追加
 catB.Motion.position.xy = [ 100, -100]; // 座標の位置[X座標、Y座標]
-catB.Looks.size.w = -100;  // 幅をマイナスとすることで 反対に向く
+catB.Looks.size.scale.w = -100;  // 幅をマイナスとすることで 反対に向く
 
 // ステージ作成
 const stage = new Ts.Stage();
