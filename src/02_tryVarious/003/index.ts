@@ -34,7 +34,6 @@ shark.Event.flagPresser().func = async function*(this: Sprite) {
     await this.Control.wait(1);
 
     // ペンを準備する
-    this.Pen.prepare();
     this.Pen.penClear();
 
     // ずっと繰り返す
