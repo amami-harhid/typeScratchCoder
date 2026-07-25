@@ -165,11 +165,10 @@ await helloImage.textToSvg(HELLO);
 
 const moji = new Ts.Sprite("moji");
 moji.Costume.add([helloImage]);
-moji.Looks.layer.gotoBack();
+moji.Looks.layer.gotoBackLayer();
 
 moji.Event.flagPresser().func = async function* (this: Sprite) {
-    this.Looks.layer.gotoFront();
-    slime.Looks.layer.gotoFront();
+    this.Looks.layer.gotoFrontLayer();
     for (;;) {
         this.Looks.visible.hide();
         await this.Control.wait(1);
@@ -177,6 +176,9 @@ moji.Event.flagPresser().func = async function* (this: Sprite) {
         await this.Control.wait(1);
         yield;
     }
+};
+slime.Event.flagPresser().func = async function* (this: Sprite) {
+    slime.Looks.layer.gotoFrontLayer();
 };
 /**
  * 独自関数
