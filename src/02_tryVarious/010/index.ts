@@ -17,10 +17,10 @@ const cat = new Ts.Sprite( "cat" );
 
 // 画像をスプライトへ追加
 cat.Costume.add( CatImage );
-cat.Motion.position.xy = [0, 0];
+cat.Motion.position.xy = [ 0, 0 ];
 
 // 大きさの設定
-cat.Looks.size.scale = [250, 250];
+cat.Looks.size.scale = [ 250, 250 ];
 
 // 【ステージ】(water)
 const stage = new Ts.Stage();
@@ -32,7 +32,7 @@ Ts.Variable.monitoring( { touch } );
 
 // 旗が押されたときの「ねこ」のスレッド
 cat.Event.flagPresser().func = async function* ( this: Sprite ) {
-    this.Looks.size.scale = [250, 250];
+    this.Looks.size.scale = [ 250, 250 ];
     touch.text = ""; // 変数の値を初期化
 };
 

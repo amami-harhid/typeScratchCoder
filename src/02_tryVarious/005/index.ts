@@ -15,7 +15,7 @@ const WaterImage = new Ts.Image( { WaterSvg } );
 const dog = new Ts.Sprite( 'shark' );
 // 画像をスプライトへ追加
 dog.Costume.add( DogImage );
-dog.Looks.size.scale = [30, 30];
+dog.Looks.size.scale = [ 30, 30 ];
 dog.Motion.position.xy = [ 0, -130 ];
 
 // 【ステージ】(water)
@@ -30,7 +30,7 @@ method.hide(); // 隠す
 // 旗が押されたとき
 dog.Event.flagPresser().func = async function*( this: Sprite ) {
 
-    this.Motion.position.xy = [0, -130];
+    this.Motion.position.xy = [ 0, -130 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
 
     // ずっと繰り返す

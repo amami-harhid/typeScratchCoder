@@ -20,7 +20,7 @@ const cat = new Ts.Sprite( "cat" );
 
 // 画像をスプライトへ追加
 cat.Costume.add( CatImage );
-cat.Motion.position.xy = [0, 0];
+cat.Motion.position.xy = [ 0, 0 ];
 
 // サウンドをスプライトへ追加
 cat.Sound.add( ChillSound );

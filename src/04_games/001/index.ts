@@ -44,7 +44,7 @@ slime.Looks.visible.hide();
 // 画像をスプライトへ追加
 slime.Costume.add( SlimeImage );
 slime.Sound.add( ChirpSound, CollectSound, CrashBeatboxSound );
-slime.Motion.position.xy = [0, 0];
+slime.Motion.position.xy = [ 0, 0 ];
 slime.Looks.size.drawingSize = { w: w * 0.8, h: h * 0.8 };
 
 //【変数】
@@ -68,10 +68,10 @@ wall.Event.flagPresser().func = async function* ( this: IWall ) {
         for ( const _elem of _row ) {
             if ( 0 < _elem ) {
                 if ( _elem == 9 ) {
-                    slime.Motion.position.xy = [w * x, -h * y];
+                    slime.Motion.position.xy = [ w * x, -h * y ];
                 } else {
                     if ( _elem == 1 ) {
-                        this.Motion.position.xy = [w * x, -h * y];
+                        this.Motion.position.xy = [ w * x, -h * y ];
                         this.type = 1;
                         this.Control.clone();
                     }
@@ -92,11 +92,11 @@ cage.Event.flagPresser().func = async function* ( this: IWall ) {
         // eslint-disable-next-line loopCheck/s3-loop-plugin
         for ( const _elem of _row ) {
             if ( _elem == 2 ) {
-                cage.Motion.position.xy = [w * x, -h * y];
+                cage.Motion.position.xy = [ w * x, -h * y ];
                 cage.type = 2;
                 cage.Control.clone();
             } else if ( _elem == 3 ) {
-                cage.Motion.position.xy = [w * x, -h * y];
+                cage.Motion.position.xy = [ w * x, -h * y ];
                 cage.type = 3;
                 cage.Control.clone();
             }

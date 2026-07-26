@@ -15,7 +15,8 @@ const build_eslint_config = [
         rules: {
             "space-in-parens": ["error", "always"],
             "object-curly-spacing": ["error", "always"],
-            "no-multi-spaces": "error"
+            "array-bracket-spacing": ["error", "always"],
+            "no-multi-spaces": "error",
         },
     },
 ];

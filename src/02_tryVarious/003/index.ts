@@ -15,7 +15,7 @@ const WaterImage = new Ts.Image( { WaterSvg } );
 const shark = new Ts.Sprite( "shark" );
 // さめイメージをスプライトへ追加
 shark.Costume.add( SharkImage );
-shark.Looks.size.scale = [30, 30];
+shark.Looks.size.scale = [ 30, 30 ];
 
 // 【ステージ】(water)
 const stage = new Ts.Stage();
@@ -23,9 +23,9 @@ stage.Backdrop.add( WaterImage );
 
 shark.Event.flagPresser().func = async function* ( this: Sprite ) {
     // 初期位置 ( 中央 )
-    this.Motion.position.xy = [0, 0];
+    this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 30% )
-    this.Looks.size.scale = [30, 30];
+    this.Looks.size.scale = [ 30, 30 ];
     // 画像効果初期化
     this.Looks.effect.clear();
     // 少しまつ

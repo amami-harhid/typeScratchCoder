@@ -24,9 +24,9 @@ stage.Backdrop.add( BasketballImage );
 
 obake.Event.flagPresser().func = async function*( this: Sprite ) {
     // 初期位置 ( 中央 )
-    this.Motion.position.xy = [0, 0];
+    this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
-    this.Looks.size.scale = [100, 100];
+    this.Looks.size.scale = [ 100, 100 ];
 
     // ずっと繰り返す
     for( ;; ){

@@ -15,7 +15,7 @@ const ColorfulCityImage = new Ts.Image( { ColorfulCityPng } );
 const shark = new Ts.Sprite( 'shark' );
 // さめイメージをスプライトへ追加
 shark.Costume.add( SharkImage );
-shark.Looks.size.scale = [10, 10];
+shark.Looks.size.scale = [ 10, 10 ];
 shark.Looks.size.scale.w *= -1;
 
 // 【ステージ】(water)

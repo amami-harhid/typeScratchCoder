@@ -24,9 +24,9 @@ stage.Backdrop.add( WaterImage );
 
 shark.Event.flagPresser().func = async function*( this: Sprite ) {
     // 初期位置 ( 中央 )
-    this.Motion.position.xy = [0, 0];
+    this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
-    this.Looks.size.scale = [100, 100];
+    this.Looks.size.scale = [ 100, 100 ];
     // 画像効果初期化
     this.Looks.effect.clear();
     // 少しまつ

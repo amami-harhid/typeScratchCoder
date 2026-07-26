@@ -20,8 +20,8 @@ const WaterImage = new Ts.Image( { WaterSvg } );
 const dog = new Ts.Sprite( "shark" );
 // 画像をスプライトへ追加
 dog.Costume.add( DogImage );
-dog.Looks.size.scale = [20, 20];
-dog.Motion.position.xy = [0, 200];
+dog.Looks.size.scale = [ 20, 20 ];
+dog.Motion.position.xy = [ 0, 200 ];
 
 // ステージの幅
 const StageWidth = Ts.StageBounds.w;
@@ -43,14 +43,14 @@ Ts.Variable.monitoring( { ジャンプ: method } );
 method.hide(); // 隠す
 
 dog.Event.flagPresser().func = async function* ( this: Sprite ) {
-    this.Motion.position.xy = [0, 250];
+    this.Motion.position.xy = [ 0, 250 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
     speed = 0;
     onFloor = false;
 };
 
 block.Event.flagPresser().func = async function* ( this: Sprite ) {
-    this.Motion.position.xy = [0, 0];
+    this.Motion.position.xy = [ 0, 0 ];
     const bounds = block.Looks.size.drawingSize;
     this.Looks.size.drawingSize = { w: StageWidth };
     const blockY = bounds.height / 2 - StageHeight / 2;

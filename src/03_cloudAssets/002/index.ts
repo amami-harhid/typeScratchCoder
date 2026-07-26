@@ -43,7 +43,7 @@ ballerina.Costume.add(
     BallerinaDImage,
 );
 // サウンドをスプライトへ追加
-const Sounds = [AElecBassSound, ABassSound, AElecGuitarSound];
+const Sounds = [ AElecBassSound, ABassSound, AElecGuitarSound ];
 ballerina.Sound.add( ...Sounds );
 
 // 【ステージ】(BlueSky)
@@ -52,9 +52,9 @@ stage.Backdrop.add( PartyImage );
 
 ballerina.Event.flagPresser().func = async function* ( this: Sprite ) {
     // 初期位置 ( 中央 )
-    this.Motion.position.xy = [0, 0];
+    this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
-    this.Looks.size.scale = [150, 150];
+    this.Looks.size.scale = [ 150, 150 ];
 
     // ずっと繰り返す
     for ( ;; ) {

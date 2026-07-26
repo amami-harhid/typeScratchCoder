@@ -26,12 +26,12 @@ await helloImage.textToSvg( HELLO );
 // 文字スプライトを作成
 const moji = new Ts.Sprite( "moji" );
 moji.Costume.add( helloImage );
-moji.Looks.size.scale = [50, 50];
+moji.Looks.size.scale = [ 50, 50 ];
 
 // 旗が押されたときの「文字」のスレッド
 moji.Event.flagPresser().func = async function* ( this: Sprite ) {
     // 中心座標
-    this.Motion.position.xy = [0, 0];
+    this.Motion.position.xy = [ 0, 0 ];
     // 右90度
     this.Motion.direction.degree = 90;
     // 回転方法は自由に回転

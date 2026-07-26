@@ -17,10 +17,10 @@ const cat = new Ts.Sprite( "cat" );
 
 // 画像をスプライトへ追加
 cat.Costume.add( CatImage );
-cat.Motion.position.xy = [0, 0];
+cat.Motion.position.xy = [ 0, 0 ];
 
 // 大きさの設定
-cat.Looks.size.scale = [250, 250];
+cat.Looks.size.scale = [ 250, 250 ];
 
 // 【ステージ】(water)
 const stage = new Ts.Stage();
@@ -37,7 +37,7 @@ const pixelate = Ts.Variable.number( 0 ); // ピクセル効果の値
 Ts.Variable.monitoring( { pixelate } );
 
 cat.Event.flagPresser().func = async function* ( this: Sprite ) {
-    this.Looks.size.scale = [250, 250];
+    this.Looks.size.scale = [ 250, 250 ];
     // スプライトを囲む矩形の情報を取り出す
     const bounds = this.Looks.size.drawingSize;
     // スプライトを囲む円の半径を計算しておく（参考値として）

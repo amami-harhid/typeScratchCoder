@@ -21,7 +21,7 @@ const cat = new Ts.Sprite( "cat" );
 
 // 画像をスプライトへ追加
 cat.Costume.add( CatImage );
-cat.Motion.position.xy = [0, 0];
+cat.Motion.position.xy = [ 0, 0 ];
 
 // 【ステージ】(water)
 const stage = new Ts.Stage();
@@ -36,7 +36,7 @@ let askingNow = false;
 cat.Event.flagPresser().func = async function* ( this: Sprite ) {
     answer.hide();
     askingNow = false;
-    this.Motion.position.xy = [0, 0];
+    this.Motion.position.xy = [ 0, 0 ];
 };
 
 const ASKING = "ASKING";

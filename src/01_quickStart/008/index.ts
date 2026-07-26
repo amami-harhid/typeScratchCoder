@@ -31,7 +31,7 @@ cat.Event.flagPresser().func = async function* ( this: Sprite ) {
     }
 };
 cat.Event.cloned().func = async function* ( this: Sprite ) {
-    this.Looks.size.scale = [20, 20]; // 横・縦 20% にする
+    this.Looks.size.scale = [ 20, 20 ]; // 横・縦 20% にする
     this.Motion.point.toRandom();
     for ( ;; ) {
         this.Motion.move.steps( 10 );

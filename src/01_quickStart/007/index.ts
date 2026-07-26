@@ -11,12 +11,12 @@ import { CatAImage, CatBImage, BlueskyImage } from "./sub/images";
 // スプライト作成(左のネコ)
 const catA = new Ts.Sprite( "catA" );
 catA.Costume.add( CatAImage ); // イメージを追加
-catA.Motion.position.xy = [-100, -100]; // 座標の位置[X座標、Y座標]
+catA.Motion.position.xy = [ -100, -100 ]; // 座標の位置[X座標、Y座標]
 
 // スプライト作成(右のネコ)
 const catB = new Ts.Sprite( "catB" );
 catB.Costume.add( CatBImage ); // イメージを追加
-catB.Motion.position.xy = [ 100, -100]; // 座標の位置[X座標、Y座標]
+catB.Motion.position.xy = [ 100, -100 ]; // 座標の位置[X座標、Y座標]
 catB.Looks.size.scale.w = -100; // 幅をマイナスとすることで 反対に向く
 
 // ステージ作成

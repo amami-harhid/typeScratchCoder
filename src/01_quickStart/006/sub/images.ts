@@ -12,4 +12,4 @@ const CanyonPng = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/c7c0b27b
 export const CatAImage = new Ts.Image( { CatASvg } );
 export const CatBImage = new Ts.Image( { CatBSvg } );
 export const BlueskyImage = new Ts.Image( { BlueskySvg } );
-export const CanyonImage = new Ts.Image( {CanyonPng} );
+export const CanyonImage = new Ts.Image( { CanyonPng } );
