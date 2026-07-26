@@ -1,35 +1,35 @@
 /**
  * このファイルの内容を変更してはいけません。
  */
- {
-    "include": ["./src/**/*.ts", "./index.html", "./node_modules/@tscratch3/typescracher/src"],
-    "exclude": ["./node_modules/*", "./build/**/*", "./node_modules/@tscratch3/typescracher/src/type"],
+{
+    "include": ["./src/**/*.ts", "./index.html"],
+    "exclude": ["node_modules", "./build/**/*"],
     "compilerOptions": {
-      "target": "esnext",
-      //"useDefineForClassFields": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "ignoreDeprecations": "6.0",
-      "types": ["node"],
-      "lib": ["esnext", "DOM", "DOM.Iterable"],
-      "skipLibCheck": true,
-      "paths": {
-        "@Type/*": ["./node_modules/@tscratch3/typescratcher/Type/*"],
-        "@Assets/*": ["./assets/*"]
-      },
-      "importHelpers": true,
-      /* Bundler mode */
-      "allowImportingTsExtensions": true,
-      //"verbatimModuleSyntax": true,
-      //"moduleDetection": "force",
-      "noEmit": true,
-  
-      /* Linting */
-      "strict": true,
-      "noUnusedLocals": true,
-      //"noUnusedParameters": true,
-      "noFallthroughCasesInSwitch": true,
-      /* import package.json のために許可する */
-      "resolveJsonModule": true
+        "target": "esnext",
+        //"useDefineForClassFields": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "ignoreDeprecations": "6.0",
+        "types": ["node"],
+        "lib": ["esnext", "DOM", "DOM.Iterable"],
+        "skipLibCheck": true,
+        "paths": {
+            "@Type/*": ["./node_modules/@tscratch3/typescratcher/Type/*"],
+            "@Assets/*": ["./assets/*"]
+        },
+        "importHelpers": true,
+        /* Bundler mode */
+        "allowImportingTsExtensions": true,
+        //"verbatimModuleSyntax": true,
+        //"moduleDetection": "force",
+        "noEmit": true,
+
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        //"noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        /* import package.json のために許可する */
+        "resolveJsonModule": true
     }
-  }
+}

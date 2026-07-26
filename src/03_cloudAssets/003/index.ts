@@ -62,7 +62,7 @@ const fontAttribute: SvgImageAttributes = {
 const mojiImage = new Ts.FontImage(fontAttribute);
 moji.Costume.add([mojiImage]);
 mojiImage.textToSvg("TEST");
-moji.Looks.layer.gotoBack();
+moji.Looks.layer.gotoBackLayer();
 
 ballerina.Event.flagPresser().func = async function* (this: Sprite) {
     // 初期位置 ( 中央 )
