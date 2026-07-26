@@ -42,9 +42,21 @@ export default defineConfig({
         //     formats: ["es"],
         // },
         outDir, // ビルド結果を格納する先
+        chunkSizeWarningLimit: 200,
         rollupOptions: {
             input : rollupOpsionsInput,
+            output: {
+                manualChunks(id) {
+                    console.log(id);
+                    if(id.includes('node_modules/@tscratch3/typescratcher')){
+                        return 'typescratcher';
+                    }else if(id.includes('node_modules')){
+                        return 'vender';
+                    }
+                },
+            },
         },
+        assetsInlineLimit: 0,
     },
     esbuild: {
         supported: {
