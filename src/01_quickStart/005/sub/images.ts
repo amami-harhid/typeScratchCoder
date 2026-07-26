@@ -8,7 +8,7 @@ const BlueskySvg = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/e7c1477
 const CanyonPng = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/c7c0b27b959193a0b570a9639cfe8158.png/get';
 
 // イメージ作成
-export const CatAImage = new Ts.Image({ CatASvg });
-export const CatBImage = new Ts.Image({ CatBSvg });
-export const BlueskyImage = new Ts.Image({ BlueskySvg });
-export const CanyonImage = new Ts.Image({CanyonPng});
+export const CatAImage = new Ts.Image( { CatASvg } );
+export const CatBImage = new Ts.Image( { CatBSvg } );
+export const BlueskyImage = new Ts.Image( { BlueskySvg } );
+export const CanyonImage = new Ts.Image( {CanyonPng} );

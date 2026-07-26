@@ -40,14 +40,14 @@ export const Map01: number[][] = [
     [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1 ,1],
 ];
 const cagePositionArr:{x:number, y: number}[] = [];
-let y = Math.floor(-Map01[0].length / 2);
+let y = Math.floor( -Map01[0].length / 2 );
 // eslint-disable-next-line loopCheck/s3-loop-plugin
-for(const row of Map01) {
-    let x = -Math.floor(-row.length/2);
+for( const row of Map01 ) {
+    let x = -Math.floor( -row.length/2 );
     // eslint-disable-next-line loopCheck/s3-loop-plugin
-    for(const elem of row) {
-        if(elem == 2){
-            cagePositionArr.push({x: x, y: y});
+    for( const elem of row ) {
+        if( elem == 2 ){
+            cagePositionArr.push( { x: x, y: y } );
         }
         x+=1;
     }
@@ -72,8 +72,8 @@ export class Wall extends Ts.Sprite implements IWall{
 
     public type: number = -1; // 初期値は -1
 
-    protected makeClone(name : string) : Sprite {
-        const clone = new Wall(name);
+    protected makeClone( name : string ) : Sprite {
+        const clone = new Wall( name );
         clone.type = this.type;
         return clone;
     }
