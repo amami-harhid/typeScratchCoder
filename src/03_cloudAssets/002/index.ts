@@ -36,12 +36,7 @@ const AElecGuitarSound = new Ts.Sound( { AElecGuitar } );
 // 【スプライト】(バレリーナ)
 const ballerina = new Ts.Sprite( "Ballerina" );
 // 画像をスプライトへ追加
-ballerina.Costume.add(
-    BallerinaAImage,
-    BallerinaBImage,
-    BallerinaCImage,
-    BallerinaDImage,
-);
+ballerina.Costume.add( BallerinaAImage, BallerinaBImage, BallerinaCImage, BallerinaDImage );
 // サウンドをスプライトへ追加
 const Sounds = [ AElecBassSound, ABassSound, AElecGuitarSound ];
 ballerina.Sound.add( ...Sounds );
@@ -50,7 +45,7 @@ ballerina.Sound.add( ...Sounds );
 const stage = new Ts.Stage();
 stage.Backdrop.add( PartyImage );
 
-ballerina.Event.flagPresser().func = async function* ( this: Sprite ) {
+ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )

@@ -26,7 +26,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage ); // 背景を追加
 
 // 【旗クリックされたとき】( ネコ )
-cat.Event.flagPresser().func = async function*( this: Sprite ) {
+cat.Event.flagPresser().func = async function* ( this : Sprite ) {
 
     // ずっと繰り返す
     for( ;; ) {
@@ -34,7 +34,7 @@ cat.Event.flagPresser().func = async function*( this: Sprite ) {
         distance.value = Math.floor( _distance );
         yield;
     }
-}
+};
 
 // 開始
 Ts.engine.start();

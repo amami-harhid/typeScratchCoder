@@ -42,14 +42,14 @@ const method = Ts.Variable.string( "" );
 Ts.Variable.monitoring( { ジャンプ: method } );
 method.hide(); // 隠す
 
-dog.Event.flagPresser().func = async function* ( this: Sprite ) {
+dog.Event.flagPresser().func = async function* ( this : Sprite ) {
     this.Motion.position.xy = [ 0, 250 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
     speed = 0;
     onFloor = false;
 };
 
-block.Event.flagPresser().func = async function* ( this: Sprite ) {
+block.Event.flagPresser().func = async function* ( this : Sprite ) {
     this.Motion.position.xy = [ 0, 0 ];
     const bounds = block.Looks.size.drawingSize;
     this.Looks.size.drawingSize = { w: StageWidth };
@@ -69,10 +69,10 @@ let onFloor = false;
  * moveSpeed の速さで移動したとき targetに衝突するかを判定する
  */
 const isTouching = function(
-    this: Sprite,
-    target: Sprite,
-    moveSpeed: number,
-): boolean {
+    this : Sprite,
+    target : Sprite,
+    moveSpeed : number,
+) : boolean {
     // 自分自身の高さ
     const ownHeight = this.Looks.size.drawingSize.height;
     // ターゲットの上辺の座標位置
@@ -90,8 +90,8 @@ let firstTouch = true;
 let walkSpeed = 0;
 // 犬がメッセージ(START)を受信したとき
 dog.Broadcast.receiver( "START" ).func = async function* (
-    this: Sprite,
-    blockBound: Bounds,
+    this : Sprite,
+    blockBound : Bounds,
 ) {
     firstTouch = true;
     speed = 0;
@@ -123,7 +123,7 @@ dog.Broadcast.receiver( "START" ).func = async function* (
 };
 
 // 犬がメッセージ(START)を受信したとき
-dog.Broadcast.receiver( "START" ).func = async function* ( this: Sprite ) {
+dog.Broadcast.receiver( "START" ).func = async function* ( this : Sprite ) {
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
     // ずっと繰り返す
     for ( ;; ) {
@@ -149,7 +149,7 @@ dog.Broadcast.receiver( "START" ).func = async function* ( this: Sprite ) {
 };
 
 // 犬がメッセージ(START)を受信したとき
-dog.Broadcast.receiver( "START" ).func = async function* ( this: Sprite ) {
+dog.Broadcast.receiver( "START" ).func = async function* ( this : Sprite ) {
     method.text = "放物風";
     method.show();
     for ( ;; ) {

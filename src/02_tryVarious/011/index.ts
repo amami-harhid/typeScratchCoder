@@ -33,7 +33,7 @@ const speechText = Ts.Variable.string( "こら、触ったね" );
 Ts.Variable.monitoring( { text: speechText } );
 
 // 緑の旗が押されたときの「ねこ」のスレッド
-cat.Event.flagPresser().func = async function* ( this: Sprite ) {
+cat.Event.flagPresser().func = async function* ( this : Sprite ) {
     this.Looks.size.scale = [ 250, 250 ];
     // Speech
     // 国をJAPANESEとし、

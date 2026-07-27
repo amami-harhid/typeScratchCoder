@@ -3,12 +3,9 @@
     "eslint.useFlatConfig": true,
     "json.schemaDownload.enable": true,
     "eslint.problems.shortenToSingleLine": true,
-    "prettier.tabWidth": 4,
-    "prettier.useTabs": false,
     "editor.formatOnSave": false,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "always"
+        "source.fixAll.eslint": "always",
     },
     "liveServer.settings.root": "/docs"
 }

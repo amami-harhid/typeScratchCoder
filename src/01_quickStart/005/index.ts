@@ -17,7 +17,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage, CanyonImage ); // 背景を追加
 
 // 【旗クリックされたとき】
-cat.Event.flagPresser().func = async function*( this: Sprite ) {
+cat.Event.flagPresser().func = async function* ( this : Sprite ) {
     // Looks: 「見た目」系
     // Looks.costume.next: 「次のコスチュームにする」
     // Looks.backdrop.next: 「次の背景にする」
@@ -33,7 +33,7 @@ cat.Event.flagPresser().func = async function*( this: Sprite ) {
         await this.Control.wait( 0.1 ); // 0.1秒だけ待つ
         yield;
     }
-}
+};
 
 
 // 開始

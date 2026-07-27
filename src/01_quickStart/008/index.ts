@@ -22,7 +22,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage ); // 背景を追加
 
 // 【旗クリックされたとき】( ネコ )
-cat.Event.flagPresser().func = async function* ( this: Sprite ) {
+cat.Event.flagPresser().func = async function* ( this : Sprite ) {
     // ずっと繰り返す
     for ( ;; ) {
         await this.Control.wait( 1 );
@@ -30,7 +30,7 @@ cat.Event.flagPresser().func = async function* ( this: Sprite ) {
         yield;
     }
 };
-cat.Event.cloned().func = async function* ( this: Sprite ) {
+cat.Event.cloned().func = async function* ( this : Sprite ) {
     this.Looks.size.scale = [ 20, 20 ]; // 横・縦 20% にする
     this.Motion.point.toRandom();
     for ( ;; ) {

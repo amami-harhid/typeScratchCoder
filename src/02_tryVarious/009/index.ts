@@ -36,14 +36,14 @@ Ts.Variable.monitoring( { ghost } );
 const pixelate = Ts.Variable.number( 0 ); // ピクセル効果の値
 Ts.Variable.monitoring( { pixelate } );
 
-cat.Event.flagPresser().func = async function* ( this: Sprite ) {
+cat.Event.flagPresser().func = async function* ( this : Sprite ) {
     this.Looks.size.scale = [ 250, 250 ];
     // スプライトを囲む矩形の情報を取り出す
     const bounds = this.Looks.size.drawingSize;
     // スプライトを囲む円の半径を計算しておく（参考値として）
     radius.value = Math.floor( Math.max( bounds.width / 2, bounds.height / 2 ) ); // 半径
 };
-cat.Event.flagPresser().func = async function* ( this: Sprite ) {
+cat.Event.flagPresser().func = async function* ( this : Sprite ) {
     for ( ;; ) {
         const _distance = this.Sensing.mouse.distance;
         distance.value = Math.floor( _distance );

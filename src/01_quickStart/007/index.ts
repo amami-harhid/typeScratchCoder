@@ -24,19 +24,19 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage ); // 背景を追加
 
 // 【旗クリックされたとき】( 左のネコ )
-catA.Event.flagPresser().func = async function*( this: Sprite ) {
+catA.Event.flagPresser().func = async function* ( this : Sprite ) {
     this.Looks.bubble.say( 'やあ、こんにちは' );
     await this.Control.wait( 4 ); // 4秒間待つ
     this.Looks.bubble.say( '' ); // 空 ( ふきだしを消す )
 
-}
+};
 // 【旗クリックされたとき】( 右のネコ )
-catB.Event.flagPresser().func = async function*( this: Sprite ) {
+catB.Event.flagPresser().func = async function* ( this : Sprite ) {
     await this.Control.wait( 2 ); // 2秒間待つ
     this.Looks.bubble.think( 'こんにちは' );
     await this.Control.wait( 2 ); // 2秒間待つ
     this.Looks.bubble.say( '' ); // 空 ( ふきだしを消す )
-}
+};
 
 // 開始
 Ts.engine.start();

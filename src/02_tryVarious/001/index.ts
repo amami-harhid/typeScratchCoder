@@ -22,7 +22,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( BasketballImage );
 
 
-obake.Event.flagPresser().func = async function*( this: Sprite ) {
+obake.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
@@ -56,7 +56,7 @@ obake.Event.flagPresser().func = async function*( this: Sprite ) {
         }
         yield;
     }
-}
+};
 
 
 // 開始

@@ -16,7 +16,7 @@ stage.Backdrop.add( BlueSkyImage );
 
 // 文字列イメージ化
 const HELLO = "Ohoo my typescratcher";
-const attribute: SvgImageAttributes = {
+const attribute : SvgImageAttributes = {
     fill: "#f00000", // 文字色
     font_family: Ts.ScratchFontFamily.Scratch,
 };
@@ -29,7 +29,7 @@ moji.Costume.add( helloImage );
 moji.Looks.size.scale = [ 50, 50 ];
 
 // 旗が押されたときの「文字」のスレッド
-moji.Event.flagPresser().func = async function* ( this: Sprite ) {
+moji.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 中心座標
     this.Motion.position.xy = [ 0, 0 ];
     // 右90度

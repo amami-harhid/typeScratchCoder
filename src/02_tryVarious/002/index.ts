@@ -22,7 +22,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
 
 
-shark.Event.flagPresser().func = async function*( this: Sprite ) {
+shark.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
@@ -35,7 +35,7 @@ shark.Event.flagPresser().func = async function*( this: Sprite ) {
     // ずっと繰り返す
     for( ;; ){
         // 50回繰り返す
-        this.Looks.bubble.say( '色の効果を変えるよ' )
+        this.Looks.bubble.say( '色の効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.COLOR, +25 );
             yield;
@@ -47,7 +47,7 @@ shark.Event.flagPresser().func = async function*( this: Sprite ) {
         await this.Control.wait( 1 );
 
         // 50回繰り返す
-        this.Looks.bubble.say( '魚眼レンズの効果を変えるよ' )
+        this.Looks.bubble.say( '魚眼レンズの効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.FISHEYE, +25 );
             yield;
@@ -59,7 +59,7 @@ shark.Event.flagPresser().func = async function*( this: Sprite ) {
         await this.Control.wait( 1 );
 
         // 50回繰り返す
-        this.Looks.bubble.say( 'モザイクの効果を変えるよ' )
+        this.Looks.bubble.say( 'モザイクの効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.MOSAIC, +5 );
             yield;
@@ -71,7 +71,7 @@ shark.Event.flagPresser().func = async function*( this: Sprite ) {
         await this.Control.wait( 1 );
 
         // 50回繰り返す
-        this.Looks.bubble.say( 'ピクセルの効果を変えるよ' )
+        this.Looks.bubble.say( 'ピクセルの効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.PIXELATE, +5 );
             yield;
@@ -83,7 +83,7 @@ shark.Event.flagPresser().func = async function*( this: Sprite ) {
         await this.Control.wait( 1 );
 
         // 50回繰り返す
-        this.Looks.bubble.say( '幽霊の効果を変えるよ' )
+        this.Looks.bubble.say( '幽霊の効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.GHOST, +2 );
             yield;
@@ -96,7 +96,7 @@ shark.Event.flagPresser().func = async function*( this: Sprite ) {
 
         yield;
     }
-}
+};
 
 
 // 開始

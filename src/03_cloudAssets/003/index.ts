@@ -56,7 +56,7 @@ stage.Backdrop.add( PartyImage );
 
 // 【文字スプライト】
 const moji = new Ts.Sprite( "moji" );
-const fontAttribute: SvgImageAttributes = {
+const fontAttribute : SvgImageAttributes = {
     font_family: HarryPotterFont.name,
 };
 const mojiImage = new Ts.FontImage( fontAttribute );
@@ -64,7 +64,7 @@ moji.Costume.add( mojiImage );
 mojiImage.textToSvg( "TEST" );
 moji.Looks.layer.gotoBackLayer();
 
-ballerina.Event.flagPresser().func = async function* ( this: Sprite ) {
+ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
@@ -83,7 +83,7 @@ ballerina.Event.flagPresser().func = async function* ( this: Sprite ) {
     }
 };
 
-stage.Broadcast.receiver( "BG" ).func = async function* ( this: Stage ) {
+stage.Broadcast.receiver( "BG" ).func = async function* ( this : Stage ) {
     this.Looks.effect.change( Ts.ImageEffective.COLOR, 25 );
 };
 

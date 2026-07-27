@@ -21,7 +21,7 @@ shark.Looks.size.scale = [ 30, 30 ];
 const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
 
-shark.Event.flagPresser().func = async function* ( this: Sprite ) {
+shark.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 30% )
