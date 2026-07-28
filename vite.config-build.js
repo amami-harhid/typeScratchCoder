@@ -16,13 +16,13 @@ const entries = glob.sync('./src/**/index.html');
 const targetDir = []
 for(const entry of entries) {
     //const directory = entry
-    console.log(entry);
+    //console.log(entry);
     const directory1 = entry.replace(/\\/g, '/')
-    console.log(directory1);
+    //console.log(directory1);
     const directory2 = directory1.replace('src/', ''); //.replace(/\/index\.html$/,'')
-    console.log(directory2);
+    //console.log(directory2);
     const directory3 = directory2.replace(/\/index\.html$/, '').replace(/index\.html$/, '');
-    console.log(directory3);
+    //console.log(directory3);
     targetDir.push(directory3)
 }
 const rollupOpsionsInput = {}
@@ -30,7 +30,7 @@ for(const target of targetDir){
     if(target != '')
         rollupOpsionsInput[target] = resolve(root, target, 'index.html');
 }
-console.log(rollupOpsionsInput);
+//console.log(rollupOpsionsInput);
 // ビルド結果を出力する先
 const outDir = resolve(__dirname, 'docs');
 

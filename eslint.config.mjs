@@ -1,50 +1,12 @@
 "use strict";
 import { eslint_S3_config } from "@tscratch3/typescratcher/eslint-plugin/index.js";
-import stylistic from "@stylistic/eslint-plugin";
+import { typescracher_eslint_config } from "./typesscratcher.eslint.config.mjs";
 
 const build_eslint_config = [
     ...eslint_S3_config,
-    
     {
-        ignores: ["**/*.d.ts"],
+        ignores: [ "**/*.d.ts" ],
     },
-    {
-        plugins: {
-            "@stylistic": stylistic
-        },
-    },
-    {
-        files: ["src/**/*.ts"],
-        rules: {
-            // 型定義のコロンの前後にスペース1つを強制する
-            "@stylistic/type-annotation-spacing": [
-                "error",
-                {
-                    "before": true,
-                    "after": true,
-                }
-            ],
-            // カンマの「前は無し」「後ろはスペース1つ」に強制
-            "@stylistic/comma-spacing": ["error", { "before": false, "after": true }],
-            // function* () の形式を強制する
-            "generator-star-spacing": ["error", { "before": false, "after": true }],
-            // インデントを4にする
-            "indent": ["error", 4, { "SwitchCase": 1 }],
-            // セミコロン強制
-            "semi": ["error", "always"],
-            //  改行コードをLFに強制
-            "linebreak-style": ["error", "unix"],
-            // 1行の最大文字数を80文字に制限（コメントやURLは除外）
-            //"max-len": ["error", { "code": 80, "ignoreComments": true, "ignoreUrls": true }],
-            // 丸括弧の内側のスペースを禁止
-            "space-in-parens": ["error", "always"],
-            // オブジェクトの内側にスペースを強制
-            "object-curly-spacing": ["error", "always"],
-            // 配列の内側のスペースを禁止
-            "array-bracket-spacing": ["error", "always"],
-            // 不要はスペース連続を禁止
-            "no-multi-spaces": "error",
-        },
-    },
+    ...typescracher_eslint_config,
 ];
 export default build_eslint_config;

@@ -3,7 +3,7 @@
  * ずっと繰り返す、に挑戦しよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // イメージ作成
 import { CatAImage, BlueskyImage } from './sub/images';

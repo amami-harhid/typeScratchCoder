@@ -1,5 +1,7 @@
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
+
+// ステージ矩形サイズ
 const stageBounds = Ts.StageBounds;
 const stageWidth = stageBounds.w;
 const stageHeight = stageBounds.h;

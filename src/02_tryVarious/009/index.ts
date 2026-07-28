@@ -4,7 +4,7 @@
  * マウスとの距離
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";

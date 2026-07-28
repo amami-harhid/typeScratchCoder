@@ -4,7 +4,7 @@
  * 文字を音声にする
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 Ts.Env.debugMode = true;
 

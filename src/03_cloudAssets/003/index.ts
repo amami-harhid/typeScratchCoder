@@ -3,7 +3,7 @@
  * Load Scratch Foundation Images
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite, Stage, SvgImageAttributes } from "@tscratch3/typescratcher";
+import type { Sprite, Stage, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【FONT読み込み】
 const HarryPotter =

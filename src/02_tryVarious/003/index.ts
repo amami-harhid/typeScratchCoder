@@ -3,7 +3,7 @@
  * ペンで線を引いてみよう。
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import sharkPng from "@Assets/shark.png";

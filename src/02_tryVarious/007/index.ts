@@ -6,9 +6,7 @@
  * ・Ａキーを押すと、ステージが質問をする
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite, Stage } from "@tscratch3/typescratcher";
-//Ts.Env.debugMode = true;
-//Ts.Env.fps = 5;
+import type { Sprite, Stage } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";

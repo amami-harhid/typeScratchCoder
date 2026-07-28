@@ -3,7 +3,7 @@
  *
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite, Stage, SvgImageAttributes } from "@tscratch3/typescratcher";
+import type { Sprite, Stage, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【MAP読み込み】
 import { Map01, WallWidth, WallHeight, Wall, type IWall } from "./sub/wall";
@@ -35,7 +35,7 @@ cage.Costume.add( DoorImage, CageImage );
 cage.Looks.size.drawingSize = { w: w, h: h };
 cage.Looks.visible.hide();
 
-const CageBank: { [key: string]: IWall } = {};
+const CageBank : { [key : string] : IWall } = {};
 
 // 【スプライト】(Spriteスライム)
 const slime = new Ts.Sprite( "slime" );
@@ -52,14 +52,14 @@ const Count = Ts.Variable.number( 0 );
 Ts.Variable.monitoring( { Count } );
 Count.hide();
 
-wall.Event.flagPresser().func = async function* ( this: IWall ) {
+wall.Event.flagPresser().func = async function* ( this : IWall ) {
     this.Looks.size.drawingSize = { w: w, h: h };
 };
-cage.Event.flagPresser().func = async function* ( this: IWall ) {
+cage.Event.flagPresser().func = async function* ( this : IWall ) {
     this.Looks.size.drawingSize = { w: w, h: h };
 };
 
-wall.Event.flagPresser().func = async function* ( this: IWall ) {
+wall.Event.flagPresser().func = async function* ( this : IWall ) {
     let y = -Math.floor( Map01.length / 2 );
     // eslint-disable-next-line loopCheck/s3-loop-plugin
     for ( const _row of Map01 ) {
@@ -84,7 +84,7 @@ wall.Event.flagPresser().func = async function* ( this: IWall ) {
     Count.show();
     slime.Control.clone();
 };
-cage.Event.flagPresser().func = async function* ( this: IWall ) {
+cage.Event.flagPresser().func = async function* ( this : IWall ) {
     let y = -Math.floor( Map01.length / 2 );
     // eslint-disable-next-line loopCheck/s3-loop-plugin
     for ( const _row of Map01 ) {
@@ -106,10 +106,10 @@ cage.Event.flagPresser().func = async function* ( this: IWall ) {
     }
 };
 
-wall.Event.cloned().func = async function* ( this: IWall ) {
+wall.Event.cloned().func = async function* ( this : IWall ) {
     this.Looks.visible.show();
 };
-cage.Event.cloned().func = async function* ( this: IWall ) {
+cage.Event.cloned().func = async function* ( this : IWall ) {
     const me = this;
     if ( this.type == 2 ) {
         this.Looks.costume.name = DoorImage.name;
@@ -138,7 +138,7 @@ cage.Event.cloned().func = async function* ( this: IWall ) {
     }
 };
 
-slime.Event.flagPresser().func = async function* ( this: IWall ) {
+slime.Event.flagPresser().func = async function* ( this : IWall ) {
     // 大きさの設定
     Count.scale.w = 50;
     Count.scale.h = 50;
@@ -146,7 +146,7 @@ slime.Event.flagPresser().func = async function* ( this: IWall ) {
     Count.show();
 };
 
-slime.Broadcast.receiver( "SLIME" ).func = async function* ( this: Sprite ) {
+slime.Broadcast.receiver( "SLIME" ).func = async function* ( this : Sprite ) {
     this.Control.clone();
 };
 
@@ -156,7 +156,7 @@ stage.Backdrop.add( WaterImage, BackdropBlackImage );
 
 // 文字列イメージ化
 const HELLO = "Teleportation";
-const attribute: SvgImageAttributes = {
+const attribute : SvgImageAttributes = {
     fill: "#f0f0f0", // 文字色
     font_family: Ts.ScratchFontFamily.Scratch,
 };
@@ -167,7 +167,7 @@ const moji = new Ts.Sprite( "moji" );
 moji.Costume.add( helloImage );
 moji.Looks.layer.gotoBackLayer();
 
-moji.Event.flagPresser().func = async function* ( this: Sprite ) {
+moji.Event.flagPresser().func = async function* ( this : Sprite ) {
     this.Looks.layer.gotoFrontLayer();
     for ( ;; ) {
         this.Looks.visible.hide();
@@ -177,16 +177,16 @@ moji.Event.flagPresser().func = async function* ( this: Sprite ) {
         yield;
     }
 };
-slime.Event.flagPresser().func = async function* ( this: Sprite ) {
+slime.Event.flagPresser().func = async function* ( this : Sprite ) {
     slime.Looks.layer.gotoFrontLayer();
 };
 /**
  * 独自関数
  * ランダムなケージへ瞬間移動
  */
-const teleportToRandomCage = async function ( this: Sprite ) {
+const teleportToRandomCage = async function ( this : Sprite ) {
     this.Sound.play( CrashBeatboxSound );
-    const otherArr: IWall[] = [];
+    const otherArr : IWall[] = [];
     // eslint-disable-next-line loopCheck/s3-loop-plugin
     for ( const idx of Ts.Loop.Iterator( Object.keys( CageBank ).length ) ) {
         const _name = Object.keys( CageBank )[idx];
@@ -208,7 +208,7 @@ const teleportToRandomCage = async function ( this: Sprite ) {
     // ケージを非表示 ==> 離れたら表示される(Cageのclonedイベントの中で制御している)
     _randomCage.Looks.visible.hide();
 };
-slime.Event.cloned().func = async function* ( this: Sprite ) {
+slime.Event.cloned().func = async function* ( this : Sprite ) {
     // 大きさの設定
     this.Looks.size.drawingSize = { w: w * 0.7, h: h * 0.8 };
     this.Looks.visible.show();
@@ -308,7 +308,7 @@ slime.Event.cloned().func = async function* ( this: Sprite ) {
     }
 };
 // 【スライムクローン】
-slime.Event.cloned().func = async function* ( this: Sprite ) {
+slime.Event.cloned().func = async function* ( this : Sprite ) {
     /** 色の変化量 */
     const changeColor = 15;
     for ( ;; ) {
@@ -318,7 +318,7 @@ slime.Event.cloned().func = async function* ( this: Sprite ) {
     }
 };
 
-stage.Event.flagPresser().func = async function* ( this: Stage ) {
+stage.Event.flagPresser().func = async function* ( this : Stage ) {
     this.Looks.backdrop.name = BackdropBlackImage.name;
 };
 

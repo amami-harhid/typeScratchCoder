@@ -3,7 +3,7 @@
  * コスチュームと背景を切り替えよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // イメージ作成
 import { CatAImage, CatBImage, BlueskyImage, CanyonImage } from './sub/images';

@@ -4,7 +4,7 @@
  * 文字を表示する
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite, SvgImageAttributes } from "@tscratch3/typescratcher";
+import type { Sprite, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import BluSkySvg from "@Assets/Blue Sky.svg";

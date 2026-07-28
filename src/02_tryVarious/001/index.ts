@@ -3,7 +3,7 @@
  * 大きくなったり小さくなったり
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import ObakeSvg from '../../../assets/obake.svg';

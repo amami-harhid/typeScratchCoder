@@ -3,7 +3,7 @@
  * 変数を表示してみよう( ネコとマウスポインターの距離を表示する)
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【変数モニターを定義】
 const distance = Ts.Variable.number( 0 ); // 初期値ゼロ

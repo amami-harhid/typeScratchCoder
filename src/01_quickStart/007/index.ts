@@ -3,7 +3,7 @@
  * ふきだし（言う・考える）を表示してみよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // イメージ作成
 import { CatAImage, CatBImage, BlueskyImage } from "./sub/images";

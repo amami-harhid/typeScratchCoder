@@ -3,7 +3,7 @@
  * クローンを作ってみよう
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import { Sprite } from "@tscratch3/typescratcher";
+import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像 import 】
 import CatASvg from "@Assets/cat.svg";

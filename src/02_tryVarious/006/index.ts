@@ -5,8 +5,6 @@
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite, Bounds } from "@tscratch3/typescratcher";
-//Ts.Env.debugMode = true;
-//Ts.Env.fps = 5;
 
 // 【画像読み込み】
 import dogPng from "@Assets/front_01.svg";
