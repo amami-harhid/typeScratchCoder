@@ -8,11 +8,16 @@
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite, Stage } from "@tscratch3/typescratcher";
 
+// 【バーチャルパッド】
+import { virtualPad } from "./sub/virtualPad";
+virtualPad();
+
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";
 const CatImage = new Ts.Image( { catSvg } );
 import WaterSvg from "@Assets/water.svg";
 const WaterImage = new Ts.Image( { WaterSvg } );
+
 
 // 【スプライト】(Spriteネコ)
 const cat = new Ts.Sprite( "cat" );

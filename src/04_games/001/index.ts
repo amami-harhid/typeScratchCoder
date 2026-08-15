@@ -21,6 +21,9 @@ import {
 // 【音を読み込む】
 import { CollectSound, ChirpSound, CrashBeatboxSound } from "./sub/sound";
 
+// バーチャルパッド
+Ts.VirtualPad.addArrorTypePad();
+
 // 【スプライト】壁
 const wall = new Wall( "wall" );
 wall.Costume.add( WallImage );

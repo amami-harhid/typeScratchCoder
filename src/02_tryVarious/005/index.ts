@@ -11,6 +11,10 @@ const DogImage = new Ts.Image( { dogPng } );
 import WaterSvg from '@Assets/water.svg';
 const WaterImage = new Ts.Image( { WaterSvg } );
 
+// 【バーチャルパッド】
+import { virtualPad } from "./sub/virtualPad";
+virtualPad();
+
 // 【スプライト】(犬)
 const dog = new Ts.Sprite( 'shark' );
 // 画像をスプライトへ追加

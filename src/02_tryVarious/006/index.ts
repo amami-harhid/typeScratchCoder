@@ -6,6 +6,10 @@
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite, Bounds } from "@tscratch3/typescratcher";
 
+// 【バーチャルパッド】
+import { virtualPad } from "./sub/virtualPad";
+virtualPad();
+
 // 【画像読み込み】
 import dogPng from "@Assets/front_01.svg";
 const DogImage = new Ts.Image( { dogPng } );
