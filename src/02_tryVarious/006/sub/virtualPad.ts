@@ -33,7 +33,6 @@ const cssStringVirtualPad =
         padding: 0 40px;
         pointer-events: none; /* コンテナ自体はクリックをすり抜ける */
     }
-    
     .d-pad button {
         pointer-events: auto; /* ボタン自体はタッチに反応する */
         width: 60px;

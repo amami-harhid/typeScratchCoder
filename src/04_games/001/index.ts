@@ -5,6 +5,9 @@
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite, Stage, SvgImageAttributes } from "@tscratch3/typescratcher";
 
+// 【バーチャルパッド】
+Ts.VirtualPad.addArrorTypePad();
+
 // 【MAP読み込み】
 import { Map01, WallWidth, WallHeight, Wall, type IWall } from "./sub/wall";
 
@@ -20,9 +23,6 @@ import {
 
 // 【音を読み込む】
 import { CollectSound, ChirpSound, CrashBeatboxSound } from "./sub/sound";
-
-// バーチャルパッド
-Ts.VirtualPad.addArrorTypePad();
 
 // 【スプライト】壁
 const wall = new Wall( "wall" );

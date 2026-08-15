@@ -1,4 +1,4 @@
-import"../modulepreload-polyfill-B5Qt9EMX.js";import{T as t}from"../typescratcher-BleDpho2.js";import{d as h}from"../front_01-Bo-sfdKs.js";import{W as g}from"../water-qdWXHiyD.js";const p=`
+import"../modulepreload-polyfill-B5Qt9EMX.js";import{T as t}from"../typescratcher-B7Aehr00.js";import{d as h}from"../front_01-Bo-sfdKs.js";import{W as g}from"../water-qdWXHiyD.js";const p=`
 <div id="virtualPad">
     <div class="d-pad">
         <button id="btnUp">▲</button>
@@ -28,7 +28,6 @@ import"../modulepreload-polyfill-B5Qt9EMX.js";import{T as t}from"../typescratche
         padding: 0 40px;
         pointer-events: none; /* コンテナ自体はクリックをすり抜ける */
     }
-    
     .d-pad button {
         pointer-events: auto; /* ボタン自体はタッチに反応する */
         width: 60px;
