@@ -3,14 +3,6 @@ import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 const htmlStringVirtualPad =
 `
 <div id="virtualPad">
-    <div class="d-pad">
-        <button id="btnUp">▲</button>
-        <div class="horizontal-btns">
-            <button id="btnLeft">◀</button>
-            <button id="btnRight">▶</button>
-        </div>
-        <button id="btnDown">▼</button>
-    </div>
     <div class="d-KEY">
         <button id="btnSpace">SPACE</button>
     </div>
@@ -27,7 +19,7 @@ const cssStringVirtualPad =
     #virtualPad {
         display: block;
         position: relative;
-        top: 10px;
+        top: 20px;
         bottom: 0px;
         left: 0;
         right: 0;
@@ -46,10 +38,6 @@ const cssStringVirtualPad =
         border-radius: 50%; /* 丸いボタン */
         user-select: none; /* テキスト選択を防ぐ */
     }
-
-    /* 十字キーの配置調整 */
-    .d-pad { display: flex; flex-direction: column; align-items: center; }
-    .horizontal-btns { display: flex; gap: 40px; }
     
     .d-KEY {
         gap:40px;

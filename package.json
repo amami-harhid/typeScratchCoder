@@ -12,7 +12,7 @@
     "license": "AGPL-3.0-only",
     "description": "",
     "dependencies": {
-        "@tscratch3/typescratcher": "^0.1.1"
+        "@tscratch3/typescratcher": "^0.1.2"
     },
     "devDependencies": {
         "@eslint/js": "^9.29.0",

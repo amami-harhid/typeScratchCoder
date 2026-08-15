@@ -1,7 +1,4 @@
-import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-
-const htmlStringVirtualPad =
-`
+import"../modulepreload-polyfill-B5Qt9EMX.js";import{T as t}from"../typescratcher-B5XbT5_R.js";import{c as i}from"../cat-Cvflsu-W.js";import{W as d}from"../water-qdWXHiyD.js";const u=`
 <div id="virtualPad">
     <div class="d-KEY">
         <button id="btnA">A</button>
@@ -16,9 +13,7 @@ const htmlStringVirtualPad =
         <button id="btnX">X</button>
     </div>
  </div>
-`;
-const cssStringVirtualPad = 
-`
+`,s=`
     #virtualPad {
         display: none; /* デフォルト（PC）では非表示 */
     }
@@ -67,18 +62,4 @@ const cssStringVirtualPad =
         border-radius: 20%; /* 角を丸くする */
         user-select: none; /* テキスト選択を防ぐ */
     }
-`;
-export const virtualPad = ()=>{
-
-    Ts.VirtualPad.addVirtualPad( htmlStringVirtualPad, cssStringVirtualPad );
-    // 各ボタンをキーボードのキーと紐付け
-    Ts.VirtualPad.setupTouchButton( 'btnUp', Ts.Keyboard.UP );
-    Ts.VirtualPad.setupTouchButton( 'btnDown', Ts.Keyboard.DOWN );
-    Ts.VirtualPad.setupTouchButton( 'btnLeft', Ts.Keyboard.LEFT );
-    Ts.VirtualPad.setupTouchButton( 'btnRight', Ts.Keyboard.RIGHT );
-    Ts.VirtualPad.setupTouchButton( 'btnA', 'A' );
-    Ts.VirtualPad.setupTouchButton( 'btnD', 'D' );
-    Ts.VirtualPad.setupTouchButton( 'btnW', 'W' );
-    Ts.VirtualPad.setupTouchButton( 'btnX', 'X' );
-
-};
+`,r=()=>{t.VirtualPad.addVirtualPad(u,s),t.VirtualPad.setupTouchButton("btnUp",t.Keyboard.UP),t.VirtualPad.setupTouchButton("btnDown",t.Keyboard.DOWN),t.VirtualPad.setupTouchButton("btnLeft",t.Keyboard.LEFT),t.VirtualPad.setupTouchButton("btnRight",t.Keyboard.RIGHT),t.VirtualPad.setupTouchButton("btnA","A"),t.VirtualPad.setupTouchButton("btnD","D"),t.VirtualPad.setupTouchButton("btnW","W"),t.VirtualPad.setupTouchButton("btnX","X")},c="/typeScratchCoder/assets/Chill-DqhXOM7X.wav";r();const l=new t.Image({catSvg:i}),p=new t.Image({WaterSvg:d}),n=new t.Sound({ChillWav:c}),e=new t.Sprite("cat");e.Costume.add(l);e.Motion.position.xy=[0,0];e.Sound.add(n);const b=new t.Stage;b.Backdrop.add(p);const o=t.Variable.number(100);t.Variable.monitoring({volume:o});const a=t.Variable.number(0);t.Variable.monitoring({pitch:a});e.Event.flagPresser().func=async function*(){for(;;)await this.Sound.playUntilDone(n),yield};e.Event.keyPresser("a").func=async function*(){this.Sound.addVolume(n,5),o.value=this.Sound.getVolume(n)};e.Event.keyPresser("d").func=async function*(){this.Sound.addVolume(n,-5),o.value=this.Sound.getVolume(n)};e.Event.keyPresser("w").func=async function*(){this.Sound.addPitch(n,5),a.value=this.Sound.getPitch(n)};e.Event.keyPresser("x").func=async function*(){this.Sound.addPitch(n,-5),a.value=this.Sound.getPitch(n)};t.engine.start();
