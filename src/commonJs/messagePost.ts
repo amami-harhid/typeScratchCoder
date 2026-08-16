@@ -24,9 +24,8 @@ export const sendHeight = () => {
         }, '*' ); // "*" はすべてのドメインを許可。セキュリティを高める場合は親のURLを指定
     }
 
-
+    // 念のため少し後で送りなおす
+    setTimeout( sendHeight, 200 );
 };
 window.addEventListener( 'load', sendHeight );
 
-// 念のため少し後で送りなおす
-setTimeout( sendHeight, 200 );

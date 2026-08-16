@@ -4,7 +4,7 @@
  * idが取得できた場合はメッセージを送信する
  * メッセージはウィンドウの高さである
  */
-
+let reSended = false;
 const sendHeight = () => {
     // iframeとして表示されていない場合は何もしない
     if ( window.self == window.parent ) {
@@ -23,10 +23,9 @@ const sendHeight = () => {
             height: stageCanvasWrapper.offsetHeight
         }, '*' ); // "*" はすべてのドメインを許可。セキュリティを高める場合は親のURLを指定
     }
-
-
+    if(reSended == false){
+        reSended = true;        
+        setTimeout(sendHeight, 500);
+    }
 };
 window.addEventListener('load', sendHeight);
-
-// 念のため少しあとで再送信
-setTimeout(sendHeight, 200);
