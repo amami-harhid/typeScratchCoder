@@ -187,7 +187,7 @@ slime.Event.flagPresser().func = async function* ( this : Sprite ) {
  * 独自関数
  * ランダムなケージへ瞬間移動
  */
-const teleportToRandomCage = async function ( this : Sprite ) {
+const teleportToRandomCage = function ( this : Sprite ) : boolean {
     this.Sound.play( CrashBeatboxSound );
     const otherArr : IWall[] = [];
     // eslint-disable-next-line loopCheck/s3-loop-plugin
@@ -200,9 +200,15 @@ const teleportToRandomCage = async function ( this : Sprite ) {
             }
         }
     }
+    // 現在接触しているCage以外にCageが０個のときは
+    // 瞬間移動できないので false を返す
+    if( otherArr.length == 0 ) {
+        return false;
+    }
     // ランダムに選ぶ
     const _idx = Ts.Operations.randomValue( 0, otherArr.length - 1 );
     const _randomCage = otherArr[_idx];
+    
     this.Motion.position.xy = [
         _randomCage.Motion.position.x,
         _randomCage.Motion.position.y,
@@ -210,6 +216,7 @@ const teleportToRandomCage = async function ( this : Sprite ) {
     Count.value += 1;
     // ケージを非表示 ==> 離れたら表示される(Cageのclonedイベントの中で制御している)
     _randomCage.Looks.visible.hide();
+    return true;
 };
 slime.Event.cloned().func = async function* ( this : Sprite ) {
     // 大きさの設定
@@ -228,7 +235,9 @@ slime.Event.cloned().func = async function* ( this : Sprite ) {
                 if ( _cages.length > 0 ) {
                     const _cage = _cages[0] as IWall;
                     if ( _cage.Looks.costume.name == DoorImage.name ) {
-                        _teleport();
+                        if( _teleport() === false ) {
+                            this.Motion.position.y -= h;
+                        };
                     } else {
                         this.Sound.play( CollectSound );
                         this.Motion.position.y -= h;
@@ -249,7 +258,9 @@ slime.Event.cloned().func = async function* ( this : Sprite ) {
                     const _cage = _cages[0] as IWall;
                     if ( _cage.Looks.costume.name == DoorImage.name ) {
                         //this.Motion.position.x += w;
-                        _teleport();
+                        if( _teleport() === false ) {
+                            this.Motion.position.y += h;
+                        }
                     } else {
                         this.Sound.play( CollectSound );
                         this.Motion.position.y += h;
@@ -270,7 +281,9 @@ slime.Event.cloned().func = async function* ( this : Sprite ) {
                     const _cage = _cages[0] as IWall;
                     if ( _cage.Looks.costume.name == DoorImage.name ) {
                         //this.Motion.position.x += w;
-                        _teleport();
+                        if( _teleport() === false ) {
+                            this.Motion.position.x -= w;
+                        }
                     } else {
                         this.Sound.play( CollectSound );
                         this.Motion.position.x -= w;
@@ -291,7 +304,9 @@ slime.Event.cloned().func = async function* ( this : Sprite ) {
                     const _cage = _cages[0] as IWall;
                     if ( _cage.Looks.costume.name == DoorImage.name ) {
                         //this.Motion.position.x += w;
-                        _teleport();
+                        if( _teleport() === false ) {
+                            this.Motion.position.x += w;
+                        }
                     } else {
                         this.Sound.play( CollectSound );
                         this.Motion.position.x += w;
