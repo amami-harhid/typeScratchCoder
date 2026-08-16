@@ -15,12 +15,34 @@ const sendHeight = () => {
     const iframeId = urlParams.get( 'id' );
     // IDが取得できている場合のみ送信
     if ( iframeId ) {
+        let totalHeightWithMargin  = 0;
+        const totalHeight = (children) => {
+
+            children.forEach((htmlChild)=>{
+                // 1. 要素自身の高さ（小数点以下まで正確に取得）
+                const rect = htmlChild.getBoundingClientRect();
+                const elementHeight = rect.height;
+                // 2. ブラウザが適用しているCSSのスタイル（余白）を取得
+                const styles = window.getComputedStyle(htmlChild);
+                const marginTop = parseFloat(styles.marginTop || '0');
+                const marginBottom = parseFloat(styles.marginBottom || '0');
+                // 3. すべてを加算
+                totalHeightWithMargin += elementHeight + marginTop + marginBottom;
+            })
+
+        }
+        
+        const scratch3HeaderChildren = document.querySelectorAll('#scratch3Header > *');
+        totalHeight(scratch3HeaderChildren);
+        const stageCanvasWrapperChildren = document.querySelectorAll('.stageCanvasWrapper > *');
+        totalHeight(stageCanvasWrapperChildren);
+        
         const stageCanvasWrapper = document.querySelector( '.stageCanvasWrapper' );
         window.parent.postMessage( { 
             type: 'resize-iframe', 
             id: iframeId, // ◀ 自分が誰かを親に伝える
             width: stageCanvasWrapper.offsetWidth,
-            height: stageCanvasWrapper.offsetHeight
+            height: totalHeightWithMargin
         }, '*' ); // "*" はすべてのドメインを許可。セキュリティを高める場合は親のURLを指定
     }
     if(reSended == false){

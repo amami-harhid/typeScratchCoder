@@ -1,4 +1,4 @@
-import"../messagePost-B_eHEiQu.js";import{T as t}from"../typescratcher-BhquJNNe.js";import{c as r}from"../cat-Cvflsu-W.js";import{W as d}from"../water-qdWXHiyD.js";const u=`
+import"../messagePost-96ZyeMEN.js";import{T as t}from"../typescratcher-BhquJNNe.js";import{c as r}from"../cat-Cvflsu-W.js";import{W as d}from"../water-qdWXHiyD.js";const u=`
 <div id="virtualPad">
     <div class="d-KEY">
         <button id="btnSpace">SPACE</button>

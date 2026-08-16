@@ -1,4 +1,4 @@
-import"../messagePost-B_eHEiQu.js";import{T as t}from"../typescratcher-BhquJNNe.js";import{d as h}from"../front_01-Bo-sfdKs.js";import{W as g}from"../water-qdWXHiyD.js";const p=`
+import"../messagePost-96ZyeMEN.js";import{T as t}from"../typescratcher-BhquJNNe.js";import{d as h}from"../front_01-Bo-sfdKs.js";import{W as g}from"../water-qdWXHiyD.js";const p=`
 <div id="virtualPad">
     <div class="d-pad">
         <button id="btnUp">▲</button>
