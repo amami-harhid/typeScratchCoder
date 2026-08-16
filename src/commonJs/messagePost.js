@@ -1,7 +1,7 @@
 /**
  * iframeとして表示される場合の対応
- * URLの 「?iframeId=xxx」より自分のID(識別子)を取得する
- * iframeIdが取得できた場合はメッセージを送信する
+ * URLの 「?id=xxx」より自分のID(識別子)を取得する
+ * idが取得できた場合はメッセージを送信する
  * メッセージはウィンドウの高さである
  */
 
@@ -13,7 +13,6 @@ const sendHeight = () => {
     // URLの「?id=xxx」から、自分のID（識別子）を取得する
     const urlParams = new URLSearchParams( window.location.search );
     const iframeId = urlParams.get( 'id' );
-    console.log( `iframeId=${iframeId}` );
     // IDが取得できている場合のみ送信
     if ( iframeId ) {
         const stageCanvasWrapper = document.querySelector( '.stageCanvasWrapper' );
@@ -29,4 +28,5 @@ const sendHeight = () => {
 };
 window.addEventListener('load', sendHeight);
 
-setTimeout(sendHeight, 1000)
+// 念のため少しあとで再送信
+setTimeout(sendHeight, 200);
