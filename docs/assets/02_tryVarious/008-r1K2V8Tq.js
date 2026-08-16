@@ -1,4 +1,4 @@
-import"../modulepreload-polyfill-B5Qt9EMX.js";import{T as t}from"../typescratcher-DE4aATtQ.js";import{c as i}from"../cat-Cvflsu-W.js";import{W as d}from"../water-qdWXHiyD.js";const u=`
+import"../modulepreload-polyfill-B5Qt9EMX.js";import{T as t}from"../typescratcher-BhquJNNe.js";import{c as i}from"../cat-Cvflsu-W.js";import{W as d}from"../water-qdWXHiyD.js";const u=`
 <div id="virtualPad">
     <div class="d-KEY">
         <button id="btnA">A</button>
