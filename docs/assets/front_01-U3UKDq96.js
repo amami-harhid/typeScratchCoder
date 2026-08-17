@@ -1,0 +1,1 @@
+var e=`/typeScratchCoder/assets/front_01-CEjPEU-M.svg`;export{e as t};

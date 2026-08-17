@@ -1,0 +1,1 @@
+var e=`/typeScratchCoder/assets/cat-8KdQ-Ysa.svg`;export{e as t};

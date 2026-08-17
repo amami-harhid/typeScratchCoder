@@ -1,8 +1,10 @@
 "use strict";
 import { eslint_S3_config } from "@tscratch3/typescratcher/eslint-plugin/index.js";
+//import { eslint_TS_loop_config } from "@tscratch3/typescratcher/eslint-plugin/index.js";
 import { typescracher_eslint_config } from "./typesscratcher.eslint.config.mjs";
 
 const build_eslint_config = [
+    //...eslint_TS_loop_config,
     ...eslint_S3_config,
     {
         ignores: [ "**/*.d.ts" ],

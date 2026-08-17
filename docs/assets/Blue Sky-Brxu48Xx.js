@@ -1,0 +1,1 @@
+var e=`/typeScratchCoder/assets/Blue%20Sky-ChyqCB-T.svg`;export{e as t};

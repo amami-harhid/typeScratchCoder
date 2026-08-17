@@ -58,7 +58,6 @@ ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
             Sounds[Ts.Operations.randomValue( 0, Sounds.length - 1 )],
         );
         await this.Control.wait( 0.2 );
-        yield;
     }
 };
 // 開始

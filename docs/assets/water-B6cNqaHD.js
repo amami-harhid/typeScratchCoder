@@ -1,0 +1,1 @@
+var e=`/typeScratchCoder/assets/water-iRYPVv3i.svg`;export{e as t};

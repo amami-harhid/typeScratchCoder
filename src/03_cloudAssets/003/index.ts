@@ -70,6 +70,13 @@ ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 初期の大きさ ( 100% )
     this.Looks.size.scale = [ 150, 150 ];
 
+    switch( this.Motion.position.xy ){
+
+    }
+
+    for( let i=0 ;i<10;i++ ){
+
+    }
     // ずっと繰り返す
     for ( ;; ) {
         this.Looks.costume.next();

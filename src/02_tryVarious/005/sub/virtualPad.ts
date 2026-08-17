@@ -84,5 +84,5 @@ export const virtualPad = ()=>{
     Ts.VirtualPad.setupTouchButton( 'btnRight', Ts.Keyboard.RIGHT );
     Ts.VirtualPad.setupTouchButton( 'btnA', 'A' );
     Ts.VirtualPad.setupTouchButton( 'btnB', 'B' );
-
+    
 };

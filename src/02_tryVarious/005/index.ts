@@ -43,7 +43,6 @@ dog.Event.flagPresser().func = async function* ( this : Sprite ) {
         this.Motion.move.steps( 10 );
         // 端についたら跳ね返る
         this.Motion.move.ifOnEdgeBounce();
-        yield;
     }
 };
 // A キーが押されたとき(等速ジャンプ)
@@ -53,11 +52,9 @@ dog.Event.keyPresser( 'a' ).func = async function* ( this : Sprite ) {
     const JUMP = 10;
     for( const _ of Ts.Loop.Iterator( 10 ) ) {
         this.Motion.position.y += JUMP;
-        yield;
     }
     for( const _ of Ts.Loop.Iterator( 10 ) ) {
         this.Motion.position.y -= JUMP;
-        yield;
     }
     method.hide();
     method.text = '';
@@ -76,7 +73,6 @@ dog.Event.keyPresser( 'b' ).func = async function* ( this : Sprite ) {
         if( this.Motion.position.y < -130 ) {
             break;
         }
-        yield;
     }
     this.Motion.position.y = -130;
     method.hide();
