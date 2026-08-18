@@ -37,6 +37,15 @@ const typescracher_eslint_config = [
             "array-bracket-spacing": [ "error", "always" ],
             // 不要はスペース連続を禁止
             "no-multi-spaces": "error",
+            // 
+            'no-restricted-syntax': [
+                'error',
+                {
+                    selector: 'SwitchStatement',
+                    message: 'Switch statements are prohibited in this project.',
+                }
+
+            ],
         },
     },
 
