@@ -1,1 +1,2 @@
 var e=`/typeScratchCoder/assets/front_01-CEjPEU-M.svg`;export{e as t};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRfMDEtVTNVS0RxOTYuanMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiLi4vLi4vYXNzZXRzL2Zyb250XzAxLnN2ZyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBcIl9fVklURV9BU1NFVF9fOEhTVWZoN2NKSE5GeENrSW5Oek5Yd19fXCIiXSwibWFwcGluZ3MiOiJBQUFBLElBQUEsRUFBZSJ9

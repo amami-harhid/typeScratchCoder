@@ -1,6 +1,6 @@
+import { createYieldTransformer } from "./node_modules/@tscratch3/typescratcher/src/vite/transformers/yield-transformer.ts";
 import { Plugin } from 'vite';
 import ts from 'typescript';
-import { createYieldTransformer } from './vite/transformers/yield-transformer';
 
 export function yieldInserterPlugin(): Plugin {
     return {
@@ -8,10 +8,10 @@ export function yieldInserterPlugin(): Plugin {
         enforce: 'pre', 
     
         transform(code, id) {
-            if ((!id.endsWith('.ts') && !id.endsWith('.js')) || id.includes('node_modules') || id.includes('commonJs') || id.includes('vite')) {
+            if ((!id.endsWith('.ts') && !id.endsWith('.js')) || id.includes('node_modules') || id.includes('vite')) {
                 return null;
             }
-
+            console.log('id=',id)
             try {
                 const transpileResult = ts.transpileModule(code, {
                     compilerOptions: {
@@ -26,8 +26,6 @@ export function yieldInserterPlugin(): Plugin {
                         ]
                     }
                 });
-                // TODO デバグ用, 後で消す
-                //console.log('transpileResult.outputText=', transpileResult.outputText)
                 return {
                     code: transpileResult.outputText,
                     map: transpileResult.sourceMapText ? JSON.parse(transpileResult.sourceMapText) : null
