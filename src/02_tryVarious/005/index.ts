@@ -32,7 +32,7 @@ Ts.Variable.monitoring( { 'ジャンプ': method } );
 method.hide(); // 隠す
 
 // 旗が押されたとき
-dog.Event.flagPresser().func = async function* ( this : Sprite ) {
+dog.Event.flagPresser().func = function( this : Sprite ) {
 
     this.Motion.position.xy = [ 0, -130 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
@@ -46,7 +46,7 @@ dog.Event.flagPresser().func = async function* ( this : Sprite ) {
     }
 };
 // A キーが押されたとき(等速ジャンプ)
-dog.Event.keyPresser( 'a' ).func = async function* ( this : Sprite ) {
+dog.Event.keyPresser( 'a' ).func = function( this : Sprite ) {
     method.text = '等速';
     method.show();
     const JUMP = 10;
@@ -60,7 +60,7 @@ dog.Event.keyPresser( 'a' ).func = async function* ( this : Sprite ) {
     method.text = '';
 };
 // B キーが押されたとき(放物風ジャンプ)
-dog.Event.keyPresser( 'b' ).func = async function* ( this : Sprite ) {
+dog.Event.keyPresser( 'b' ).func = function( this : Sprite ) {
     method.text = '放物風';
     method.show();
     const INIT_JUMP = 30;

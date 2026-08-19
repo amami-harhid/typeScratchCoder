@@ -16,16 +16,14 @@ cat.Costume.add( CatAImage ); // イメージを追加
 const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage ); // 背景を追加
 
-const flagPresser = async function* ( this : Sprite ) {
+const flagPresser = function ( this : Sprite ) {
     // Motion: 「動き」系
     // move: 「動かす」系
     // Motion.move.ifOnEdgeBounce: もし端についていたら跳ね返る
     for( ;; ) {
         this.Motion.move.steps( 5 );
-        this.Motion.move.ifOnEdgeBounce();
-        if( this.Motion.position.x > 400 )
-            break;
-        // フレームごとに休止
+        this.Motion.move.ifOnEdgeBounce(); // もし端についていたら跳ね返る
+        // ループの最後でフレーム休止
     }
 };
 

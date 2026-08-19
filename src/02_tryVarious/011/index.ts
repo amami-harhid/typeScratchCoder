@@ -33,7 +33,7 @@ const speechText = Ts.Variable.string( "こら、触ったね" );
 Ts.Variable.monitoring( { text: speechText } );
 
 // 緑の旗が押されたときの「ねこ」のスレッド
-cat.Event.flagPresser().func = async function* ( this : Sprite ) {
+cat.Event.flagPresser().func = function( this : Sprite ) {
     this.Looks.size.scale = [ 250, 250 ];
     // Speech
     // 国をJAPANESEとし、
@@ -62,17 +62,18 @@ cat.Event.flagPresser().func = async function* ( this : Sprite ) {
             // タッチしているとき
             if ( speechFlag ) {
                 // ピッチ加工したFEMAILの声
-                await this.Speech.type( "FEMAIL" ).speech( speechText.text );
+                this.Speech.type( "FEMAIL" );
+                this.Speech.speech( speechText.text );
             } else {
                 // ピッチ加工したMAILの声
-                await this.Speech.type( "MAIL" ).speech( speechText.text );
+                this.Speech.type( "MAIL" );
+                this.Speech.speech( speechText.text );
             }
             // 声タイプ反転
             speechFlag = !speechFlag;
             // マウスが触っている間、待つ
-            await this.Control.waitWhile( _touch );
+            this.Control.waitWhile( _touch );
         }
-        yield;
     }
 };
 

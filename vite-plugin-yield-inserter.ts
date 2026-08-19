@@ -8,7 +8,7 @@ export function yieldInserterPlugin(): Plugin {
         enforce: 'pre', 
     
         transform(code, id) {
-            if ((!id.endsWith('.ts') && !id.endsWith('.js')) || id.includes('node_modules') || id.includes('commonJs')) {
+            if ((!id.endsWith('.ts') && !id.endsWith('.js')) || id.includes('node_modules') || id.includes('commonJs') || id.includes('vite')) {
                 return null;
             }
 
@@ -27,7 +27,7 @@ export function yieldInserterPlugin(): Plugin {
                     }
                 });
                 // TODO デバグ用, 後で消す
-                console.log('transpileResult.outputText=', transpileResult.outputText)
+                //console.log('transpileResult.outputText=', transpileResult.outputText)
                 return {
                     code: transpileResult.outputText,
                     map: transpileResult.sourceMapText ? JSON.parse(transpileResult.sourceMapText) : null

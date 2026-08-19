@@ -22,7 +22,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
 
 
-shark.Event.flagPresser().func = async function* ( this : Sprite ) {
+shark.Event.flagPresser().func = function( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
@@ -30,7 +30,7 @@ shark.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 画像効果初期化
     this.Looks.effect.clear();
     // 少しまつ
-    await this.Control.wait( 1 );
+    this.Control.wait( 1 );
 
     // ずっと繰り返す
     for( ;; ){
@@ -38,63 +38,56 @@ shark.Event.flagPresser().func = async function* ( this : Sprite ) {
         this.Looks.bubble.say( '色の効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.COLOR, +25 );
-            yield;
         }
         this.Looks.bubble.say( '' );
         // 画像効果クリア
         this.Looks.effect.clear();
         // 少しまつ
-        await this.Control.wait( 1 );
+        this.Control.wait( 1 );
 
         // 50回繰り返す
         this.Looks.bubble.say( '魚眼レンズの効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.FISHEYE, +25 );
-            yield;
         }
         this.Looks.bubble.say( '' );
         // 画像効果クリア
         this.Looks.effect.clear();
         // 少しまつ
-        await this.Control.wait( 1 );
+        this.Control.wait( 1 );
 
         // 50回繰り返す
         this.Looks.bubble.say( 'モザイクの効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.MOSAIC, +5 );
-            yield;
         }
         this.Looks.bubble.say( '' );
         // 画像効果クリア
         this.Looks.effect.clear();
         // 少しまつ
-        await this.Control.wait( 1 );
+        this.Control.wait( 1 );
 
         // 50回繰り返す
         this.Looks.bubble.say( 'ピクセルの効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.PIXELATE, +5 );
-            yield;
         }
         this.Looks.bubble.say( '' );
         // 画像効果クリア
         this.Looks.effect.clear();
         // 少しまつ
-        await this.Control.wait( 1 );
+        this.Control.wait( 1 );
 
         // 50回繰り返す
         this.Looks.bubble.say( '幽霊の効果を変えるよ' );
         for( const _ of Ts.Loop.Iterator( 50 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.GHOST, +2 );
-            yield;
         }
         this.Looks.bubble.say( '' );
         // 画像効果クリア
         this.Looks.effect.clear();
         // 少しまつ
-        await this.Control.wait( 1 );
-
-        yield;
+        this.Control.wait( 1 );
     }
 };
 

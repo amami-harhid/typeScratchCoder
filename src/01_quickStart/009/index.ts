@@ -26,13 +26,12 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage ); // 背景を追加
 
 // 【旗クリックされたとき】( ネコ )
-cat.Event.flagPresser().func = async function* ( this : Sprite ) {
+cat.Event.flagPresser().func = function( this : Sprite ) {
 
     // ずっと繰り返す
     for( ;; ) {
         const _distance = this.Sensing.mouse.distance;
         distance.value = Math.floor( _distance );
-        yield;
     }
 };
 

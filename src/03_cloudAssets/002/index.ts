@@ -45,7 +45,7 @@ ballerina.Sound.add( ...Sounds );
 const stage = new Ts.Stage();
 stage.Backdrop.add( PartyImage );
 
-ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
+ballerina.Event.flagPresser().func = function( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
@@ -57,7 +57,7 @@ ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
         this.Sound.play(
             Sounds[Ts.Operations.randomValue( 0, Sounds.length - 1 )],
         );
-        await this.Control.wait( 0.2 );
+        this.Control.wait( 0.2 );
     }
 };
 // 開始

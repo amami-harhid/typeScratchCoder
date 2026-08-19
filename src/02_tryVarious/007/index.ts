@@ -36,21 +36,21 @@ Ts.Variable.monitoring( { 答え: answer } );
 answer.hide(); // 隠す
 
 let askingNow = false;
-cat.Event.flagPresser().func = async function* ( this : Sprite ) {
+cat.Event.flagPresser().func = function( this : Sprite ) {
     answer.hide();
     askingNow = false;
     this.Motion.position.xy = [ 0, 0 ];
 };
 
 const ASKING = "ASKING";
-cat.Event.keyPresser( Ts.Keyboard.SPACE ).func = async function* ( this : Sprite ) {
+cat.Event.keyPresser( Ts.Keyboard.SPACE ).func = function( this : Sprite ) {
     if ( askingNow === true ) return;
     this.Broadcast.send( ASKING );
 };
-cat.Broadcast.receiver( ASKING ).func = async function* ( this : Sprite ) {
+cat.Broadcast.receiver( ASKING ).func = function( this : Sprite ) {
     askingNow = true;
-
-    answer.text = await this.Sensing.askAndWait( "今日はご機嫌よろしいですか？" );
+    this.Sensing.askAndWait( "今日はご機嫌よろしいですか？" );
+    answer.text = this.Sensing.answer;
     answer.show();
 
     if ( answer.text == "はい" ) {
@@ -66,18 +66,19 @@ cat.Broadcast.receiver( ASKING ).func = async function* ( this : Sprite ) {
     }
 };
 const ASKING_STAGE = "ASKING_STAGE";
-stage.Event.keyPresser( "A" ).func = async function* ( this : Stage ) {
+stage.Event.keyPresser( "A" ).func = function( this : Stage ) {
     if ( askingNow === false ) {
         askingNow = true;
-        await this.Broadcast.sendAndWait( ASKING_STAGE );
+        this.Broadcast.sendAndWait( ASKING_STAGE );
         askingNow = false;
     }
 };
-stage.Broadcast.receiver( ASKING_STAGE ).func = async function* ( this : Sprite ) {
+stage.Broadcast.receiver( ASKING_STAGE ).func = function( this : Sprite ) {
     answer.hide();
-    answer.text = await this.Sensing.askAndWait(
+    this.Sensing.askAndWait(
         "ステージだよ。「はい」か「いいえ」で答えて",
     );
+    answer.text = this.Sensing.answer;
     answer.show();
     if ( answer.text == "はい" || answer.text == "いいえ" ) {
         return;

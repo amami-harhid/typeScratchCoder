@@ -1,6 +1,6 @@
 /**
  * サンプル-006
- * コスチュームと背景を切り替えよう
+ * 端についたら音を鳴らす
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite } from "@tscratch3/typescratcher";
@@ -21,7 +21,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage, CanyonImage ); // 背景を追加
 
 // 【旗クリックされたとき】
-cat.Event.flagPresser().func = async function* ( this : Sprite ) {
+cat.Event.flagPresser().func = function ( this : Sprite ) {
     // Looks: 「見た目」系
     // Looks.costume.next: 「次のコスチュームにする」
     // Looks.backdrop.next: 「次の背景にする」
@@ -34,12 +34,11 @@ cat.Event.flagPresser().func = async function* ( this : Sprite ) {
         this.Motion.move.ifOnEdgeBounce();
         this.Looks.costume.next(); // 次のコスチュームにする
         this.Looks.backdrop.next(); // 次の背景にする
-        await this.Control.wait( 0.1 ); // 0.1秒だけ待つ
-        yield;
+        this.Control.wait( 0.1 ); // 0.1秒だけ待つ
     }
 };
 // 【旗クリックされたとき】( 別スレッドにしてみる )
-cat.Event.flagPresser().func = async function* ( this : Sprite ) {
+cat.Event.flagPresser().func = function ( this : Sprite ) {
     
     // Sensing: 「調べる」系
     // edge: 「端」に関するもの
@@ -55,10 +54,9 @@ cat.Event.flagPresser().func = async function* ( this : Sprite ) {
             }else{
                 this.Sound.play( AElecGuitarSound );
             }
-            await this.Control.wait( 0.1 );
+            this.Control.wait( 0.1 );
             boingSoundFlag = !boingSoundFlag;
         }
-        yield;
     }
 };
 

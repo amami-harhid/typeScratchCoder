@@ -37,7 +37,7 @@ const typescracher_eslint_config = [
             "array-bracket-spacing": [ "error", "always" ],
             // 不要はスペース連続を禁止
             "no-multi-spaces": "error",
-            // 
+            // Switch禁止
             'no-restricted-syntax': [
                 'error',
                 {

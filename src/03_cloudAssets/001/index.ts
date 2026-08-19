@@ -36,7 +36,7 @@ ballerina.Costume.add(
 const stage = new Ts.Stage();
 stage.Backdrop.add( PartyImage );
 
-ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
+ballerina.Event.flagPresser().func = function( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
@@ -45,8 +45,7 @@ ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
     // ずっと繰り返す
     for ( ;; ) {
         this.Looks.costume.next();
-        await this.Control.wait( 0.2 );
-        yield;
+        this.Control.wait( 0.2 );
     }
 };
 

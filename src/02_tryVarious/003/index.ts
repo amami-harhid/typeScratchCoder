@@ -21,7 +21,7 @@ shark.Looks.size.scale = [ 30, 30 ];
 const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
 
-shark.Event.flagPresser().func = async function* ( this : Sprite ) {
+shark.Event.flagPresser().func = function( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 30% )
@@ -29,7 +29,7 @@ shark.Event.flagPresser().func = async function* ( this : Sprite ) {
     // 画像効果初期化
     this.Looks.effect.clear();
     // 少しまつ
-    await this.Control.wait( 1 );
+    this.Control.wait( 1 );
 
     // ペンを準備する
     this.Pen.penClear();
@@ -60,9 +60,7 @@ shark.Event.flagPresser().func = async function* ( this : Sprite ) {
                 `hue=${this.Pen.HSVColor.hue}, saturation=${this.Pen.HSVColor.saturation}, brightness=${this.Pen.HSVColor.brightness}, transparency=${this.Pen.HSVColor.transparency}`,
             );
             // すこし待つ
-            await this.Control.wait( 0.5 );
-
-            yield;
+            this.Control.wait( 0.5 );
         }
         this.Pen.penUp();
         this.Pen.penClear();
@@ -79,15 +77,11 @@ shark.Event.flagPresser().func = async function* ( this : Sprite ) {
             this.Pen.stamp();
 
             // すこし待つ
-            await this.Control.wait( 0.5 );
-
-            yield;
+            this.Control.wait( 0.5 );
         }
 
         // ペンをクリアする
         this.Pen.penClear();
-
-        yield;
     }
 };
 

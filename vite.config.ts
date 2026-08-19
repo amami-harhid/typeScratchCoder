@@ -3,9 +3,7 @@
  */
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-//import svgr from 'vite-plugin-svgr';
 import { glob } from 'glob'; // version 10.5.0
-//import topLevelAwait from 'vite-plugin-top-level-await';
 import { yieldInserterPlugin } from './vite-plugin-yield-inserter';
 
 // ルートとするディレクトリー
@@ -44,8 +42,6 @@ export default defineConfig({
     },
     root: resolve(__dirname, './src'),
     plugins: [
-        //svgr(),
-        //topLevelAwait()
         yieldInserterPlugin()
     ],
     resolve: {

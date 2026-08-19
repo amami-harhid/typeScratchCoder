@@ -29,7 +29,7 @@ moji.Costume.add( helloImage );
 moji.Looks.size.scale = [ 50, 50 ];
 
 // 旗が押されたときの「文字」のスレッド
-moji.Event.flagPresser().func = async function* ( this : Sprite ) {
+moji.Event.flagPresser().func = function( this : Sprite ) {
     // 中心座標
     this.Motion.position.xy = [ 0, 0 ];
     // 右90度
@@ -44,7 +44,6 @@ moji.Event.flagPresser().func = async function* ( this : Sprite ) {
         this.Motion.direction.degree += 1;
         // もし端に触れたら跳ね返る
         this.Motion.move.ifOnEdgeBounce();
-        yield;
     }
 };
 

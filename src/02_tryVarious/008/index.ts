@@ -39,30 +39,29 @@ Ts.Variable.monitoring( { volume } );
 const pitch = Ts.Variable.number( 0 );
 Ts.Variable.monitoring( { pitch } );
 
-cat.Event.flagPresser().func = async function* ( this : Sprite ) {
+cat.Event.flagPresser().func = function( this : Sprite ) {
     // ずっと繰り返し音を鳴らす
     for ( ;; ) {
-        await this.Sound.playUntilDone( ChillSound );
-        yield;
+        this.Sound.playUntilDone( ChillSound );
     }
 };
 
-cat.Event.keyPresser( "a" ).func = async function* ( this : Sprite ) {
+cat.Event.keyPresser( "a" ).func = function( this : Sprite ) {
     // ボリュームを あげる
     this.Sound.addVolume( ChillSound, +5 );
     volume.value = this.Sound.getVolume( ChillSound );
 };
-cat.Event.keyPresser( "d" ).func = async function* ( this : Sprite ) {
+cat.Event.keyPresser( "d" ).func = function( this : Sprite ) {
     // ボリュームを さげる
     this.Sound.addVolume( ChillSound, -5 );
     volume.value = this.Sound.getVolume( ChillSound );
 };
-cat.Event.keyPresser( "w" ).func = async function* ( this : Sprite ) {
+cat.Event.keyPresser( "w" ).func = function( this : Sprite ) {
     // ピッチを あげる
     this.Sound.addPitch( ChillSound, +5 );
     pitch.value = this.Sound.getPitch( ChillSound );
 };
-cat.Event.keyPresser( "x" ).func = async function* ( this : Sprite ) {
+cat.Event.keyPresser( "x" ).func = function( this : Sprite ) {
     // ピッチを さげる
     this.Sound.addPitch( ChillSound, -5 );
     pitch.value = this.Sound.getPitch( ChillSound );

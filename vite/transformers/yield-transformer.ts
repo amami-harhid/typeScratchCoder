@@ -1,7 +1,7 @@
 import ts from 'typescript';
-import { isTarget, createYieldStatement, hasSkipComment, isTargetEventAssignment } from '../utils/ast-helpers';
+import { isTarget, createYieldStatement, hasSkipComment, isTargetEventAssignment, isAwaitTargetCall } from '../utils/ast-helpers';
 
-// 🌟 型アノテーションに , inLoop?: boolean を追加
+// 繰り返し構文の「本体（Body）」を書き換えるメイン処理
 function transformLoopBody(
     node: ts.Statement, 
     visit: (n: ts.Node, inLoop?: boolean) => ts.Node, 
@@ -24,7 +24,13 @@ function transformLoopBody(
         const yieldStmt = createYieldStatement();
 
         const lastStmt = node.statements[node.statements.length - 1];
-        const rawTailText = sourceFile.text.substring(lastStmt.end, node.end - 1);
+        const trailingCommentsOfLastStmt = ts.getTrailingCommentRanges(sourceFile.text, lastStmt.end);
+    
+        const scanStartPos = (trailingCommentsOfLastStmt && trailingCommentsOfLastStmt.length > 0)
+            ? trailingCommentsOfLastStmt[trailingCommentsOfLastStmt.length - 1].end
+            : lastStmt.end;
+
+        const rawTailText = sourceFile.text.substring(scanStartPos, node.end - 1);
 
         const commentRegex = /(\/\/.*|\/\*[\s\S]*?\*\/)/g;
         const matches = rawTailText.match(commentRegex);
@@ -65,7 +71,6 @@ function transformLoopBody(
     return ts.factory.createBlock(newStatements, true);
 }
 
-// 🌟 型アノテーションに , inLoop?: boolean を追加
 function transformIfBody(
     node: ts.Statement, 
     visit: (n: ts.Node, inLoop?: boolean) => ts.Node
@@ -87,7 +92,6 @@ function transformIfBody(
     }
 }
 
-// 🌟 型アノテーションに , inLoop?: boolean を追加
 function convertToAsyncGenerator(
     rightExpr: ts.FunctionExpression, 
     visit: (n: ts.Node, inLoop?: boolean) => ts.Node, 
@@ -118,14 +122,11 @@ function convertToAsyncGenerator(
 export const createYieldTransformer = (id: string, context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
     return (sf: ts.SourceFile) => {
     
-        // スコープ外（別ファイル）を追跡しないよう、ファイルごとに独立したターゲット管理変数を定義
         const targetVariableNames = new Set<string>();
 
-        // 【1パス目】ファイル内のイベント代入式を先にスキャンし、変数への参照があればその名前を控える
         function preScan(node: ts.Node): void {
             if (isTargetEventAssignment(node)) {
                 const binaryExpr = node as ts.BinaryExpression;
-                // 右辺が変数名（Identifier）単体（例: func = flagPresser）の場合
                 if (ts.isIdentifier(binaryExpr.right)) {
                     targetVariableNames.add(binaryExpr.right.text);
                 }
@@ -134,10 +135,18 @@ export const createYieldTransformer = (id: string, context: ts.TransformationCon
         }
         preScan(sf);
 
-        // 【2パス目】実際のコード書き換え処理
         function visit(node: ts.Node, inLoop = false): ts.Node {
       
-            // パターンA: 変数宣言文（const flagPresser = function...）の検知と変換
+            // 🌟【新機能：特定の命令に await が無ければ付与する処理】
+            // 親ノードがすでに AwaitExpression でないことを確認した上で処理
+            if (isAwaitTargetCall(node) && node.parent && !ts.isAwaitExpression(node.parent)) {
+                // 先に子ノード（引数など）の内部変換を再帰処理したノードを作成
+                const visitedCall = ts.visitEachChild(node, (n) => visit(n, inLoop), context) as ts.CallExpression;
+                // それを await 演算子で包んで返す
+                return ts.factory.createAwaitExpression(visitedCall);
+            }
+
+            // 変数宣言文の検知と変換
             if (ts.isVariableDeclaration(node) && node.initializer && ts.isFunctionExpression(node.initializer)) {
                 if (ts.isIdentifier(node.name) && targetVariableNames.has(node.name.text)) {
                     const updatedFunction = convertToAsyncGenerator(node.initializer, visit, inLoop);
@@ -151,7 +160,7 @@ export const createYieldTransformer = (id: string, context: ts.TransformationCon
                 }
             }
 
-            // パターンB: 直接のイベント代入（xxx.Event...func = function...）の検知と変換
+            // 直接のイベント代入の検知と変換
             if (isTargetEventAssignment(node)) {
                 const binaryExpr = node as ts.BinaryExpression;
                 const rightExpr = binaryExpr.right;
@@ -167,7 +176,7 @@ export const createYieldTransformer = (id: string, context: ts.TransformationCon
                 }
             }
 
-            // --- 繰り返し構文の検知と書き換え ---
+            // 繰り返し構文の検知と書き換え
             if (
                 ts.isForStatement(node) ||
         ts.isForInStatement(node) ||

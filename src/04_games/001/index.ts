@@ -55,19 +55,19 @@ const Count = Ts.Variable.number( 0 );
 Ts.Variable.monitoring( { Count } );
 Count.hide();
 
-wall.Event.flagPresser().func = async function* ( this : IWall ) {
+wall.Event.flagPresser().func = function( this : IWall ) {
     this.Looks.size.drawingSize = { w: w, h: h };
 };
-cage.Event.flagPresser().func = async function* ( this : IWall ) {
+cage.Event.flagPresser().func = function( this : IWall ) {
     this.Looks.size.drawingSize = { w: w, h: h };
 };
 
-wall.Event.flagPresser().func = async function* ( this : IWall ) {
+wall.Event.flagPresser().func = function( this : IWall ) {
     let y = -Math.floor( Map01.length / 2 );
-    // eslint-disable-next-line loopCheck/s3-loop-plugin
+    // @ts-loop-yield-skip
     for ( const _row of Map01 ) {
         let x = -Math.floor( _row.length / 2 );
-        // eslint-disable-next-line loopCheck/s3-loop-plugin
+        // @ts-loop-yield-skip
         for ( const _elem of _row ) {
             if ( 0 < _elem ) {
                 if ( _elem == 9 ) {
@@ -87,12 +87,12 @@ wall.Event.flagPresser().func = async function* ( this : IWall ) {
     Count.show();
     slime.Control.clone();
 };
-cage.Event.flagPresser().func = async function* ( this : IWall ) {
+cage.Event.flagPresser().func = function( this : IWall ) {
     let y = -Math.floor( Map01.length / 2 );
-    // eslint-disable-next-line loopCheck/s3-loop-plugin
+    // @ts-loop-yield-skip
     for ( const _row of Map01 ) {
         let x = -Math.floor( _row.length / 2 );
-        // eslint-disable-next-line loopCheck/s3-loop-plugin
+        // @ts-loop-yield-skip
         for ( const _elem of _row ) {
             if ( _elem == 2 ) {
                 cage.Motion.position.xy = [ w * x, -h * y ];
@@ -109,10 +109,10 @@ cage.Event.flagPresser().func = async function* ( this : IWall ) {
     }
 };
 
-wall.Event.cloned().func = async function* ( this : IWall ) {
+wall.Event.cloned().func = function( this : IWall ) {
     this.Looks.visible.show();
 };
-cage.Event.cloned().func = async function* ( this : IWall ) {
+cage.Event.cloned().func = function( this : IWall ) {
     const me = this;
     if ( this.type == 2 ) {
         this.Looks.costume.name = DoorImage.name;
@@ -127,7 +127,7 @@ cage.Event.cloned().func = async function* ( this : IWall ) {
     for ( ;; ) {
         if ( !this.Sensing.sprite.isTouching( slime ) ) {
             this.Looks.visible.show();
-            await this.Control.wait( Ts.Operations.randomValue( 3.5, 5.5 ) );
+            this.Control.wait( Ts.Operations.randomValue( 3.5, 5.5 ) );
             if ( this.type == 2 ) {
                 this.Looks.costume.name = CageImage.name;
                 this.type = 3;
@@ -136,12 +136,10 @@ cage.Event.cloned().func = async function* ( this : IWall ) {
                 this.type = 2;
             }
         }
-
-        yield;
     }
 };
 
-slime.Event.flagPresser().func = async function* ( this : IWall ) {
+slime.Event.flagPresser().func = function( this : IWall ) {
     // 大きさの設定
     Count.scale.w = 50;
     Count.scale.h = 50;
@@ -149,7 +147,7 @@ slime.Event.flagPresser().func = async function* ( this : IWall ) {
     Count.show();
 };
 
-slime.Broadcast.receiver( "SLIME" ).func = async function* ( this : Sprite ) {
+slime.Broadcast.receiver( "SLIME" ).func = function( this : Sprite ) {
     this.Control.clone();
 };
 
@@ -170,17 +168,16 @@ const moji = new Ts.Sprite( "moji" );
 moji.Costume.add( helloImage );
 moji.Looks.layer.gotoBackLayer();
 
-moji.Event.flagPresser().func = async function* ( this : Sprite ) {
+moji.Event.flagPresser().func = function( this : Sprite ) {
     this.Looks.layer.gotoFrontLayer();
     for ( ;; ) {
         this.Looks.visible.hide();
-        await this.Control.wait( 1 );
+        this.Control.wait( 1 );
         this.Looks.visible.show();
-        await this.Control.wait( 1 );
-        yield;
+        this.Control.wait( 1 );
     }
 };
-slime.Event.flagPresser().func = async function* ( this : Sprite ) {
+slime.Event.flagPresser().func = function( this : Sprite ) {
     slime.Looks.layer.gotoFrontLayer();
 };
 /**
@@ -190,7 +187,7 @@ slime.Event.flagPresser().func = async function* ( this : Sprite ) {
 const teleportToRandomCage = function ( this : Sprite ) : boolean {
     this.Sound.play( CrashBeatboxSound );
     const otherArr : IWall[] = [];
-    // eslint-disable-next-line loopCheck/s3-loop-plugin
+    // @ts-loop-yield-skip
     for ( const idx of Ts.Loop.Iterator( Object.keys( CageBank ).length ) ) {
         const _name = Object.keys( CageBank )[idx];
         const _cage = CageBank[_name];
@@ -218,7 +215,7 @@ const teleportToRandomCage = function ( this : Sprite ) : boolean {
     _randomCage.Looks.visible.hide();
     return true;
 };
-slime.Event.cloned().func = async function* ( this : Sprite ) {
+slime.Event.cloned().func = function( this : Sprite ) {
     // 大きさの設定
     this.Looks.size.drawingSize = { w: w * 0.7, h: h * 0.8 };
     this.Looks.visible.show();
@@ -318,25 +315,23 @@ slime.Event.cloned().func = async function* ( this : Sprite ) {
         }
 
         if ( this.Sensing.keyboard.isDown( Ts.Keyboard.ANY ) ) {
-            await this.Control.waitUntil( () =>
+            this.Control.waitUntil( () =>
                 this.Sensing.keyboard.isNotDown( Ts.Keyboard.ANY ),
             );
         }
-        yield;
     }
 };
 // 【スライムクローン】
-slime.Event.cloned().func = async function* ( this : Sprite ) {
+slime.Event.cloned().func = function( this : Sprite ) {
     /** 色の変化量 */
     const changeColor = 15;
     for ( ;; ) {
         this.Looks.effect.change( Ts.ImageEffective.COLOR, changeColor ); // 色の効果を変える
-        await this.Control.wait( 0.1 );
-        yield;
+        this.Control.wait( 0.1 );
     }
 };
 
-stage.Event.flagPresser().func = async function* ( this : Stage ) {
+stage.Event.flagPresser().func = function( this : Stage ) {
     this.Looks.backdrop.name = BackdropBlackImage.name;
 };
 

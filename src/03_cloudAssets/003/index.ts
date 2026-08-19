@@ -64,19 +64,12 @@ moji.Costume.add( mojiImage );
 mojiImage.textToSvg( "TEST" );
 moji.Looks.layer.gotoBackLayer();
 
-ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
+ballerina.Event.flagPresser().func = function( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
     // 初期の大きさ ( 100% )
     this.Looks.size.scale = [ 150, 150 ];
 
-    switch( this.Motion.position.xy ){
-
-    }
-
-    for( let i=0 ;i<10;i++ ){
-
-    }
     // ずっと繰り返す
     for ( ;; ) {
         this.Looks.costume.next();
@@ -84,13 +77,11 @@ ballerina.Event.flagPresser().func = async function* ( this : Sprite ) {
             Sounds[Ts.Operations.randomValue( 0, Sounds.length - 1 )],
         );
         this.Broadcast.send( "BG" );
-        await this.Control.wait( 0.2 );
-
-        yield;
+        this.Control.wait( 0.2 );
     }
 };
 
-stage.Broadcast.receiver( "BG" ).func = async function* ( this : Stage ) {
+stage.Broadcast.receiver( "BG" ).func = function( this : Stage ) {
     this.Looks.effect.change( Ts.ImageEffective.COLOR, 25 );
 };
 

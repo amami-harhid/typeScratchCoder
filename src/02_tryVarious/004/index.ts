@@ -27,7 +27,7 @@ const Touching = Ts.Variable.string( '' );
 Ts.Variable.monitoring( { Touching } );
 
 // 旗が押されたとき
-shark.Event.flagPresser().func = async function* ( this : Sprite ) {
+shark.Event.flagPresser().func = function( this : Sprite ) {
 
     this.Motion.position.xy = [ 0, 0 ];
     // ずっと繰り返す
@@ -36,12 +36,11 @@ shark.Event.flagPresser().func = async function* ( this : Sprite ) {
         this.Motion.point.toMouse();
         // 進める
         this.Motion.move.steps( 5 );
-        yield;
     }
 };
 
 // 旗が押されたとき
-shark.Event.flagPresser().func = async function* ( this : Sprite ) {
+shark.Event.flagPresser().func = function( this : Sprite ) {
 
     // ずっと繰り返す
     for( ;; ){
@@ -52,8 +51,6 @@ shark.Event.flagPresser().func = async function* ( this : Sprite ) {
         }else{
             Touching.text = '';
         }
-
-        yield;
     }
 };
 

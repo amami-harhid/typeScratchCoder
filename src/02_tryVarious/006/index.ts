@@ -32,7 +32,6 @@ const StageHeight = Ts.StageBounds.h;
 // 【スプライト】(ブロック)
 const block = new Ts.Sprite( "block" );
 block.Costume.add( BlockImage );
-console.log( block.Looks.visible );
 block.Looks.visible.hide(); // 非表示にする
 block.Looks.effect.set( Ts.ImageEffective.GHOST, 50 );
 // 【ステージ】(water)
@@ -44,14 +43,14 @@ const method = Ts.Variable.string( "" );
 Ts.Variable.monitoring( { ジャンプ: method } );
 method.hide(); // 隠す
 
-dog.Event.flagPresser().func = async function* ( this : Sprite ) {
+dog.Event.flagPresser().func = function( this : Sprite ) {
     this.Motion.position.xy = [ 0, 250 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
     speed = 0;
     onFloor = false;
 };
 
-block.Event.flagPresser().func = async function* ( this : Sprite ) {
+block.Event.flagPresser().func = function( this : Sprite ) {
     this.Motion.position.xy = [ 0, 0 ];
     const bounds = block.Looks.size.drawingSize;
     this.Looks.size.drawingSize = { w: StageWidth };
@@ -88,14 +87,13 @@ const isTouching = function(
     }
     return true;
 };
-let firstTouch = true;
+
 let walkSpeed = 0;
 // 犬がメッセージ(START)を受信したとき
-dog.Broadcast.receiver( "START" ).func = async function* (
+dog.Broadcast.receiver( "START" ).func = function(
     this : Sprite,
     blockBound : Bounds,
 ) {
-    firstTouch = true;
     speed = 0;
     onFloor = false;
     const Bounds = this.Looks.size.drawingSize;
@@ -105,7 +103,6 @@ dog.Broadcast.receiver( "START" ).func = async function* (
     // ずっと繰り返す
     for ( ;; ) {
         if ( _IsTouching( block, speed ) ) {
-            firstTouch = false;
             // 次に衝突が予想されるとき
             this.Motion.position.y =
                 blockBound.height - StageHeight / 2 + DogHeigth / 2;
@@ -117,15 +114,12 @@ dog.Broadcast.receiver( "START" ).func = async function* (
             this.Motion.position.y += speed;
             this.Motion.move.steps( walkSpeed );
             speed -= GRAVITY;
-            if ( firstTouch === false ) {
-            }
         }
-        yield;
     }
 };
 
 // 犬がメッセージ(START)を受信したとき
-dog.Broadcast.receiver( "START" ).func = async function* ( this : Sprite ) {
+dog.Broadcast.receiver( "START" ).func = function( this : Sprite ) {
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
     // ずっと繰り返す
     for ( ;; ) {
@@ -146,12 +140,11 @@ dog.Broadcast.receiver( "START" ).func = async function* ( this : Sprite ) {
             // 端についたら跳ね返る
             this.Motion.move.ifOnEdgeBounce();
         }
-        yield;
     }
 };
 
 // 犬がメッセージ(START)を受信したとき
-dog.Broadcast.receiver( "START" ).func = async function* ( this : Sprite ) {
+dog.Broadcast.receiver( "START" ).func = function( this : Sprite ) {
     method.text = "放物風";
     method.show();
     for ( ;; ) {
@@ -162,11 +155,10 @@ dog.Broadcast.receiver( "START" ).func = async function* ( this : Sprite ) {
             speed = INIT_JUMP;
             onFloor = false;
             // スペースキーが押されている間、待つ
-            await this.Control.waitWhile( () =>
+            this.Control.waitWhile( () =>
                 this.Sensing.keyboard.isDown( Ts.Keyboard.SPACE ),
             );
         }
-        yield;
     }
 };
 

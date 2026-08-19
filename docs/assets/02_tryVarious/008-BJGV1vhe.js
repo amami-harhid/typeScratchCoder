@@ -1,4 +1,4 @@
-import"../messagePost-C8oKmP_k.js";import{t as e}from"../typescratcher-DVKRzU2x.js";import{t}from"../cat-DnhSCkrq.js";import{t as n}from"../water-B6cNqaHD.js";var r=`
+import"../messagePost-BxuSvs_J.js";import{t as e}from"../typescratcher-CLsrfcmY.js";import{t}from"../cat-DnhSCkrq.js";import{t as n}from"../water-B6cNqaHD.js";var r=`
 <div id="virtualPad">
     <div class="d-KEY">
         <button id="btnA">A</button>
