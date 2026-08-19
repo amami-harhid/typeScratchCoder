@@ -5,8 +5,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite --open",
-        "build": "vite build --config ./vite.config-build.ts --emptyOutDir --base=/typeScratchCoder/",
-        "test": "vite build --config ./vite.config-build.ts --emptyOutDir"
+        "build": "vite build --emptyOutDir --base=/typeScratchCoder/",
+        "test": "vite build --emptyOutDir"
     },
     "author": "amami-harhid",
     "license": "AGPL-3.0-only",
