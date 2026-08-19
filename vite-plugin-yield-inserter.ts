@@ -26,6 +26,7 @@ export function yieldInserterPlugin(): Plugin {
                         ]
                     }
                 });
+                console.log(transpileResult.outputText)
                 return {
                     code: transpileResult.outputText,
                     map: transpileResult.sourceMapText ? JSON.parse(transpileResult.sourceMapText) : null

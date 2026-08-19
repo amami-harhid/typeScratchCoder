@@ -23,7 +23,7 @@ cat.Event.flagPresser().func = function ( this : Sprite ) {
     // Looks.backdrop.next: 「次の背景にする」
     
     // Control: 「制御」
-    // Control.wait : 指定した秒数だけ待つ。 awaitをつけること！
+    // Control.wait : 指定した秒数だけ待つ。 
     
     for( ;; ) {
         this.Motion.move.steps( 5 );

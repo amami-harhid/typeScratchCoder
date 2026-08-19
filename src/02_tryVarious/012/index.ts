@@ -21,7 +21,7 @@ const attribute : SvgImageAttributes = {
     font_family: Ts.ScratchFontFamily.Scratch,
 };
 const helloImage = new Ts.FontImage( attribute );
-await helloImage.textToSvg( HELLO );
+helloImage.Text.textToSvg( HELLO );
 
 // 文字スプライトを作成
 const moji = new Ts.Sprite( "moji" );
