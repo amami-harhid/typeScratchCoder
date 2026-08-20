@@ -61,7 +61,7 @@ const fontAttribute : SvgImageAttributes = {
 };
 const mojiImage = new Ts.FontImage( fontAttribute );
 moji.Costume.add( mojiImage );
-mojiImage.textToSvg( "TEST" );
+mojiImage.Text.textToSvg( "TEST" );
 moji.Looks.layer.gotoBackLayer();
 
 ballerina.Event.flagPresser().func = function( this : Sprite ) {

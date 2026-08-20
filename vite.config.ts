@@ -4,33 +4,38 @@
 import { resolve, relative, dirname } from 'path';
 import { defineConfig } from 'vite';
 import { glob } from 'glob'; // version 10.5.0
-import { yieldInserterPlugin } from './vite-plugin-yield-inserter.ts';
+import { TsCodeReplacer } from './.vitePlugin/vite-plugin-ts-code-replacer.ts';
+import checker from 'vite-plugin-checker';
+import fs from 'fs';
 
 // ルートとするディレクトリー
-const root = resolve(import.meta.dirname, './src/')
+const root = resolve(import.meta.dirname, 'src')
 const outDir = resolve(import.meta.dirname, 'docs');
 
-// 1. glob で src 以下のすべての index.html を取得
-const entries = glob.sync('./src/**/index.html');
-
+// 1. カレントディレクトリを確実に固定(./src)して、src 以下のすべての index.html を取得
+const entries = glob.sync('**/index.html', { cwd: root });
 const rollupOpsionsInput: { [key: string]: string } = {};
 
 for (const entry of entries) {
     // 2. 実際のファイルパスを絶対パスに変換
-    const absoluteEntryPath = resolve(import.meta.dirname, entry);
-    
+    const absoluteEntryPath = resolve(root, entry);
+
+    const htmlContent = fs.readFileSync(absoluteEntryPath, 'utf-8');
+    if (!htmlContent.includes('.ts')) {
+        continue; // .ts という文字列が含まれていない HTML はスキップ
+    }
+
     // 3. root (./src/) からの「相対パス」を計算する
     const relativePathFromRoot = relative(root, absoluteEntryPath);
     
     // 4. キー名（エントリー名）を決める (例: "index" や "sub/index")
+    const normalizedPath = relativePathFromRoot.replace(/\\/g, '/');
     // index.html を除いたディレクトリー構造をキーにする
-    const key = dirname(relativePathFromRoot) === '.' ? 'main' : dirname(relativePathFromRoot);
+    const key = dirname(relativePathFromRoot) === '.' ? 'main' : dirname(normalizedPath);
     
-    // 5. Viteには root からの相対パスを渡す
-    rollupOpsionsInput[key] = relativePathFromRoot;
+    // 5. Viteには root からの相対パスを渡す(Windows対応)
+    rollupOpsionsInput[key] = normalizedPath;
 }
-
-
 
 export default defineConfig({
     root, // ルートは ./src
@@ -47,11 +52,16 @@ export default defineConfig({
         devSourcemap: true
     },
     plugins: [
-        yieldInserterPlugin()
+        TsCodeReplacer(),
+        checker({
+            typescript: true,
+            eslint: {
+                lintCommand: `eslint "${resolve(import.meta.dirname, './src/**/*.{ts,tsx}')}"`,
+            }
+        })
     ],
     resolve: {
         alias: {
-            "@Type": resolve(import.meta.dirname, './node_modules/@tscratch3/typescratcher/Type'),
             "@Assets": resolve(import.meta.dirname, './assets'),
         }
     }

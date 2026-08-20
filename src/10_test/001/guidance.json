@@ -1,0 +1,6 @@
+{
+    "type": "Test",
+    "id": "001",
+    "title": "awaitのテスト",
+    "detail": "await を付与する確認"
+}
