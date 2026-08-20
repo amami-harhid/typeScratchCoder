@@ -1,4 +1,4 @@
-import { createYieldTransformer } from "./transformers/yield-transformer.ts";
+import { createTransformer } from "./transformers/transformer.ts";
 import { Plugin } from 'vite';
 import ts from 'typescript';
 
@@ -33,7 +33,7 @@ export function TsCodeReplacer(): Plugin {
                     fileName: id,
                     transformers: {
                         before: [
-                            (context) => createYieldTransformer(id, context)
+                            (context) => createTransformer(id, context)
                         ]
                     }
                 });

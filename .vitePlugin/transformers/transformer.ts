@@ -16,9 +16,23 @@ function transformLoopBody(
     visit: (n: ts.Node, inLoop?: boolean) => ts.Node, 
     id: string
 ): ts.Statement {
+
+    const sourceFile = node.getSourceFile();
+
     if (ts.isBlock(node)) {
         if (node.statements.length === 0) {
-            throw new Error(`[vite-plugin-yield-inserter] エラー: 空の繰り返し構文が検出されました。ファイル: ${id}`);
+            // 🌟 空のブロック `{}` のエラー位置を取得
+            const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile));
+            const nodeText = node.getText(sourceFile);
+
+            const error = new Error(`Empty loop body detected. Loop statements must not be empty.`) as PluginError;
+            error.loc = {
+                file: id,
+                line: line + 1,
+                column: character + 1
+            };
+            error.frame = nodeText;
+            throw error;
         }
 
         const newStatements: ts.Statement[] = [];
@@ -29,7 +43,6 @@ function transformLoopBody(
             newStatements.push(ts.visitNode(stmt, visit) as ts.Statement);
         }
 
-        const sourceFile = node.getSourceFile();
         const yieldStmt = createYieldStatement();
 
         const lastStmt = node.statements[node.statements.length - 1];
@@ -65,7 +78,18 @@ function transformLoopBody(
     }
 
     if (ts.isEmptyStatement(node)) {
-        throw new Error(`[vite-plugin-yield-inserter] エラー: 空の繰り返し構文が検出されました。ファイル: ${id}`);
+        // 🌟 セミコロンのみ `;` の空ループのエラー位置を取得
+        const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile));
+        const nodeText = node.getText(sourceFile);
+
+        const error = new Error(`Empty loop body detected. Loop statements must not be empty.`) as PluginError;
+        error.loc = {
+            file: id,
+            line: line + 1,
+            column: character + 1
+        };
+        error.frame = nodeText;
+        throw error;
     }
 
     const newStatements: ts.Statement[] = [];
@@ -128,7 +152,7 @@ function convertToAsyncGenerator(
     );
 }
 
-export const createYieldTransformer = (id: string, context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
+export const createTransformer = (id: string, context: ts.TransformationContext): ts.Transformer<ts.SourceFile> => {
     return (sf: ts.SourceFile) => {
     
         const targetVariableNames = new Set<string>();
@@ -146,19 +170,23 @@ export const createYieldTransformer = (id: string, context: ts.TransformationCon
 
         function visit(node: ts.Node, inLoop = false): ts.Node {
       
-            //【機能：new xx.Image(hoge) などの引数を { hoge } に包む処理】
+            //【機能：new xx.Image(hoge) や xx.Variable.monitoring(hoge) などの引数を { hoge } に包む処理】
             if (isArgumentObjectWrapTarget(node)) {
                 // 先に子ノード（引数の内部など）を再帰的に変換
-                const visitedNewExpr = ts.visitEachChild(node, (n) => visit(n, inLoop), context) as ts.NewExpression;
-                const originalArg = visitedNewExpr.arguments![0];
-
+                const visitedNode  = ts.visitEachChild(node, (n) => visit(n, inLoop), context) as ts.NewExpression;
+                
+                // 型ガードを用いて引数を安全に取得
+                const originalArg = ts.isNewExpression(visitedNode) 
+                    ? visitedNode.arguments![0] 
+                    : (visitedNode as ts.CallExpression).arguments[0];
+                
                 // 引数が変数名（識別子）である場合のみ許可
                 if (!ts.isIdentifier(originalArg)) {
                     // ソースファイル上の行数・文字位置を取得して分かりやすいエラーにする
                     const { line, character } = sf.getLineAndCharacterOfPosition(node.getStart(sf));
                     // 表現の取得（例: "new xx.Image("path/to/img")"）
                     const nodeText = node.getText(sf);
-                    console.log('nodeText', nodeText)
+
                     const error = new Error(`Please specify a variable as the argument. [変数を引数にしてください]`) as PluginError;
                     error.loc = {
                         file: id,
@@ -177,14 +205,22 @@ export const createYieldTransformer = (id: string, context: ts.TransformationCon
                     [propertyAssignment],
                     false
                 );
-
-                // new 式の引数を差し替えて返す
-                return ts.factory.updateNewExpression(
-                    visitedNewExpr,
-                    visitedNewExpr.expression,
-                    visitedNewExpr.typeArguments,
-                    ts.factory.createNodeArray([newObjectLiteral])
-                );
+                // nodeの種類に応じて適切な更新メソッドを使い分ける
+                if (ts.isNewExpression(visitedNode)) {
+                    return ts.factory.updateNewExpression(
+                        visitedNode,
+                        visitedNode.expression,
+                        visitedNode.typeArguments,
+                        ts.factory.createNodeArray([newObjectLiteral])
+                    );
+                }else{
+                    return ts.factory.updateCallExpression(
+                        visitedNode as ts.CallExpression,
+                        (visitedNode as ts.CallExpression).expression,
+                        (visitedNode as ts.CallExpression).typeArguments,
+                        ts.factory.createNodeArray([newObjectLiteral])
+                    );
+                }
             }
             //【機能：特定の命令に await が無ければ付与する処理】
             // 親ノードがすでに AwaitExpression でないことを確認した上で処理

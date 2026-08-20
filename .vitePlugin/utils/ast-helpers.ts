@@ -78,36 +78,47 @@ export function isAwaitTargetCall(node: ts.Node): boolean {
 }
 
 /**
- * new xx.Image(hoge) または new xx.Sound(hoge) であり、
- * かつ引数がオブジェクトリテラル形式でないかを判定する
+ * オブジェクトリテラル自動ラップの対象（new式、または特定のメソッド呼び出し）であるかを判定する
  */
-export function isArgumentObjectWrapTarget(node: ts.Node): node is ts.NewExpression {
-    if (!ts.isNewExpression(node)) {
+export function isArgumentObjectWrapTarget(node: ts.Node): node is ts.NewExpression | ts.CallExpression {
+    // 1. new演算子、または通常の関数・メソッド呼び出しであること
+    if (!ts.isNewExpression(node) && !ts.isCallExpression(node)) {
         return false;
     }
 
-    // 引数が1つであること
+    // 2. 引数が1つであること
     if (!node.arguments || node.arguments.length !== 1) {
         return false;
     }
 
-    // すでにオブジェクトリテラル { ... } になっている場合は除外
+    // 3. すでにオブジェクトリテラル { ... } になっている場合は除外
     const firstArg = node.arguments[0];
     if (ts.isObjectLiteralExpression(firstArg)) {
         return false;
     }
 
-    // new 式の対象（xx.Image や xx.Sound などのプロパティアクセス）を解析
     const expr = node.expression;
-    if (!ts.isPropertyAccessExpression(expr)) {
-        return false;
+
+    // --- ケースA: new xx.Image() / new xx.Sound() の判定 ---
+    if (ts.isNewExpression(node) && ts.isPropertyAccessExpression(expr)) {
+        const className = expr.name.text;
+        return className === 'Image' || className === 'Sound';
     }
 
-    // 末尾が Image または Sound であるかチェック
-    const className = expr.name.text;
-    if (className === 'Image' || className === 'Sound') {
-        // 必要に応じて親オブジェクト（xx）の階層チェックを入れることも可能です
-        return true;
+    // --- ケースB: xx.Variable.monitoring() の判定 ---
+    // 構造: expression(xx.Variable) . name(monitoring)
+    if (ts.isCallExpression(node) && ts.isPropertyAccessExpression(expr)) {
+        const methodName = expr.name.text;
+        
+        if (methodName === 'monitoring') {
+            const parentExpr = expr.expression; // xx.Variable の部分
+            
+            // 2階層目のプロパティアクセス（xx.Variable）をチェック
+            if (ts.isPropertyAccessExpression(parentExpr)) {
+                const subName = parentExpr.name.text;
+                return subName === 'Variable';
+            }
+        }
     }
 
     return false;

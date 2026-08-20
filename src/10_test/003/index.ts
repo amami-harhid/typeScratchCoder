@@ -1,5 +1,5 @@
 /**
- * コード変換-002
+ * コード変換-003
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite, Stage } from "@tscratch3/typescratcher";
@@ -13,7 +13,6 @@ export const CatAImage = new Ts.Image( CatASvg );
 export const BlueskyImage = new Ts.Image( BlueskySvg );
 // サウンド作成
 const AElecBassSound = new Ts.Sound( AElecBass );
-//const AElecBassSound2 = new Ts.Sound( "aaab" );
 
 const sprite = new Ts.Sprite( 'test' );
 sprite.Costume.add( CatAImage );
@@ -21,34 +20,22 @@ sprite.Sound.add( AElecBassSound );
 
 const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage ); 
-//stage.Sound.add( AElecBassSound2 );
 
 // 【変数モニターを定義】
 const distance = Ts.Variable.number( 0 ); // 初期値ゼロ
 Ts.Variable.monitoring( distance ); // モニター表示登録
 
-const test : boolean = false;
-
 const spriteFlagPresser = function( this : Sprite ) {
-    this.Control.wait( 2 );
-    this.Control.waitUntil( ()=>test );
-    this.Control.waitWhile( ()=>test );
-    this.Broadcast.sendAndWait( 'TEST' );
-    this.Looks.bubble.sayForSecs( 'TEST', 2 );
+    for( ;; ){
+        console.log( "xxx" );
+    }
 };
 
 sprite.Event.flagPresser().func = spriteFlagPresser;
 
 const stageFlagPresser = function( this : Stage ) {
-    this.Looks.backdrop.nextAndWait();
-    this.Looks.backdrop.previousAndWait();
-    this.Looks.backdrop.switchRandomAndWait();
-    this.Looks.backdrop.switchAndWait( BlueskyImage );
-    this.Control.wait( 2 );
-    this.Control.waitUntil( ()=>test );
-    this.Control.waitWhile( ()=>test );
-    this.Broadcast.sendAndWait( 'TEST' );
-
+    //for( ;; )
+    //    ;
 };
 
 stage.Event.flagPresser().func = stageFlagPresser;
