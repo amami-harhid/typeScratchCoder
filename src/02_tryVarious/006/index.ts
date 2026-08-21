@@ -12,11 +12,17 @@ virtualPad();
 
 // 【画像読み込み】
 import dogPng from "@Assets/front_01.svg";
-const DogImage = new Ts.Image( { dogPng } );
+const DogImage = new Ts.Image( {
+    dogPng 
+} );
 import blockSvg from "@Assets/block.svg";
-const BlockImage = new Ts.Image( { blockSvg } );
+const BlockImage = new Ts.Image( {
+    blockSvg 
+} );
 import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( { WaterSvg } );
+const WaterImage = new Ts.Image( {
+    WaterSvg 
+} );
 
 // 【スプライト】(犬)
 const dog = new Ts.Sprite( "shark" );
@@ -40,7 +46,9 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const method = Ts.Variable.string( "" );
-Ts.Variable.monitoring( { ジャンプ: method } );
+Ts.Variable.monitoring( {
+    ジャンプ: method 
+} );
 method.hide(); // 隠す
 
 dog.Event.flagPresser().func = function( this : Sprite ) {
@@ -53,7 +61,9 @@ dog.Event.flagPresser().func = function( this : Sprite ) {
 block.Event.flagPresser().func = function( this : Sprite ) {
     this.Motion.position.xy = [ 0, 0 ];
     const bounds = block.Looks.size.drawingSize;
-    this.Looks.size.drawingSize = { w: StageWidth };
+    this.Looks.size.drawingSize = {
+        w: StageWidth 
+    };
     const blockY = bounds.height / 2 - StageHeight / 2;
     this.Motion.position.y = blockY;
 

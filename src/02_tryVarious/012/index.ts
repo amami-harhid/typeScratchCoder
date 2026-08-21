@@ -8,7 +8,9 @@ import type { Sprite, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import BluSkySvg from "@Assets/Blue Sky.svg";
-const BlueSkyImage = new Ts.Image( { BluSkySvg } );
+const BlueSkyImage = new Ts.Image( {
+    BluSkySvg 
+} );
 
 // 【ステージ】(water)
 const stage = new Ts.Stage();

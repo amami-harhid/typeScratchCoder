@@ -41,7 +41,9 @@ export const Map01 : number[][] = [
 
     [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
 ];
-const cagePositionArr : {x : number, y : number}[] = [];
+const cagePositionArr : {x : number,
+y : number}[] = [];
+
 let y = Math.floor( -Map01[0].length / 2 );
 
 // @ts-loop-yield-skip
@@ -50,7 +52,10 @@ for( const row of Map01 ) {
     // @ts-loop-yield-skip
     for( const elem of row ) {
         if( elem == 2 ){
-            cagePositionArr.push( { x: x, y: y } );
+            cagePositionArr.push( {
+                x: x,
+                y: y 
+            } );
         }
         x+=1;
     }

@@ -14,9 +14,13 @@ virtualPad();
 
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";
-const CatImage = new Ts.Image( { catSvg } );
+const CatImage = new Ts.Image( {
+    catSvg 
+} );
 import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( { WaterSvg } );
+const WaterImage = new Ts.Image( {
+    WaterSvg 
+} );
 
 
 // 【スプライト】(Spriteネコ)
@@ -32,7 +36,9 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const answer = Ts.Variable.string( "" );
-Ts.Variable.monitoring( { 答え: answer } );
+Ts.Variable.monitoring( {
+    答え: answer 
+} );
 answer.hide(); // 隠す
 
 let askingNow = false;

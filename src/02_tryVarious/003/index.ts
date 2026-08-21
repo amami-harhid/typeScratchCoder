@@ -4,23 +4,15 @@
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite } from "@tscratch3/typescratcher";
-
-// 【画像読み込み】
-import sharkPng from "@Assets/shark.png";
-const SharkImage = new Ts.Image( { sharkPng } );
-import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( { WaterSvg } );
-
+import { SharkImage, WaterImage } from "./sub/image";
 // 【スプライト】(さめ)
 const shark = new Ts.Sprite( "shark" );
 // さめイメージをスプライトへ追加
 shark.Costume.add( SharkImage );
 shark.Looks.size.scale = [ 30, 30 ];
-
 // 【ステージ】(water)
 const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
-
 shark.Event.flagPresser().func = function( this : Sprite ) {
     // 初期位置 ( 中央 )
     this.Motion.position.xy = [ 0, 0 ];
@@ -30,27 +22,25 @@ shark.Event.flagPresser().func = function( this : Sprite ) {
     this.Looks.effect.clear();
     // 少しまつ
     this.Control.wait( 1 );
-
-    // ペンを準備する
+    // ペンをクリアする
     this.Pen.penClear();
 
     // ずっと繰り返す
     for ( ;; ) {
-        // 20回繰り返す
         this.Looks.bubble.say( "ペンをひく" );
         this.Pen.HSVColor.hue = 0; // 色相 [0 - 360]
         //this.Pen.HSVColor.saturation = 0;
         this.Pen.HSVColor.transparency = 0; // 透明度
+        // ペンの太さ=1
+        this.Pen.size.thickness = 1;
         this.Pen.penDown();
+        // 20回繰り返す
         for ( const _ of Ts.Loop.Iterator( 20 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.COLOR, +25 );
-
             // どこかに行く
             this.Motion.move.toRandom();
-
             // ペン太さを太くしていく
             this.Pen.size.thickness += 1;
-
             // ペンの色を変える
             this.Pen.HSVColor.hue += 15; // 色相 [0 - 360]
             //this.Pen.HSVColor.saturation += 5; // 彩度
@@ -64,26 +54,20 @@ shark.Event.flagPresser().func = function( this : Sprite ) {
         }
         this.Pen.penUp();
         this.Pen.penClear();
-
-        // 20回繰り返す
         this.Looks.bubble.say( "スタンプ" );
+        // 20回繰り返す
         for ( const _ of Ts.Loop.Iterator( 20 ) ) {
             this.Looks.effect.change( Ts.ImageEffective.COLOR, +25 );
-
             // どこかに行く
             this.Motion.move.toRandom();
-
             // スタンプする
             this.Pen.stamp();
-
             // すこし待つ
             this.Control.wait( 0.5 );
         }
-
         // ペンをクリアする
         this.Pen.penClear();
     }
 };
-
 // 開始
 Ts.engine.start();

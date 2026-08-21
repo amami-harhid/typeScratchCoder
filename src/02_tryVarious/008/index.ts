@@ -12,12 +12,18 @@ virtualPad();
 
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";
-const CatImage = new Ts.Image( { catSvg } );
+const CatImage = new Ts.Image( {
+    catSvg 
+} );
 import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( { WaterSvg } );
+const WaterImage = new Ts.Image( {
+    WaterSvg 
+} );
 // 【音読み込み】
 import ChillWav from "@Assets/Chill.wav";
-const ChillSound = new Ts.Sound( { ChillWav } );
+const ChillSound = new Ts.Sound( {
+    ChillWav 
+} );
 
 // 【スプライト】(Spriteネコ)
 const cat = new Ts.Sprite( "cat" );
@@ -35,9 +41,13 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const volume = Ts.Variable.number( 100 );
-Ts.Variable.monitoring( { volume } );
+Ts.Variable.monitoring( {
+    volume 
+} );
 const pitch = Ts.Variable.number( 0 );
-Ts.Variable.monitoring( { pitch } );
+Ts.Variable.monitoring( {
+    pitch 
+} );
 
 cat.Event.flagPresser().func = function( this : Sprite ) {
     // ずっと繰り返し音を鳴らす

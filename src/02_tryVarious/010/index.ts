@@ -8,9 +8,13 @@ import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";
-const CatImage = new Ts.Image( { catSvg } );
+const CatImage = new Ts.Image( {
+    catSvg 
+} );
 import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( { WaterSvg } );
+const WaterImage = new Ts.Image( {
+    WaterSvg 
+} );
 
 // 【スプライト】(Spriteネコ)
 const cat = new Ts.Sprite( "cat" );
@@ -28,7 +32,9 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const touch = Ts.Variable.string( "" ); // タッチ
-Ts.Variable.monitoring( { touch } );
+Ts.Variable.monitoring( {
+    touch 
+} );
 
 // 旗が押されたときの「ねこ」のスレッド
 cat.Event.flagPresser().func = function( this : Sprite ) {

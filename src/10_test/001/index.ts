@@ -10,9 +10,15 @@ const AElecBass =
     "https://cdn.assets.scratch.mit.edu/internalapi/asset/5cb46ddd903fc2c9976ff881df9273c9.wav/get";
 
 // イメージ作成
-const CatAImage = new Ts.Image( { CatASvg } );
-const BlueskyImage = new Ts.Image( { BlueskySvg } );
-const AElecBassSound = new Ts.Sound( { AElecBass } );
+const CatAImage = new Ts.Image( {
+    CatASvg 
+} );
+const BlueskyImage = new Ts.Image( {
+    BlueskySvg 
+} );
+const AElecBassSound = new Ts.Sound( {
+    AElecBass 
+} );
 
 const sprite = new Ts.Sprite( 'test' );
 sprite.Costume.add( CatAImage );

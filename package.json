@@ -4,15 +4,16 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "dev": "vite --open",
+        "dev": "vite",
+        "dev_open": "vite --open",
         "build": "vite build --emptyOutDir --base=/typeScratchCoder/",
-        "test": "vite build --emptyOutDir"
+        "build_test": "vite build --emptyOutDir"
     },
     "author": "amami-harhid",
     "license": "AGPL-3.0-only",
     "description": "",
     "dependencies": {
-        "@tscratch3/typescratcher": "^0.1.21"
+        "@tscratch3/typescratcher": "^0.1.26"
     },
     "devDependencies": {
         "@eslint/js": "^9.29.0",

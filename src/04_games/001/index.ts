@@ -29,13 +29,19 @@ const wall = new Wall( "wall" );
 wall.Costume.add( WallImage );
 const w = WallWidth;
 const h = WallHeight;
-wall.Looks.size.drawingSize = { w: w, h: h };
+wall.Looks.size.drawingSize = {
+    w: w,
+    h: h 
+};
 wall.Looks.visible.hide();
 
 // 【スプライト】Cage
 const cage = new Wall( "cage" );
 cage.Costume.add( DoorImage, CageImage );
-cage.Looks.size.drawingSize = { w: w, h: h };
+cage.Looks.size.drawingSize = {
+    w: w,
+    h: h 
+};
 cage.Looks.visible.hide();
 
 const CageBank : { [key : string] : IWall } = {};
@@ -48,18 +54,29 @@ slime.Looks.visible.hide();
 slime.Costume.add( SlimeImage );
 slime.Sound.add( ChirpSound, CollectSound, CrashBeatboxSound );
 slime.Motion.position.xy = [ 0, 0 ];
-slime.Looks.size.drawingSize = { w: w * 0.8, h: h * 0.8 };
+slime.Looks.size.drawingSize = {
+    w: w * 0.8,
+    h: h * 0.8 
+};
 
 //【変数】
 const Count = Ts.Variable.number( 0 );
-Ts.Variable.monitoring( { Count } );
+Ts.Variable.monitoring( {
+    Count 
+} );
 Count.hide();
 
 wall.Event.flagPresser().func = function( this : IWall ) {
-    this.Looks.size.drawingSize = { w: w, h: h };
+    this.Looks.size.drawingSize = {
+        w: w,
+        h: h 
+    };
 };
 cage.Event.flagPresser().func = function( this : IWall ) {
-    this.Looks.size.drawingSize = { w: w, h: h };
+    this.Looks.size.drawingSize = {
+        w: w,
+        h: h 
+    };
 };
 
 wall.Event.flagPresser().func = function( this : IWall ) {
@@ -217,7 +234,10 @@ const teleportToRandomCage = function ( this : Sprite ) : boolean {
 };
 slime.Event.cloned().func = function( this : Sprite ) {
     // 大きさの設定
-    this.Looks.size.drawingSize = { w: w * 0.7, h: h * 0.8 };
+    this.Looks.size.drawingSize = {
+        w: w * 0.7,
+        h: h * 0.8 
+    };
     this.Looks.visible.show();
 
     const _teleport = teleportToRandomCage.bind( this );

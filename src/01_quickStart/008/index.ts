@@ -10,8 +10,12 @@ import CatASvg from "@Assets/cat.svg";
 import BlueskySvg from "@Assets/Blue Sky.svg";
 
 // イメージ作成
-const CatAImage = new Ts.Image( { CatASvg } );
-const BlueskyImage = new Ts.Image( { BlueskySvg } );
+const CatAImage = new Ts.Image( {
+    CatASvg 
+} );
+const BlueskyImage = new Ts.Image( {
+    BlueskySvg 
+} );
 
 // スプライト作成(ネコ)
 const cat = new Ts.Sprite( "catA" );

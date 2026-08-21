@@ -4,7 +4,8 @@
 import { resolve, relative, dirname } from 'path';
 import { defineConfig } from 'vite';
 import { glob } from 'glob'; // version 10.5.0
-import { TsCodeReplacer } from './.vitePlugin/vite-plugin-ts-code-replacer.ts';
+//import { TsCodeReplacer } from '@tscratch3/typescratcher/build/vitePlugins/vite-plugin-ts-code-replacer.js';
+import { TsCodeReplacer } from '@tscratch3/typescratcher/build/vitePlugins/index.js';
 import checker from 'vite-plugin-checker';
 import fs from 'fs';
 

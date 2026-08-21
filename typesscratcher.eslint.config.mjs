@@ -9,6 +9,15 @@ const typescracher_eslint_config = [
         },
         files: [ "src/**/*.ts" ],
         rules: {
+            // オブジェクトリテラルが1つ以上のプロパティを持つ場合、必ず改行することを強制する
+            "@stylistic/object-curly-newline": ["error", { 
+                "ObjectExpression": { "multiline": true, "minProperties": 1 },
+                "ObjectPattern": { "multiline": true, "minProperties": 1 }
+            }],
+            // プロパティごとに独立した行にすることを強制する
+            "@stylistic/object-property-newline": ["error", {
+                "allowAllPropertiesOnSameLine": false
+            }],
             // 型定義のコロンの前後にスペース1つを強制する
             "@stylistic/type-annotation-spacing": [
                 "error",
