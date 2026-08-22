@@ -12,17 +12,11 @@ virtualPad();
 
 // 【画像読み込み】
 import dogPng from "@Assets/front_01.svg";
-const DogImage = new Ts.Image( {
-    dogPng 
-} );
+const DogImage = new Ts.Image( dogPng );
 import blockSvg from "@Assets/block.svg";
-const BlockImage = new Ts.Image( {
-    blockSvg 
-} );
+const BlockImage = new Ts.Image( blockSvg );
 import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( {
-    WaterSvg 
-} );
+const WaterImage = new Ts.Image( WaterSvg );
 
 // 【スプライト】(犬)
 const dog = new Ts.Sprite( "shark" );
@@ -46,12 +40,11 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const method = Ts.Variable.string( "" );
-Ts.Variable.monitoring( {
-    ジャンプ: method 
-} );
+Ts.Variable.monitoring( { ジャンプ: method } );
 method.hide(); // 隠す
 
 dog.Event.flagPresser().func = function( this : Sprite ) {
+    
     this.Motion.position.xy = [ 0, 250 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
     speed = 0;
@@ -59,6 +52,7 @@ dog.Event.flagPresser().func = function( this : Sprite ) {
 };
 
 block.Event.flagPresser().func = function( this : Sprite ) {
+
     this.Motion.position.xy = [ 0, 0 ];
     const bounds = block.Looks.size.drawingSize;
     this.Looks.size.drawingSize = {
@@ -79,11 +73,8 @@ let onFloor = false;
 /**
  * moveSpeed の速さで移動したとき targetに衝突するかを判定する
  */
-const isTouching = function(
-    this : Sprite,
-    target : Sprite,
-    moveSpeed : number,
-) : boolean {
+const isTouching = function( this : Sprite, target : Sprite, moveSpeed : number ) : boolean {
+
     // 自分自身の高さ
     const ownHeight = this.Looks.size.drawingSize.height;
     // ターゲットの上辺の座標位置
@@ -100,16 +91,15 @@ const isTouching = function(
 
 let walkSpeed = 0;
 // 犬がメッセージ(START)を受信したとき
-dog.Broadcast.receiver( "START" ).func = function(
-    this : Sprite,
-    blockBound : Bounds,
-) {
+dog.Broadcast.receiver( "START" ).func = function( this : Sprite, blockBound : Bounds ) {
+
     speed = 0;
     onFloor = false;
     const Bounds = this.Looks.size.drawingSize;
     const DogHeigth = Bounds.height;
     const _IsTouching = isTouching.bind( this );
     this.Pen.penDown(); // 自由落下中ペン描画をする
+
     // ずっと繰り返す
     for ( ;; ) {
         if ( _IsTouching( block, speed ) ) {
@@ -130,6 +120,7 @@ dog.Broadcast.receiver( "START" ).func = function(
 
 // 犬がメッセージ(START)を受信したとき
 dog.Broadcast.receiver( "START" ).func = function( this : Sprite ) {
+
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
     // ずっと繰り返す
     for ( ;; ) {
@@ -139,10 +130,12 @@ dog.Broadcast.receiver( "START" ).func = function( this : Sprite ) {
                 this.Motion.direction.degree = 90;
                 walkSpeed = 10;
                 this.Motion.move.steps( walkSpeed );
+
             } else if ( this.Sensing.keyboard.isDown( Ts.Keyboard.LEFT ) ) {
                 this.Motion.direction.degree = -90;
                 walkSpeed = 10;
                 this.Motion.move.steps( walkSpeed );
+            
             } else {
                 // 地面についていないときはゼロにはならない
                 walkSpeed = 0;
@@ -155,13 +148,12 @@ dog.Broadcast.receiver( "START" ).func = function( this : Sprite ) {
 
 // 犬がメッセージ(START)を受信したとき
 dog.Broadcast.receiver( "START" ).func = function( this : Sprite ) {
+
     method.text = "放物風";
     method.show();
+
     for ( ;; ) {
-        if (
-            onFloor === true &&
-            this.Sensing.keyboard.isDown( Ts.Keyboard.SPACE )
-        ) {
+        if ( onFloor === true &&this.Sensing.keyboard.isDown( Ts.Keyboard.SPACE ) ) {
             speed = INIT_JUMP;
             onFloor = false;
             // スペースキーが押されている間、待つ

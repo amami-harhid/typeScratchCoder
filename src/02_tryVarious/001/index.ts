@@ -7,13 +7,9 @@ import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import ObakeSvg from '../../../assets/obake.svg';
-const ObakeImage = new Ts.Image( {
-    ObakeSvg 
-} );
+const ObakeImage = new Ts.Image( ObakeSvg );
 import BasketballPng from '../../../assets/Basketball 2.png';
-const BasketballImage = new Ts.Image( {
-    BasketballPng 
-} );
+const BasketballImage = new Ts.Image( BasketballPng );
 
 
 // 【スプライト】(おばけ)

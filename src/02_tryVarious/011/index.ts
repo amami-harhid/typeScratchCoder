@@ -10,13 +10,9 @@ Ts.Env.debugMode = true;
 
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";
-const CatImage = new Ts.Image( {
-    catSvg 
-} );
+const CatImage = new Ts.Image( catSvg );
 import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( {
-    WaterSvg 
-} );
+const WaterImage = new Ts.Image( WaterSvg );
 
 // 【スプライト】(Spriteネコ)
 const cat = new Ts.Sprite( "cat" );
@@ -34,9 +30,7 @@ stage.Backdrop.add( WaterImage );
 
 // 変数(タッチ)
 const speechText = Ts.Variable.string( "こら、触ったね" );
-Ts.Variable.monitoring( {
-    text: speechText 
-} );
+Ts.Variable.monitoring( { "text": speechText } );
 
 // 緑の旗が押されたときの「ねこ」のスレッド
 cat.Event.flagPresser().func = function( this : Sprite ) {

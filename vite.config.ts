@@ -47,7 +47,7 @@ export default defineConfig({
         rollupOptions: {
             input: rollupOpsionsInput,
         },
-        sourcemap: 'inline'
+        sourcemap: true
     },
     css: {
         devSourcemap: true

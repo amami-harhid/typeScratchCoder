@@ -7,13 +7,9 @@ import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import sharkPng from '@Assets/shark.png';
-const SharkImage = new Ts.Image( {
-    sharkPng 
-} );
+const SharkImage = new Ts.Image( sharkPng );
 import WaterSvg from '@Assets/water.svg';
-const WaterImage = new Ts.Image( {
-    WaterSvg 
-} );
+const WaterImage = new Ts.Image( WaterSvg );
 
 
 // 【スプライト】(さめ)

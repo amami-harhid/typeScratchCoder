@@ -7,13 +7,9 @@ import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import sharkPng from '@Assets/shark.png';
-const SharkImage = new Ts.Image( {
-    sharkPng 
-} );
+const SharkImage = new Ts.Image( sharkPng );
 const ColorfulCityPng = 'https://cdn.assets.scratch.mit.edu/internalapi/asset/04d18ddd1b85f0ea30beb14b8da49f60.png/get';
-const ColorfulCityImage = new Ts.Image( {
-    ColorfulCityPng 
-} );
+const ColorfulCityImage = new Ts.Image( ColorfulCityPng );
 
 // 【スプライト】(さめ)
 const shark = new Ts.Sprite( 'shark' );
@@ -28,9 +24,7 @@ stage.Backdrop.add( ColorfulCityImage );
 
 // 変数
 const Touching = Ts.Variable.string( '' ); 
-Ts.Variable.monitoring( {
-    Touching 
-} );
+Ts.Variable.monitoring( Touching );
 
 // 旗が押されたとき
 shark.Event.flagPresser().func = function( this : Sprite ) {

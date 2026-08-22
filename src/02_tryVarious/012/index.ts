@@ -7,12 +7,20 @@ import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
-import BluSkySvg from "@Assets/Blue Sky.svg";
-const BlueSkyImage = new Ts.Image( {
-    BluSkySvg 
-} );
+import catSvg from '@Assets/cat.svg';
+const CatAImage = new Ts.Image( catSvg );
+import BlueskySvg from "@Assets/Blue Sky.svg";
 
-// 【ステージ】(water)
+const BlueSkyImage = new Ts.Image( BlueskySvg );
+
+// TODO
+// スプライト作成＋コスチューム追加をしておかないと、背景を追加できない？
+
+// スプライト作成
+const cat = new Ts.Sprite( "cat" );
+cat.Costume.add( CatAImage ); // イメージを追加
+
+// 【ステージ】( blueSky )
 const stage = new Ts.Stage();
 stage.Backdrop.add( BlueSkyImage );
 

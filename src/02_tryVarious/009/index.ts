@@ -8,13 +8,9 @@ import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import catSvg from "@Assets/cat.svg";
-const CatImage = new Ts.Image( {
-    catSvg 
-} );
+const CatImage = new Ts.Image( catSvg );
 import WaterSvg from "@Assets/water.svg";
-const WaterImage = new Ts.Image( {
-    WaterSvg 
-} );
+const WaterImage = new Ts.Image( WaterSvg );
 
 // 【スプライト】(Spriteネコ)
 const cat = new Ts.Sprite( "cat" );
@@ -32,21 +28,13 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const distance = Ts.Variable.number( 100 ); //距離
-Ts.Variable.monitoring( {
-    distance 
-} );
+Ts.Variable.monitoring( distance );
 const radius = Ts.Variable.number( 0 ); // 半径
-Ts.Variable.monitoring( {
-    radius 
-} );
+Ts.Variable.monitoring( radius );
 const ghost = Ts.Variable.number( 0 ); // 幽霊効果の値
-Ts.Variable.monitoring( {
-    ghost 
-} );
+Ts.Variable.monitoring( ghost );
 const pixelate = Ts.Variable.number( 0 ); // ピクセル効果の値
-Ts.Variable.monitoring( {
-    pixelate 
-} );
+Ts.Variable.monitoring( pixelate );
 
 cat.Event.flagPresser().func = function( this : Sprite ) {
     this.Looks.size.scale = [ 250, 250 ];

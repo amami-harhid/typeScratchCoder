@@ -41,8 +41,7 @@ export const Map01 : number[][] = [
 
     [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
 ];
-const cagePositionArr : {x : number,
-y : number}[] = [];
+const cagePositionArr : {x : number, y : number}[] = [];
 
 let y = Math.floor( -Map01[0].length / 2 );
 

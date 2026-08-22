@@ -7,13 +7,9 @@ import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
 import dogPng from '@Assets/front_01.svg';
-const DogImage = new Ts.Image( {
-    dogPng 
-} );
+const DogImage = new Ts.Image( dogPng );
 import WaterSvg from '@Assets/water.svg';
-const WaterImage = new Ts.Image( {
-    WaterSvg 
-} );
+const WaterImage = new Ts.Image( WaterSvg );
 
 // 【バーチャルパッド】
 import { virtualPad } from "./sub/virtualPad";
@@ -32,9 +28,7 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const method = Ts.Variable.string( '' ); 
-Ts.Variable.monitoring( {
-    'ジャンプ': method 
-} );
+Ts.Variable.monitoring( { 'ジャンプ': method } );
 method.hide(); // 隠す
 
 // 旗が押されたとき
@@ -51,6 +45,7 @@ dog.Event.flagPresser().func = function( this : Sprite ) {
         this.Motion.move.ifOnEdgeBounce();
     }
 };
+
 // A キーが押されたとき(等速ジャンプ)
 dog.Event.keyPresser( 'a' ).func = function( this : Sprite ) {
     method.text = '等速';
@@ -65,6 +60,7 @@ dog.Event.keyPresser( 'a' ).func = function( this : Sprite ) {
     method.hide();
     method.text = '';
 };
+
 // B キーが押されたとき(放物風ジャンプ)
 dog.Event.keyPresser( 'b' ).func = function( this : Sprite ) {
     method.text = '放物風';
@@ -83,7 +79,6 @@ dog.Event.keyPresser( 'b' ).func = function( this : Sprite ) {
     this.Motion.position.y = -130;
     method.hide();
     method.text = '';
-
 };
 
 // 開始

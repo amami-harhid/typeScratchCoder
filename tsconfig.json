@@ -30,6 +30,7 @@
         "noFallthroughCasesInSwitch": true,
         /* import package.json のために許可する */
         "resolveJsonModule": true,
+        "sourceMap": true,
 
     }
 }
