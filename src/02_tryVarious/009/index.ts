@@ -27,14 +27,14 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
 
 // 変数
-const distance = Ts.Variable.number( 100 ); //距離
-new Ts.VariableMonitoring( { distance } );
-const radius = Ts.Variable.number( 0 ); // 半径
-new Ts.VariableMonitoring( { radius } );
-const ghost = Ts.Variable.number( 0 ); // 幽霊効果の値
-new Ts.VariableMonitoring( { ghost } );
-const pixelate = Ts.Variable.number( 0 ); // ピクセル効果の値
-new Ts.VariableMonitoring( { pixelate } );
+const distance = Ts.Variable.number( 'distance' ); //距離
+distance.value = 100;
+const radius = Ts.Variable.number( 'radius' ); // 半径
+radius.value = 0;
+const ghost = Ts.Variable.number( 'ghost' ); // 幽霊効果の値
+ghost.value = 0;
+const pixelate = Ts.Variable.number( 'pixelate' ); // ピクセル効果の値
+pixelate.value = 0;
 
 cat.Event.flagPresser().func = function( this : Sprite ) {
     this.Looks.size.scale = [ 250, 250 ];

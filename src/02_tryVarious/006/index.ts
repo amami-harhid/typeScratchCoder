@@ -39,17 +39,7 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
 
 // 変数
-const method = Ts.Variable.string( "" );
-new Ts.VariableMonitoring( { method } );
-//Ts.Variable.monitoring( { ジャンプ: method } );
-
-// モニターの改良
-// const method = Ts.Variable.string( "" );
-// const monitor = new Ts.Variable.monitor( { ジャンプ: method } );
-// monitor.hide();
-// monitor.show();
-
-
+const method = Ts.Variable.string( "ジャンプ" );
 method.hide(); // 隠す
 
 dog.Event.flagPresser().func = function( this : Sprite ) {

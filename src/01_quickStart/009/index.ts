@@ -6,9 +6,9 @@ import { Typescratcher as Ts } from "@tscratch3/typescratcher";
 import type { Sprite } from "@tscratch3/typescratcher";
 
 // 【変数モニターを定義】
-const distance = Ts.Variable.number( 0 ); // 初期値ゼロ
+const distance = Ts.Variable.number( 'distance', 0 ); // 初期値ゼロ
 //Ts.Variable.monitoring( distance ); // モニター表示登録
-new Ts.VariableMonitoring( { distance } );
+//new Ts.VariableMonitoring( { distance } );
 
 // 【画像 import 】
 import CatASvg from '@Assets/cat.svg';

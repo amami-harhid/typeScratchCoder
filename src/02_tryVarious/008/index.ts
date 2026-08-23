@@ -34,10 +34,10 @@ const stage = new Ts.Stage();
 stage.Backdrop.add( WaterImage );
 
 // 変数
-const volume = Ts.Variable.number( 100 );
-new Ts.VariableMonitoring( { volume } );
-const pitch = Ts.Variable.number( 0 );
-new Ts.VariableMonitoring( { pitch } );
+const volume = Ts.Variable.number( 'volume' );
+volume.value = 100;
+const pitch = Ts.Variable.number( 'pitch' );
+pitch.value = 0;
 
 cat.Event.flagPresser().func = function( this : Sprite ) {
     // ずっと繰り返し音を鳴らす

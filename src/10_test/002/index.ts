@@ -24,8 +24,8 @@ stage.Backdrop.add( BlueskyImage );
 //stage.Sound.add( AElecBassSound2 );
 
 // 【変数モニターを定義】
-const distance = Ts.Variable.number( 0 ); // 初期値ゼロ
-new Ts.VariableMonitoring( { distance } );
+const distance = Ts.Variable.number( 'distance' );
+distance.value = 0; // 初期値ゼロ
 
 const test : boolean = false;
 
