@@ -24,7 +24,7 @@ stage.Backdrop.add( ColorfulCityImage );
 
 // 変数
 const Touching = Ts.Variable.string( '' ); 
-Ts.Variable.monitoring( Touching );
+new Ts.VariableMonitoring( { Touching } );
 
 // 旗が押されたとき
 shark.Event.flagPresser().func = function( this : Sprite ) {

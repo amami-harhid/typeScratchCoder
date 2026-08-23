@@ -3,7 +3,7 @@
  * Load Scratch Foundation Images
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import type { Sprite, Stage, SvgImageAttributes } from "@tscratch3/typescratcher";
+import type { Sprite, Stage, FontImageAttribute, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【FONT読み込み】
 const HarryPotter =
@@ -61,9 +61,13 @@ const moji = new Ts.Sprite( "moji" );
 const fontAttribute : SvgImageAttributes = {
     font_family: HarryPotterFont.name,
 };
-const mojiImage = new Ts.FontImage( fontAttribute );
+const fotImageAttr : FontImageAttribute = {
+    text: "TEST",
+    attributes: fontAttribute,
+};
+const mojiImage = new Ts.FontImage( fotImageAttr );
 moji.Costume.add( mojiImage );
-mojiImage.Text.textToSvg( "TEST" );
+
 moji.Looks.layer.gotoBackLayer();
 
 ballerina.Event.flagPresser().func = function( this : Sprite ) {

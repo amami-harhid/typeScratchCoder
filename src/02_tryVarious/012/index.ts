@@ -4,21 +4,12 @@
  * 文字を表示する
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import type { Sprite, SvgImageAttributes } from "@tscratch3/typescratcher";
+import type { Sprite, FontImageAttribute, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【画像読み込み】
-import catSvg from '@Assets/cat.svg';
-const CatAImage = new Ts.Image( catSvg );
 import BlueskySvg from "@Assets/Blue Sky.svg";
 
 const BlueSkyImage = new Ts.Image( BlueskySvg );
-
-// TODO
-// スプライト作成＋コスチューム追加をしておかないと、背景を追加できない？
-
-// スプライト作成
-const cat = new Ts.Sprite( "cat" );
-cat.Costume.add( CatAImage ); // イメージを追加
 
 // 【ステージ】( blueSky )
 const stage = new Ts.Stage();
@@ -30,8 +21,11 @@ const attribute : SvgImageAttributes = {
     fill: "#f00000", // 文字色
     font_family: Ts.ScratchFontFamily.Scratch,
 };
-const helloImage = new Ts.FontImage( attribute );
-helloImage.Text.textToSvg( HELLO );
+const fontImageAttr : FontImageAttribute = {
+    text: HELLO,
+    attributes: attribute,
+};
+const helloImage = new Ts.FontImage( fontImageAttr );
 
 // 文字スプライトを作成
 const moji = new Ts.Sprite( "moji" );

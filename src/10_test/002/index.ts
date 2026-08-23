@@ -25,7 +25,7 @@ stage.Backdrop.add( BlueskyImage );
 
 // 【変数モニターを定義】
 const distance = Ts.Variable.number( 0 ); // 初期値ゼロ
-Ts.Variable.monitoring( distance ); // モニター表示登録
+new Ts.VariableMonitoring( { distance } );
 
 const test : boolean = false;
 

@@ -28,7 +28,7 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const touch = Ts.Variable.string( "" ); // タッチ
-Ts.Variable.monitoring( touch );
+new Ts.VariableMonitoring( { touch } );
 
 // 旗が押されたときの「ねこ」のスレッド
 cat.Event.flagPresser().func = function( this : Sprite ) {

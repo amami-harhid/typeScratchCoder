@@ -13,7 +13,7 @@
     "license": "AGPL-3.0-only",
     "description": "",
     "dependencies": {
-        "@tscratch3/typescratcher": "^0.1.30"
+        "@tscratch3/typescratcher": "^0.1.34"
     },
     "devDependencies": {
         "@ampproject/remapping": "^2.3.0",

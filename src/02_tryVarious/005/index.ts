@@ -28,8 +28,8 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const method = Ts.Variable.string( '' ); 
-Ts.Variable.monitoring( { 'ジャンプ': method } );
-method.hide(); // 隠す
+const methodMonitor = new Ts.VariableMonitoring( { 'ジャンプ': method } );
+methodMonitor.hide(); // 隠す
 
 // 旗が押されたとき
 dog.Event.flagPresser().func = function( this : Sprite ) {
@@ -49,7 +49,7 @@ dog.Event.flagPresser().func = function( this : Sprite ) {
 // A キーが押されたとき(等速ジャンプ)
 dog.Event.keyPresser( 'a' ).func = function( this : Sprite ) {
     method.text = '等速';
-    method.show();
+    methodMonitor.show();
     const JUMP = 10;
     for( const _ of Ts.Loop.Iterator( 10 ) ) {
         this.Motion.position.y += JUMP;
@@ -57,14 +57,14 @@ dog.Event.keyPresser( 'a' ).func = function( this : Sprite ) {
     for( const _ of Ts.Loop.Iterator( 10 ) ) {
         this.Motion.position.y -= JUMP;
     }
-    method.hide();
+    methodMonitor.hide();
     method.text = '';
 };
 
 // B キーが押されたとき(放物風ジャンプ)
 dog.Event.keyPresser( 'b' ).func = function( this : Sprite ) {
     method.text = '放物風';
-    method.show();
+    methodMonitor.show();
     const INIT_JUMP = 30;
     const GRAVITY = 4;
     let speed = INIT_JUMP;
@@ -77,7 +77,7 @@ dog.Event.keyPresser( 'b' ).func = function( this : Sprite ) {
         }
     }
     this.Motion.position.y = -130;
-    method.hide();
+    methodMonitor.hide();
     method.text = '';
 };
 

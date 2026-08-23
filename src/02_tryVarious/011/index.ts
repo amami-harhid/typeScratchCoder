@@ -30,7 +30,8 @@ stage.Backdrop.add( WaterImage );
 
 // 変数(タッチ)
 const speechText = Ts.Variable.string( "こら、触ったね" );
-Ts.Variable.monitoring( { "text": speechText } );
+new Ts.VariableMonitoring( { speechText } );
+//Ts.Variable.monitoring( { "text": speechText } );
 
 // 緑の旗が押されたときの「ねこ」のスレッド
 cat.Event.flagPresser().func = function( this : Sprite ) {

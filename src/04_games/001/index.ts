@@ -3,7 +3,7 @@
  *
  */
 import { Typescratcher as Ts } from "@tscratch3/typescratcher";
-import type { Sprite, Stage, SvgImageAttributes } from "@tscratch3/typescratcher";
+import type { Sprite, Stage, FontImageAttribute, SvgImageAttributes } from "@tscratch3/typescratcher";
 
 // 【バーチャルパッド】
 Ts.VirtualPad.addArrorTypePad();
@@ -61,10 +61,8 @@ slime.Looks.size.drawingSize = {
 
 //【変数】
 const Count = Ts.Variable.number( 0 );
-Ts.Variable.monitoring( {
-    Count 
-} );
-Count.hide();
+const CountMonitor = new Ts.VariableMonitoring( { Count } );
+CountMonitor.hide();
 
 wall.Event.flagPresser().func = function( this : IWall ) {
     this.Looks.size.drawingSize = {
@@ -161,7 +159,7 @@ slime.Event.flagPresser().func = function( this : IWall ) {
     Count.scale.w = 50;
     Count.scale.h = 50;
     Count.value = 0;
-    Count.show();
+    CountMonitor.show();
 };
 
 slime.Broadcast.receiver( "SLIME" ).func = function( this : Sprite ) {
@@ -178,8 +176,12 @@ const attribute : SvgImageAttributes = {
     fill: "#f0f0f0", // 文字色
     font_family: Ts.ScratchFontFamily.Scratch,
 };
-const helloImage = new Ts.FontImage( attribute );
-helloImage.Text.textToSvg( HELLO );
+const fontImageAttr : FontImageAttribute = {
+    text: HELLO,
+    attributes: attribute,
+};
+const helloImage = new Ts.FontImage( fontImageAttr );
+//helloImage.Text.textToSvg( HELLO );
 
 const moji = new Ts.Sprite( "moji" );
 moji.Costume.add( helloImage );
