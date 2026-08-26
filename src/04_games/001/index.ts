@@ -61,8 +61,8 @@ slime.Looks.size.drawingSize = {
 
 //【変数】
 const Count = Ts.Variable.number( 0 );
-const CountMonitor = new Ts.VariableMonitoring( { Count } );
-CountMonitor.hide();
+Ts.Variable.monitoring( { Count } );
+Count.hide();
 
 wall.Event.flagPresser().func = function( this : IWall ) {
     this.Looks.size.drawingSize = {
@@ -159,7 +159,7 @@ slime.Event.flagPresser().func = function( this : IWall ) {
     Count.scale.w = 50;
     Count.scale.h = 50;
     Count.value = 0;
-    CountMonitor.show();
+    Count.show();
 };
 
 slime.Broadcast.receiver( "SLIME" ).func = function( this : Sprite ) {

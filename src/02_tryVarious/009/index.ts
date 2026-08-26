@@ -28,13 +28,13 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const distance = Ts.Variable.number( 100 ); //距離
-new Ts.VariableMonitoring( { distance } );
+Ts.Variable.monitoring( { distance } );
 const radius = Ts.Variable.number( 0 ); // 半径
-new Ts.VariableMonitoring( { radius } );
+Ts.Variable.monitoring( { radius } );
 const ghost = Ts.Variable.number( 0 ); // 幽霊効果の値
-new Ts.VariableMonitoring( { ghost } );
+Ts.Variable.monitoring( { ghost } );
 const pixelate = Ts.Variable.number( 0 ); // ピクセル効果の値
-new Ts.VariableMonitoring( { pixelate } );
+Ts.Variable.monitoring( { pixelate } );
 
 cat.Event.flagPresser().func = function( this : Sprite ) {
     this.Looks.size.scale = [ 250, 250 ];

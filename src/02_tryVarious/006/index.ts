@@ -40,8 +40,8 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const method = Ts.Variable.string( "" );
-new Ts.VariableMonitoring( { method } );
-//Ts.Variable.monitoring( { ジャンプ: method } );
+//new Ts.VariableMonitoring( { method } );
+Ts.Variable.monitoring( { ジャンプ: method } );
 
 // モニターの改良
 // const method = Ts.Variable.string( "" );

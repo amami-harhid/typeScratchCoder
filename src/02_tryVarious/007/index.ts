@@ -32,12 +32,12 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const answer = Ts.Variable.string( "" );
-const answerMonitor = new Ts.VariableMonitoring( { 答え: answer } );
-answerMonitor.hide(); // 隠す
+Ts.Variable.monitoring( { 答え: answer } );
+answer.hide(); // 隠す
 
 let askingNow = false;
 cat.Event.flagPresser().func = function( this : Sprite ) {
-    answerMonitor.hide();
+    answer.hide();
     askingNow = false;
     this.Motion.position.xy = [ 0, 0 ];
 };
@@ -51,7 +51,7 @@ cat.Broadcast.receiver( ASKING ).func = function( this : Sprite ) {
     askingNow = true;
     this.Sensing.askAndWait( "今日はご機嫌よろしいですか？" );
     answer.text = this.Sensing.answer;
-    answerMonitor.show();
+    answer.show();
 
     if ( answer.text == "はい" ) {
         this.Looks.bubble.say( "YES" );
@@ -74,12 +74,12 @@ stage.Event.keyPresser( "A" ).func = function( this : Stage ) {
     }
 };
 stage.Broadcast.receiver( ASKING_STAGE ).func = function( this : Sprite ) {
-    answerMonitor.hide();
+    answer.hide();
     this.Sensing.askAndWait(
         "ステージだよ。「はい」か「いいえ」で答えて",
     );
     answer.text = this.Sensing.answer;
-    answerMonitor.show();
+    answer.show();
     if ( answer.text == "はい" || answer.text == "いいえ" ) {
         return;
     }

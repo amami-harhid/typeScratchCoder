@@ -23,7 +23,7 @@ stage.Backdrop.add( BlueskyImage );
 
 // 【変数モニターを定義】
 const distance = Ts.Variable.number( 0 ); // 初期値ゼロ
-new Ts.VariableMonitoring( { distance } );
+Ts.Variable.monitoring( distance );
 
 const spriteFlagPresser = function( this : Sprite ) {
     for( ;; ){

@@ -35,9 +35,9 @@ stage.Backdrop.add( WaterImage );
 
 // 変数
 const volume = Ts.Variable.number( 100 );
-new Ts.VariableMonitoring( { volume } );
+Ts.Variable.monitoring( { volume } );
 const pitch = Ts.Variable.number( 0 );
-new Ts.VariableMonitoring( { pitch } );
+Ts.Variable.monitoring( { pitch } );
 
 cat.Event.flagPresser().func = function( this : Sprite ) {
     // ずっと繰り返し音を鳴らす
