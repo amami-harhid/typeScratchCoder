@@ -43,13 +43,6 @@ const method = Ts.Variable.string( "" );
 //new Ts.VariableMonitoring( { method } );
 Ts.Variable.monitoring( { ジャンプ: method } );
 
-// モニターの改良
-// const method = Ts.Variable.string( "" );
-// const monitor = new Ts.Variable.monitor( { ジャンプ: method } );
-// monitor.hide();
-// monitor.show();
-
-
 method.hide(); // 隠す
 
 dog.Event.flagPresser().func = function( this : Sprite ) {

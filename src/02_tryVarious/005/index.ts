@@ -29,7 +29,6 @@ stage.Backdrop.add( WaterImage );
 // 変数
 const method = Ts.Variable.string( '' ); 
 Ts.Variable.monitoring( { 'ジャンプ': method } );
-method.hide(); // 隠す
 
 // 旗が押されたとき
 dog.Event.flagPresser().func = function( this : Sprite ) {
