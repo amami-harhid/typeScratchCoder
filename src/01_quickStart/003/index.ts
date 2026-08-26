@@ -16,8 +16,6 @@ cat.Costume.add( CatAImage ); // イメージを追加
 export const stage = new Ts.Stage();
 stage.Backdrop.add( BlueskyImage ); // 背景を追加
 
-
-
 // スプライト【旗クリックされたとき】のイベント定義
 cat.Event.flagPresser().func = function ( this : Sprite ){
     // Motion: 「動き」系

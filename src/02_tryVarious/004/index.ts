@@ -24,7 +24,6 @@ stage.Backdrop.add( ColorfulCityImage );
 
 // 変数
 const Touching = Ts.Variable.string( '' ); 
-//new Ts.VariableMonitoring( { Touching } );
 Ts.Variable.monitoring( Touching );
 
 // 旗が押されたとき

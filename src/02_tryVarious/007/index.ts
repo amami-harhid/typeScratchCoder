@@ -75,9 +75,7 @@ stage.Event.keyPresser( "A" ).func = function( this : Stage ) {
 };
 stage.Broadcast.receiver( ASKING_STAGE ).func = function( this : Sprite ) {
     answer.hide();
-    this.Sensing.askAndWait(
-        "ステージだよ。「はい」か「いいえ」で答えて",
-    );
+    this.Sensing.askAndWait( "ステージだよ。「はい」か「いいえ」で答えて" );
     answer.text = this.Sensing.answer;
     answer.show();
     if ( answer.text == "はい" || answer.text == "いいえ" ) {

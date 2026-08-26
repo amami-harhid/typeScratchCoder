@@ -35,13 +35,16 @@ dog.Event.flagPresser().func = function( this : Sprite ) {
 
     this.Motion.position.xy = [ 0, -130 ];
     this.Motion.rotation.style = Ts.Rotation.LEFT_RIGHT; // 左右のみ反転
-
+    const moveSteps = 10;
+    let moveDirection = 1;
     // ずっと繰り返す
     for( ;; ){        
-        // 進める
-        this.Motion.move.steps( 10 );
         // 端についたら跳ね返る
-        this.Motion.move.ifOnEdgeBounce();
+        if( this.Sensing.edge.isTouchingVirtical ) {
+            moveDirection *= -1;
+        }
+        // 進める
+        this.Motion.position.x += moveSteps * moveDirection;
     }
 };
 
@@ -50,6 +53,7 @@ dog.Event.keyPresser( 'a' ).func = function( this : Sprite ) {
     method.text = '等速';
     method.show();
     const JUMP = 10;
+    this.Motion.position.y = -130;
     for( const _ of Ts.Loop.Iterator( 10 ) ) {
         this.Motion.position.y += JUMP;
     }
@@ -67,13 +71,14 @@ dog.Event.keyPresser( 'b' ).func = function( this : Sprite ) {
     const INIT_JUMP = 30;
     const GRAVITY = 4;
     let speed = INIT_JUMP;
+    this.Motion.position.y = -130;
 
     for( ;; ) {
-        this.Motion.position.y += speed;
         speed -= GRAVITY;
-        if( this.Motion.position.y < -130 ) {
+        if( ( this.Motion.position.y + speed ) < -130 ) {
             break;
         }
+        this.Motion.position.y += speed;
     }
     this.Motion.position.y = -130;
     method.hide();
