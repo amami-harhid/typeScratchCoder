@@ -1,2 +1,2 @@
 var e=`/typeScratchCoder/assets/shark-B45Z9ec2.png`;export{e as t};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2hhcmstRHF6TS00SnUuanMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiLi4vLi4vYXNzZXRzL3NoYXJrLnBuZyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBcIl9fVklURV9BU1NFVF9fRktOZEx6S25sZnRXM3RfZ3pvODF5d19fXCIiXSwibWFwcGluZ3MiOiJBQUFBLElBQUEsRUFBZSJ9
+//# sourceMappingURL=shark-DqzM-4Ju.js.map

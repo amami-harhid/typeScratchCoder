@@ -1,0 +1,2 @@
+import{t as e}from"../typescratcher-DjnLVHBO.js";var t=new e.Font({HarryPotter:`https://amami-harhid.github.io/tscratch3assets/assets/fonts/HarryPotter-ov4z.woff`}),n=new e.Sprite(`moji`),r={text:`Harry Potter Font`,attributes:{fill:`#f00000`,font_family:t.name}},i=new e.FontImage({fotImageAttr:r});n.Costume.add(i),n.Looks.size.scale=[50,50],e.engine.start();
+//# sourceMappingURL=004-hbJKsfBn.js.map

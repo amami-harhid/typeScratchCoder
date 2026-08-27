@@ -8,9 +8,7 @@ import type { Sprite, Stage, FontImageAttribute, SvgImageAttributes } from "@tsc
 // 【FONT読み込み】
 const HarryPotter =
     "https://amami-harhid.github.io/tscratch3assets/assets/fonts/HarryPotter-ov4z.woff";
-const HarryPotterFont = new Ts.Font( {
-    HarryPotter 
-} );
+const HarryPotterFont = new Ts.Font( HarryPotter );
 // 【画像読み込み】
 const Ballerina_a =
     "https://cdn.assets.scratch.mit.edu/internalapi/asset/5197d3778baf55da6b81b3ada1e10021.svg/get";
@@ -59,6 +57,7 @@ stage.Backdrop.add( PartyImage );
 // 【文字スプライト】
 const moji = new Ts.Sprite( "moji" );
 const fontAttribute : SvgImageAttributes = {
+    fill: "#f00000", // 文字色
     font_family: HarryPotterFont.name,
 };
 const fotImageAttr : FontImageAttribute = {
