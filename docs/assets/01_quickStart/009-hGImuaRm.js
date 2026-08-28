@@ -1,0 +1,2 @@
+import{t as e}from"../typescratcher-BUWh1rf3.js";import{t}from"../Blue Sky-DQSZrA-M.js";import{t as n}from"../cat-DnhSCkrq.js";var r=e.Variable.number(0);e.Variable.monitoring({distance:r});var i=new e.Image({CatASvg:n}),a=new e.Image({BlueskySvg:t}),o=new e.Sprite(`catA`);o.Costume.add(i),new e.Stage().Backdrop.add(a),o.Event.flagPresser().func=async function*(){for(;;){let e=this.Sensing.mouse.distance;r.value=Math.floor(e),yield}},e.engine.start();
+//# sourceMappingURL=009-hGImuaRm.js.map

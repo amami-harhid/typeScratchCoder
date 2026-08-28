@@ -1,2 +1,0 @@
-import{t as e}from"../typescratcher-DjnLVHBO.js";var t=`https://cdn.assets.scratch.mit.edu/internalapi/asset/bcf454acf82e4504149f7ffe07081dbc.svg/get`,n=`https://cdn.assets.scratch.mit.edu/internalapi/asset/e7c147730f19d284bcd7b3f00af19bb6.svg/get`,r=new e.Image({CatASvg:t}),i=new e.Image({BlueskySvg:n});new e.Sprite(`cat`).Costume.add(r),new e.Stage().Backdrop.add(i),e.engine.start();
-//# sourceMappingURL=002-b-V6Q2s4.js.map

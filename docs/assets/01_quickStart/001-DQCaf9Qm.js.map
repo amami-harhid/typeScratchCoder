@@ -1,1 +1,0 @@
-{"version":3,"file":"001-DQCaf9Qm.js","names":[],"sources":["../../../src/01_quickStart/001/index.ts"],"sourcesContent":["/**\n * サンプル-001\n * 最初の一歩：起動\n */\nimport { Typescratcher as Ts } from \"@tscratch3/typescratcher\";\n// 開始\nTs.engine.start();\n//# sourceMappingURL=index.js.map"],"mappings":"iDAMA,EAAG,OAAO,MAAM"}
