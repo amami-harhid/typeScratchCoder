@@ -1,11 +1,10 @@
 /**
  * このファイルの内容を変更してはいけません。
  */
-import { resolve, relative, dirname } from 'path';
+import { resolve, relative, posix } from 'path';
 import { defineConfig } from 'vite';
-import { glob } from 'glob'; // version 10.5.0
-//import { TsCodeReplacer } from '@tscratch3/typescratcher/build/vitePlugins/vite-plugin-ts-code-replacer.js';
-import { TsCodeReplacer } from '@tscratch3/typescratcher/build/vitePlugins/index.js';
+import { glob } from 'glob'; // @10.5.0
+import { TsCodeReplacer } from '@tscratch3/typescratcher/build/vitePlugins/index.js'
 import checker from 'vite-plugin-checker';
 import fs from 'fs';
 
@@ -14,7 +13,7 @@ const root = resolve(import.meta.dirname, 'src')
 const outDir = resolve(import.meta.dirname, 'docs');
 
 // 1. カレントディレクトリを確実に固定(./src)して、src 以下のすべての index.html を取得
-const entries = glob.sync('**/index.html', { cwd: root });
+const entries = glob.sync('**/index.html', { cwd: root, posix: true });
 const rollupOpsionsInput: { [key: string]: string } = {};
 
 for (const entry of entries) {
@@ -31,8 +30,9 @@ for (const entry of entries) {
     
     // 4. キー名（エントリー名）を決める (例: "index" や "sub/index")
     const normalizedPath = relativePathFromRoot.replace(/\\/g, '/');
+    const dir = posix.dirname(normalizedPath);
     // index.html を除いたディレクトリー構造をキーにする
-    const key = dirname(relativePathFromRoot) === '.' ? 'main' : dirname(normalizedPath);
+    const key = (dir === '.' || dir === '') ? 'main' : dir;
     
     // 5. Viteには root からの相対パスを渡す(Windows対応)
     rollupOpsionsInput[key] = normalizedPath;

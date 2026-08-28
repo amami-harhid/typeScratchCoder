@@ -3,8 +3,7 @@
  */
 import { Typescratcher as Ts, type SvgImageAttributes, type FontImageAttribute } from "@tscratch3/typescratcher";
 
-const HarryPotter =
-    "https://amami-harhid.github.io/tscratch3assets/assets/fonts/HarryPotter-ov4z.woff";
+const HarryPotter = "https://amami-harhid.github.io/tscratch3assets/assets/fonts/HarryPotter-ov4z.woff";
 const HarryPotterFont = new Ts.Font( HarryPotter );
 
 // 【文字スプライト】
